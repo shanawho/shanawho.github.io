@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="main">
+    <div id="splash">
+      <h1>I design &amp; develop products and experiences to simplify people's lives.</h1>
+    </div>
+
+
+    <div id="work">
+      <span ng-repeat="project in projects" ng-show="project.path != params">
+
+        <div class="title" id="{{project.path}}">
+          <a href="#/{{project.path}}">
+            <img src="../images/{{project.path}}/{{project.path}}.png" />
+            <div class="banner-text">
+              <h1>{{project.title}}</h1>
+              <h2>{{project.tagline}}</h2>
+            </div>
+          </a>
+
+        </div>
+      </span>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,281 @@
+* {
+  box-sizing: border-box; }
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: Ek Mukta, sans-serif;
+  width: 100%;
+  color: #162214; }
+
+h1 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 40px;
+  margin-bottom: 0; }
+
+h2 {
+  font-weight: 200;
+  margin: 0;
+  clear: both;
+  line-height: 30px; }
+
+h4 {
+  margin: 0;
+  float: left;
+  clear: both;
+  color: #909390; }
+
+h5, ul li {
+  clear: both;
+  font-weight: 200;
+  font-size: 16px;
+  margin: 0;
+  line-height: 20px; }
+
+ul li {
+  margin-top: 10px; }
+
+.resume p {
+  font-weight: 200;
+  font-size: 16px;
+  display: block;
+  clear: both;
+  margin-top: 5px;
+  line-height: 20px; }
+
+a {
+  text-decoration: none;
+  color: #87cc94;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  a:hover {
+    color: #218732;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; }
+
+figure img {
+  width: 150%;
+  margin-left: -25%; }
+
+figcaption {
+  font-size: 1em;
+  font-weight: 200;
+  margin-bottom: 20px;
+  display: block;
+  width: 150%;
+  margin-left: -25%; }
+
+.resume-title {
+  float: left; }
+
+.resume-name {
+  font-weight: 700;
+  font-size: 36px;
+  margin-bottom: 0;
+  line-height: 36px;
+  display: block; }
+
+.resume-tag {
+  font-weight: 300;
+  display: block; }
+
+.resume-contact {
+  float: right; }
+
+.date {
+  font-weight: 200;
+  font-size: 16px;
+  margin-top: 0;
+  display: block;
+  float: right; }
+
+nav {
+  position: fixed;
+  top: 0;
+  color: white;
+  background: rgba(134, 204, 148, 0.2);
+  padding: 20px 0;
+  width: 100%;
+  z-index: 100; }
+  nav a {
+    line-height: 20px;
+    font-size: 16px;
+    color: #218732; }
+
+.nav-left {
+  float: left;
+  margin-left: 5%; }
+  .nav-left a {
+    margin-right: 40px; }
+
+.nav-right {
+  float: right;
+  margin-right: 5%; }
+  .nav-right a {
+    margin-left: 40px; }
+
+.side {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 40%;
+  height: 100%; }
+
+/*MAIN PAGE STYLING */
+#splash {
+  height: 100%;
+  padding-top: 20%; }
+
+.title {
+  position: relative;
+  margin-bottom: 200px; }
+  .title img {
+    width: 100%; }
+  .title h1 {
+    font-size: 2em; }
+  .title a {
+    color: #162214; }
+
+.banner-text {
+  position: absolute;
+  width: 100%; }
+
+.wrapper {
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 100px; }
+
+.main {
+  text-align: center; }
+
+.footer {
+  background: rgba(134, 204, 148, 0.2);
+  height: 100px; }
+  .footer h5, .footer ul li, ul .footer li {
+    margin-top: 20px; }
+  .footer .wrapper {
+    display: block; }
+
+i {
+  margin-right: 10px;
+  display: block;
+  font-size: 25px; }
+
+/*PROJECT PAGE STYLING */
+p {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  clear: both; }
+
+.text {
+  margin: 0 auto; }
+
+.hilight {
+  color: #218732;
+  font-weight: 400; }
+
+.crowd {
+  background-img: url("../images/crowd.jpg");
+  height: 50%; }
+
+.clearfix {
+  clear: both; }
+
+.last {
+  margin-right: 0; }
+
+.more {
+  height: 80px;
+  border-top: 1px solid rgba(134, 204, 148, 0.2);
+  padding-top: 20px;
+  display: block; }
+  .more img {
+    width: 100%; }
+  .more a {
+    color: #162214; }
+
+.image-pair {
+  display: block;
+  width: 130%;
+  margin-left: -15%; }
+  .image-pair figure {
+    width: 49%;
+    margin-left: 0;
+    margin-right: 2%;
+    float: left; }
+    .image-pair figure:last-child {
+      margin-right: 0; }
+    .image-pair figure img {
+      width: 100%;
+      margin: 0; }
+  .image-pair figcaption {
+    margin: 0;
+    width: 100%; }
+
+/*RESUME STYLING */
+.resume {
+  display: block;
+  height: 100%;
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 100px; }
+  .resume h4 {
+    color: #162214; }
+
+.resume-section {
+  margin-left: 5%; }
+
+.resume-list {
+  list-style-type: none;
+  margin-top: 0; }
+  .resume-list li {
+    font-weight: 300; }
+    .resume-list li:first-child {
+      margin-top: 0; }
+
+.two-thirds {
+  width: 60%;
+  float: left;
+  clear: both;
+  margin-right: 5%; }
+
+.third {
+  width: 30%;
+  float: left;
+  margin-right: 3%; }
+
+.last {
+  margin-right: 0; }
+
+@media (max-width: 800px) {
+  .wrapper {
+    width: 80%; }
+
+  nav {
+    background: #162214; }
+    nav a {
+      color: white; }
+
+  .image-pair {
+    display: block;
+    height: 200px;
+    width: 120%;
+    margin-left: -10%; }
+
+  figure img {
+    margin-top: 0; }
+
+  .nav-left,
+  .nav-right {
+    float: none;
+    text-align: center; } }
+@media (max-width: 400px) {
+  .third,
+  .two-thirds {
+    float: none;
+    clear: both;
+    width: 100%;
+    margin: 0 auto; }
+
+  .more {
+    height: 500px; } }

@@ -1,0 +1,322 @@
+$margin: 20px
+$main-font: Ek Mukta, sans-serif
+$black: #162214
+$green: #218732
+$mint: #87cc94
+$transp-mint: rgba(134, 204, 148, 0.2)
+
+*
+  box-sizing: border-box
+
+body, html
+  padding: 0
+  margin: 0
+  font-family: $main-font
+  width: 100%
+  color: $black
+  // background: rgba(192, 224, 182, 0.1)
+h1
+  font-weight: 700
+  font-size: 40px
+  line-height: 40px
+  margin-bottom: 0
+
+h2
+  font-weight: 200
+  margin: 0
+  clear: both
+  line-height: 30px
+
+h4
+  margin: 0
+  float: left
+  clear: both
+  color: #909390
+
+h5
+  clear: both
+  font-weight: 200
+  font-size: 16px
+  margin: 0
+  line-height: 20px
+
+ul li
+  @extend h5
+  margin-top: 10px
+
+.resume
+  p
+    font-weight: 200
+    font-size: 16px
+    display: block
+    clear: both
+    margin-top: 5px
+    line-height: 20px
+
+a
+  text-decoration: none
+  color: $mint
+  -webkit-transition: all .3s
+  transition: all .3s
+
+  &:hover
+    color: $green
+    -webkit-transition: all .3s
+    transition: all .3s
+
+figure img
+  width: 150%
+  margin-left: -25%
+  
+figcaption
+  font-size: 1em
+  font-weight: 200
+  margin-bottom: 20px
+  display: block
+  width: 150%
+  margin-left: -25%
+
+.resume-title
+  float: left
+.resume-name
+  font-weight: 700
+  font-size: 36px
+  margin-bottom: 0
+  line-height: 36px
+  display: block
+
+.resume-tag
+  font-weight: 300
+  display: block
+
+.resume-contact
+  float: right
+.date
+  font-weight: 200
+  font-size: 16px
+  margin-top: 0
+  display: block
+  float: right
+
+nav
+  position: fixed
+  top: 0
+  color: #fff
+  background: $transp-mint
+  padding: $margin 0
+  width: 100%
+  z-index: 100
+
+  a
+    line-height: 20px
+    font-size: 16px
+    color: $green
+
+.nav-left
+  float: left
+  margin-left: 5%
+
+  a
+    margin-right: $margin * 2
+
+
+.nav-right
+  float: right
+  margin-right: 5%
+
+  a
+    margin-left: $margin * 2
+
+.side
+  background-color: rgba(0, 0, 0, 0.3)
+  width: 40%
+  height: 100%
+
+/** MAIN PAGE STYLING **/
+
+#splash
+  height: 100%
+  padding-top: 20%
+
+
+.title
+  position: relative
+  margin-bottom: 200px
+
+  img
+    width: 100%
+
+  h1
+    font-size: 2em
+
+  a
+    color: $black
+
+.banner-text
+  position: absolute
+  width: 100%
+
+.wrapper
+  width: 600px
+  margin: 0 auto
+  margin-top: 100px
+
+.main
+  text-align: center
+
+.footer
+  background: $transp-mint
+  height: 100px
+  
+  h5
+    margin-top: $margin
+  .wrapper
+    display: block
+
+i
+  margin-right: $margin/2
+  display: block
+  font-size: 25px
+/** PROJECT PAGE STYLING **/
+
+p
+  font-size: 18px
+  font-weight: 200
+  line-height: 30px
+  clear: both
+
+.text
+  margin: 0 auto
+
+.hilight
+  color: $green
+  font-weight: 400
+
+
+.crowd
+  background-img: url('../images/crowd.jpg')
+  height: 50%
+
+.clearfix
+  clear: both
+
+
+.last
+  margin-right: 0
+
+.more
+  height: 80px
+  border-top: 1px solid $transp-mint
+  padding-top: $margin
+  display: block
+
+  img
+    width: 100%
+
+  a
+    color: $black
+
+.image-pair
+  display: block
+  width: 130%
+  margin-left: -15%
+
+  figure
+    width: 49%
+    margin-left: 0
+    margin-right: 2%
+    float: left
+
+    &:last-child
+      margin-right: 0
+
+    img
+      width: 100%
+      margin: 0
+
+  figcaption
+    margin: 0
+    width: 100%
+
+
+
+
+/** RESUME STYLING **/
+
+.resume
+  display: block
+  height: 100%
+  width: 800px
+  margin: 0 auto
+  margin-top: 100px
+
+  h4
+    color: $black
+.resume-section
+  margin-left: 5%
+
+.resume-list
+  list-style-type: none
+  margin-top: 0
+
+  li
+    font-weight: 300
+
+    &:first-child
+      margin-top: 0
+
+
+.two-thirds
+  width: 60%
+  float: left
+  clear: both
+  margin-right: 5%
+
+
+.third
+  width: 30%
+  float: left
+  margin-right: 3%
+
+.last
+  margin-right: 0
+
+
+@media (max-width: 800px)
+  .wrapper
+    width: 80%
+
+  nav
+    background: $black
+
+    a
+      color: #fff
+
+
+  .image-pair
+    display: block
+    height: 200px
+    width: 120%
+    margin-left: -10%
+
+  figure img
+    margin-top: 0
+
+
+  .nav-left, 
+  .nav-right
+    float: none
+    text-align: center
+
+
+@media (max-width: 400px)
+
+  .third,
+  .two-thirds
+    float: none
+    clear: both
+    width: 100%
+    margin: 0 auto
+
+  .more
+    height: 500px

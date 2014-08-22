@@ -1,0 +1,93 @@
+
+<div class="wrapper">
+
+    <h1>Confluence</h1>
+
+    <div class="text">
+    <p><span class="hilight">Confluence connects language learners across the globe so learners can practice their pronunciation, improve their fluency, and receive feedback from native speakers.</span> Learners interact through a <span class="hilight">crowdsourced Q&amp;A platform</span> where they can record their questions and <span class="hilight">receive personal feedback on their own voice</span>.</p>
+
+    <p>Confluence was originally designed and developed as part of CS 160: User Interface Design &amp; Development at UC Berkeley. <span class="hilight">I've also redesigned the project since the conclusion of the course.</span></p>
+
+
+    <h4>USER RESEARCH</h4>
+    <p>In order to better understand the issues foreign language learners face, my team and I interviewed learners from various backgrounds including: 
+
+      <ul>
+        <li>Students studying in a high-caliber educational environment</li>
+        <li>Students enrolled in a five week study abroad program in the US from Japan</li>
+        <li>Professionals working abroad, learning on the side</li>
+      </ul>
+
+    <p>The issues our interviewees faced fell into three categories:</p>
+
+    <div class="third">
+      <h5>Environmental</h5>
+      <ul>
+        <li>Traditional educational environments focus on reading, writing, &amp; vocabulary</li>
+        <li>Learners get more practice speaking when studying abroad</li>
+      </ul>
+
+    </div>
+    <div class="third">
+      <h5>Personal</h5>
+      <ul>
+        <li>Students shy or embarrassed about their accent are less likely to practice</li>
+        <li>Working professionals don't have large blocks of time to dedicate</li>
+      </ul>
+    </div>
+    <div class="third">
+      <h5>Cultural</h5>
+      <ul>
+        <li>Some cultures tend to discourage speaking up in class or practicing vocalization</li>
+      </ul>
+    </div>
+
+    <p>The research brought up some interesting concerns we wanted to tackle. We realized that mobile technology allows us to create a space which encourages learners to focus on pronunciation, while connecting remote users who can help each other. <span class="hilight">Learners can learn on their own time and at their own pace, as well as ask questions in a format which is less intimidating than face to face.</span></p>
+
+
+    <h4>PROTOTYPING &AMP; USER TESTING</h4>
+
+    <p>We designed and developed multiple round of prototypes. Below are some hilights about what we learned from user testing.</p>
+
+    <figure>
+      <img src="../images/confluence/balsamiq.png" />
+
+      <figcaption>Balsamiq mocks.</figcaption>
+    </figure>
+
+    <p><span class="hilight">We originally wanted to build an app with equal focus on a crowdsourced dashboard and partner-based conversational messaging.</span> After user testing, we discovered several concerns with partner messaging. How do you know if your partner is reliable or correct? What if your partner is a slow replier? As a result, <span class="hilight">we scrapped messaging to focus on crowdsourced Q&amp;A, which our users were excited about.</span></p>
+
+    <figure>
+      <img src="../images/confluence/lowfi.png" />
+
+      <figcaption>Low-fi Android prototype.</figcaption>
+    </figure>
+
+    <p>Low-fi prototype user testing revealed that users had difficulty using our recording interface and the countdown we included to indicate time left was too ambiguous. We integrated the recording interface with the question-asking screen and developed a subtle progress bar.</p>
+
+
+    <h5>Round 3: High-fi Android prototype</h5>
+
+    <h4>FINAL DELIVERABLES</h4>
+
+    <p><span class="hilight">Our final class project was fully developed in Android with Node.js.</span> </p>
+
+    <h4>PROJECT REDESIGN</h4>
+
+    <p><span class="hilight">I decided to redesign the project</span> because the course had a heavy emphasis on implementation, and I was unsatisfied with how our final design turned out. I focused on cleaning up the interface and incorporating a more purposeful focus on human interaction. The emphasis on the personal profile is intended to make it easier for users to establish a connection with those they are interacting with, and to also provide an aspect of human connection as a foil to the trust/reliability issues seen in our earlier competitive analysis. </p>
+
+  </div>
+
+
+
+  <div class="more">
+    <span ng-repeat="project in projects" ng-show="project.path != params">
+      <a href="#/{{project.path}}">
+        <div class="third">
+          <img src="../images/{{project.path}}/{{project.path}}.png" />
+          <h5>{{project.title}}</h5>
+        </div>
+      </a>
+    </span>
+  </div>
+</div>

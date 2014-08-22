@@ -1,0 +1,57 @@
+<div class="wrapper">
+
+    <figure>
+      <img src="../images/decal/class.jpg" />
+    </figure>
+
+    <h1>Introduction to Photoshop &amp; Illustrator</h1>
+
+      <p><span class="hilight">My sophomore year, I facilitated a 2-unit course called Introduction to Photoshop &amp; Illustrator under Berkeley’s <a href="http://www.decal.org/" target="_blank">Democratic Education</a> (DeCal) program.</span> Both semesters, I taught technical design skills to a weekly 2-hour class of 30 students. I also planned lessons, held office hours, graded homework, and led our Education Team.</p>
+
+      <p>The class is widely popular. That being said, we try to keep class-sizes small, make the experience personal, and provide a high-quality educational experience. Our class has been taught by students for students every semester since Fall 2010. <span class="hilight">We've been around for a while, and we're not going anywhere.</span></p>
+      <figure>
+        <img src="../images/decal/crowd.jpg" />
+        <figcaption>Behold, the 300 applicants we consider every semester. Our infosession is outdoors because we can't book a room big enough.</figcaption>
+      </figure>
+
+      <p>When I taught, we used a third-party educational hosting platform where we posted lessons and files. The platform was great for grading <span class="hilight">but required us to repost all class information and materials every semester</span>. It was often difficult to navigate, buggy in its upload process, and a headache to style.</p>
+
+      <p><span class="hilight">After two semesters of using it, I pushed our Education Team to make a switch.</span> I designed and developed an independent site where we can consistently host lesson overviews. This way, when we start anew each semester, <span class="hilight">the online setup requires minimal effort.</span> The site also gives prospective students an overview of the course before they even apply.</p>
+
+
+      <p><a href="#">See the site live here</a></p>
+    <div class="proj-reflection">
+      <h4>A PERSONAL NOTE</h4>
+
+      <p><span class="hilight">I love this class with all my heart.</span> I took this DeCal my first semester at Berkeley. It was my first exposure to any sort of design, and it gave me the technical skills to get me on my feet. When I applied for a leadership position, I knew I wanted to teach so I could help others like how the course helped me. Seeing my students grow as designers has been a wonderful experience. Teaching has also helped me realize I do like public speaking, which is something quite surprising but exciting for someone who grappled with stage fright in high school. </p>
+
+      <div class="image-pair">
+        <figure>
+          <img class="half" src="../images/decal/showcase.jpg" />
+          <figcaption>Final project showcase</figcaption>
+        </figure>
+        
+        <figure>
+          <img class="half last" src="../images/decal/thanks.jpg" />
+          <figcaption>A parting gift I lettered for my students</figcaption>
+        </figure>
+      </div>
+
+
+      <p>This semester, I've chosen to step away from teaching in order to dedicate more time to other pursuits. I realized I learned a tremendous amount by leading my own class, and I wanted to open up the opportunity for others to do the same. I'm excited for two good friends of mine who were my TA's and are now both going to teach! Best wishes to both of them, as I'm sure they'll do an amazing job. As for me, I'll be advising our Education Team and managing the website.</p>
+
+
+    </div>
+
+
+  <div class="more">
+    <span ng-repeat="project in projects" ng-show="project.path != params">
+      <a href="#/{{project.path}}">
+        <div class="third">
+          <img src="../images/{{project.path}}/{{project.path}}.png" />
+          <h5>{{project.title}}</h5>
+        </div>
+      </a>
+    </span>
+  </div>
+</div>
