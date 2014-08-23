@@ -10,18 +10,18 @@
     }).when("/work", {
       templateUrl: "pages/main.html",
       controller: "mainController",
-      title: "home"
+      title: "Product Design & Frontend Development"
     }).when("/art", {
       templateUrl: "pages/art.html",
       controller: "artController"
     }).when("/about", {
       templateUrl: "pages/about.html",
       controller: "aboutController",
-      title: "about"
+      title: "About"
     }).when("/resume", {
       templateUrl: "pages/resume.html",
       controller: "resumeController",
-      title: "resume"
+      title: "Resume"
     }).when("/davinci", {
       templateUrl: "pages/davinci.html",
       controller: "davinciController",
@@ -39,8 +39,8 @@
       controller: "32ptController",
       title: "32pt"
     }).otherwise({
-      redirectTo: "main.html",
-      title: "about"
+      redirectTo: "/",
+      title: "Product Design & Frontend Development"
     });
 
   });
@@ -56,7 +56,7 @@
     $scope.projects = [
       {title: "Confluence", path: "confluence", tagline: "Crowdsourced Q&A for foreign language learners"},
       {title: "DaVinci Mobile", path: "davinci", tagline: "LinkedIn's mobile pattern library for designers and developers"},
-      {title: "Introduction to Photoshop & Illustrator", path: "decal", tagline: "A weekly 2-hour, 2-unit UC Berkeley DeCal course"},
+      {title: "Introduction to Illustrator & Photoshop", path: "decal", tagline: "A weekly 2-hour, 2-unit UC Berkeley DeCal course"},
       {title: "32pt", path: "32pt", tagline: "Beautiful, affordable, custom letterpress business cards"},
 
     ]

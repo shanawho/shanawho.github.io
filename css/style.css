@@ -94,14 +94,15 @@ nav {
   position: fixed;
   top: 0;
   color: white;
-  background: rgba(134, 204, 148, 0.2);
   padding: 20px 0;
   width: 100%;
   z-index: 100; }
+  nav h2 {
+    display: inline-block; }
   nav a {
     line-height: 20px;
     font-size: 16px;
-    color: #218732; }
+    color: #162214; }
 
 .nav-left {
   float: left;
@@ -114,6 +115,8 @@ nav {
   margin-right: 5%; }
   .nav-right a {
     margin-left: 40px; }
+  .nav-right h2 {
+    display: inline-block; }
 
 .side {
   background-color: rgba(0, 0, 0, 0.3);
@@ -189,6 +192,9 @@ p {
   border-top: 1px solid rgba(134, 204, 148, 0.2);
   padding-top: 20px;
   display: block; }
+  .more .third {
+    width: 30%;
+    margin: 0 1.66%; }
   .more img {
     width: 100%; }
   .more a {

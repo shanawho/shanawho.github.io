@@ -1,6 +1,33 @@
 <div class="wrapper">
     <h1>32pt</h1>
 
+    <p><span class="hilight">Many merchants who offer letterpress services often spend much of their time dealing with issues such as incorrect file types, image sizes, and related problems.</span> The additional conversations with customers which these issues require could be easily prevented with a system that prevents error in the first place.</p>
+
+    <p>A friend approached me about working on a project to curb the many errors that printers deal with. The project was 32pt, which is an online webservice <span class="hilight">connecting letterpress printers and their customers</span>. The webservice focuses on creating an easy-to-use interface for anyone to design a handsome business card.</p>
+
+    <p>We developed three personas for sample users:</p>
+
+      <ul>
+        <li>Jane already has a design already created in an external program. She's already finalized her design and just wants to get it out to print.</li>
+
+        <li>Marc wants to create his own card and has a good design aesthetics. He has an idea of what he wants but needs a platform to create it.</li>
+
+        <li>Susan wants to create a card on online but has little design experience.</li>
+      </ul>
+
+    <p>While my teammates developed the backend to handle the case for our first user flow, I worked on the custom designer for the latter two sample users. <span class="hilight">I worked on designing and developing an interface in which users could directly manipulate the text and images they wished to include on their card.</span> This was a huge step up from most mainstream printing companies' online design interfaces.</p>
+
+    <p>The interface was designed to be minimalist, clean, and <span class="hilight">devoid of unnecessary distractions</span>. Editing options only appear if they are applicable (eg: group alignment is only available if selecting more than one object), and all options disappear when nothing is selected.</p>
+
+    <p>I also implemented an <span class="hilight">undo-redo stack</span>, for all those mistakes we all make during the design process.</p>
+
+    <p><span class="hilight">32pt is still a work-in-progress.</span></p>
+
+    <h4>TECHNICAL DETAILS</h4>
+    <p><span class="hilight">I learned AngularJS and Coffeescript and worked in a stack built on NodeJS</span>. I also worked with <a href="http://fabricjs.com/" target="_blank">FabricJS</a> and made my first open source contributions.</p>
+
+    <p>My amazing team: <a href="http://ericzhang.com/" target="_blank">Eric Zhang</a> and <a href="http://sumukhsridhara.com/" target="_blank">Sumukh Sridhara</a></p>
+
 
   <div class="more">
     <span ng-repeat="project in projects" ng-show="project.path != params">
