@@ -103,6 +103,8 @@ nav {
     line-height: 20px;
     font-size: 16px;
     color: #162214; }
+    nav a:active {
+      text-decoration: underline; }
 
 .nav-left {
   float: left;
