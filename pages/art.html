@@ -1,17 +1,11 @@
 <div class="wrapper">
-
-
-		<h1>I grew up drawing nonstop</h1>
+	<h1>I grew up drawing nonstop</h1>
 
 	<p>One of my earliest memories is putting my Beanie Babies in poses and trying to copy them on paper with crayons. By high school, I had developed an almost unhealthy obsession with portraiture (my mother practically begged me to go outside and play). Nowadays I still enjoy drawing when I can, although I've shifted my focus to other pursuits like design.</p>
 
 
 	<figure>
 		<img src="../images/art/matt.jpg" />
-	</figure>
-
-	<figure>
-		<img src="../images/art/hand.jpg" />
 	</figure>
 	<figure>
 		<img src="../images/art/emily.jpg" />
@@ -69,5 +63,18 @@
 
 	<h4>AND YOU CAN TOO</h4>
 
-	<p>And as for everyone who claims to be bad at art. It's really not true. You just have to stick with it! Practice does wonders.</p>
+	<p>A lot of people I've talked to seem to assume that artistic skill isn't something that can be learned. This is not true. You just have to stick with it! Practice does wonders. If I hadn't kept drawing while growing up, I would probably still be drawing misshapen Beanie Babies with crayons.</p>
+
+
+
+  <div class="more">
+    <span ng-repeat="project in projects">
+      <a href="#/{{project.path}}">
+        <div class="third">
+          <img src="../images/{{project.path}}/{{project.path}}.png" />
+          <h5>{{project.title}}</h5>
+        </div>
+      </a>
+    </span>
+  </div>
 </div>

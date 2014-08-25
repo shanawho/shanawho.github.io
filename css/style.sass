@@ -44,15 +44,6 @@ ul li
   @extend h5
   margin-top: 10px
 
-.resume
-  p
-    font-weight: 200
-    font-size: 16px
-    display: block
-    clear: both
-    margin-top: 5px
-    line-height: 20px
-
 a
   text-decoration: none
   color: $mint
@@ -63,6 +54,9 @@ a
     color: $green
     -webkit-transition: all .3s
     transition: all .3s
+
+.current-link
+  text-decoration: underline
 
 figure img
   width: 150%
@@ -88,6 +82,7 @@ figcaption
 .resume-tag
   font-weight: 300
   display: block
+  margin-bottom: $margin
 
 .resume-contact
   float: right
@@ -99,14 +94,11 @@ figcaption
   float: right
 
 nav
-  position: fixed
   top: 0
   color: #fff
   padding: $margin 0
   width: 100%
   z-index: 100
-
-
 
   h2
     display: inline-block
@@ -116,8 +108,9 @@ nav
     font-size: 16px
     color: $black
     
-    &:active
-      text-decoration: underline
+    &:hover
+      color: $mint
+
 
 .nav-left
   float: left
@@ -134,6 +127,9 @@ nav
   a
     margin-left: $margin * 2
 
+    &:first-child
+      margin-left: 0
+
   h2
     display: inline-block
 
@@ -146,21 +142,37 @@ nav
 
 #splash
   height: 100%
-  padding-top: 20%
+  padding-top: 30%
+  width: 150%
+  margin-left: -25%
+
+  h1
+    color: $mint
+
+  h2
+    margin-bottom: 30px
+
 
 
 .title
   position: relative
-  margin-bottom: 200px
+  margin-bottom: 300px
 
   img
-    width: 100%
+    width: 130%
+    margin-left: -15%
+
+    &:hover
+
 
   h1
     font-size: 2em
 
   a
     color: $black
+
+#selected
+  margin-top: 35%
 
 .banner-text
   position: absolute
@@ -175,18 +187,27 @@ nav
   text-align: center
 
 .footer
-  background: $transp-mint
-  height: 100px
+  background: $black
+  color: #fff
+  display: table
+  padding: $margin 0
+  width: 100%
+
+  a
+    color: #fff
+
+    &:hover
+      color: $mint
+
+  .hilight
+    color: #fff
   
   h5
     margin-top: $margin
-  .wrapper
-    display: block
 
 i
-  margin-right: $margin/2
-  display: block
   font-size: 25px
+  text-align: -10000px
 /** PROJECT PAGE STYLING **/
 
 p
@@ -199,7 +220,6 @@ p
   margin: 0 auto
 
 .hilight
-  color: $green
   font-weight: 400
 
 
@@ -217,8 +237,8 @@ p
 .more
   height: 80px
   border-top: 1px solid $transp-mint
-  padding-top: $margin
-  display: block
+  padding: $margin 0
+  display: table
 
   .third
     width: 30%
@@ -229,6 +249,9 @@ p
 
   a
     color: $black
+
+  h5
+    margin-bottom: 10px
 
 .image-pair
   display: block
@@ -258,14 +281,23 @@ p
 /** RESUME STYLING **/
 
 .resume
-  display: block
+  display: table
   height: 100%
   width: 800px
   margin: 0 auto
   margin-top: 100px
 
+  p
+    font-weight: 200
+    font-size: 16px
+    display: block
+    clear: both
+    margin-top: 5px
+    line-height: 20px
+
   h4
     color: $black
+
 .resume-section
   margin-left: 5%
 
@@ -278,6 +310,30 @@ p
 
     &:first-child
       margin-top: 0
+
+.resume-links
+  width: 50%
+  float: left
+  text-align: center
+  margin-bottom: $margin
+
+  button
+    padding: 10px $margin
+    font-weight: 100
+    font-size: 14px
+    background: none
+    border: 1px solid $mint
+    border-radius: 5px
+    color: $mint
+    -webkit-transition: all .3s
+    transition: all .3s
+
+    &:hover,
+    &:focus
+      background: $transp-mint
+      -webkit-transition: all .3s
+      transition: all .3s
+
 
 
 .two-thirds
@@ -297,14 +353,9 @@ p
 
 
 @media (max-width: 800px)
-  .wrapper
+  .wrapper,
+  .resume
     width: 80%
-
-  nav
-    background: $black
-
-    a
-      color: #fff
 
 
   .image-pair
@@ -324,6 +375,12 @@ p
 
 
 @media (max-width: 400px)
+
+  .resume-links
+    float: none
+    clear: both
+    margin: 0 auto
+    width: 80%
 
   .third,
   .two-thirds

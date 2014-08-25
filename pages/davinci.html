@@ -8,11 +8,11 @@
 
     <div class="text">
 
-    <p><span class="hilight">DaVinci Mobile is LinkedIn's pattern library for designers and developers.</span> </p>
+    <p>DaVinci Mobile is LinkedIn's pattern library for designers and developers.</p>
 
     <p>Davinci Mobile originally was a linked PDF. Although the PDF allowed designers to access the information they needed, the setup didn’t scale well and provided limited resources for developers. The solution was to create an online pattern library which fit in with its preexisting sister branches, but also established its own style. Mobile DaVinci is fully-responsive so designers can see components in context on a mobile device.</p>
 
-    <p><span class="hilight">Although I was originally slated to solely work on design, I volunteered to expedite the project by developing the hub page.</span> Throughout the project I worked closely with designers, web developers, and a fellow intern who implemented my component page designs.</p>
+    <p>Although I was originally slated to solely work on design, I volunteered to expedite the project by developing the hub page. Throughout the project I worked closely with designers, web developers, and a fellow intern who implemented my component page designs.</p>
 
     <figure>
       <img src="../images/davinci/mobile-wires.png" />
@@ -37,7 +37,7 @@
 
     <figure>
       <img src="../images/davinci/mobile-component.png" />
-      <figcaption>A lower component page, designed to showcase device-specific differences between mobile web, iOS, and Android</figcaption>
+      <figcaption>Mobile component pages</figcaption>
     </figure>
   </div>
 
@@ -45,7 +45,7 @@
 
 
   <div class="more">
-    <span ng-repeat="project in projects" ng-show="project.path != params">
+    <span ng-repeat="project in projects">
       <a href="#/{{project.path}}">
         <div class="third">
           <img src="../images/{{project.path}}/{{project.path}}.png" />

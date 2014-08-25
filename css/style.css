@@ -36,14 +36,6 @@ h5, ul li {
 ul li {
   margin-top: 10px; }
 
-.resume p {
-  font-weight: 200;
-  font-size: 16px;
-  display: block;
-  clear: both;
-  margin-top: 5px;
-  line-height: 20px; }
-
 a {
   text-decoration: none;
   color: #87cc94;
@@ -53,6 +45,9 @@ a {
     color: #218732;
     -webkit-transition: all 0.3s;
     transition: all 0.3s; }
+
+.current-link {
+  text-decoration: underline; }
 
 figure img {
   width: 150%;
@@ -78,7 +73,8 @@ figcaption {
 
 .resume-tag {
   font-weight: 300;
-  display: block; }
+  display: block;
+  margin-bottom: 20px; }
 
 .resume-contact {
   float: right; }
@@ -91,7 +87,6 @@ figcaption {
   float: right; }
 
 nav {
-  position: fixed;
   top: 0;
   color: white;
   padding: 20px 0;
@@ -103,8 +98,8 @@ nav {
     line-height: 20px;
     font-size: 16px;
     color: #162214; }
-    nav a:active {
-      text-decoration: underline; }
+    nav a:hover {
+      color: #87cc94; }
 
 .nav-left {
   float: left;
@@ -117,6 +112,8 @@ nav {
   margin-right: 5%; }
   .nav-right a {
     margin-left: 40px; }
+    .nav-right a:first-child {
+      margin-left: 0; }
   .nav-right h2 {
     display: inline-block; }
 
@@ -128,17 +125,27 @@ nav {
 /*MAIN PAGE STYLING */
 #splash {
   height: 100%;
-  padding-top: 20%; }
+  padding-top: 30%;
+  width: 150%;
+  margin-left: -25%; }
+  #splash h1 {
+    color: #87cc94; }
+  #splash h2 {
+    margin-bottom: 30px; }
 
 .title {
   position: relative;
-  margin-bottom: 200px; }
+  margin-bottom: 300px; }
   .title img {
-    width: 100%; }
+    width: 130%;
+    margin-left: -15%; }
   .title h1 {
     font-size: 2em; }
   .title a {
     color: #162214; }
+
+#selected {
+  margin-top: 35%; }
 
 .banner-text {
   position: absolute;
@@ -153,17 +160,23 @@ nav {
   text-align: center; }
 
 .footer {
-  background: rgba(134, 204, 148, 0.2);
-  height: 100px; }
+  background: #162214;
+  color: white;
+  display: table;
+  padding: 20px 0;
+  width: 100%; }
+  .footer a {
+    color: white; }
+    .footer a:hover {
+      color: #87cc94; }
+  .footer .hilight {
+    color: white; }
   .footer h5, .footer ul li, ul .footer li {
     margin-top: 20px; }
-  .footer .wrapper {
-    display: block; }
 
 i {
-  margin-right: 10px;
-  display: block;
-  font-size: 25px; }
+  font-size: 25px;
+  text-align: -10000px; }
 
 /*PROJECT PAGE STYLING */
 p {
@@ -176,7 +189,6 @@ p {
   margin: 0 auto; }
 
 .hilight {
-  color: #218732;
   font-weight: 400; }
 
 .crowd {
@@ -192,8 +204,8 @@ p {
 .more {
   height: 80px;
   border-top: 1px solid rgba(134, 204, 148, 0.2);
-  padding-top: 20px;
-  display: block; }
+  padding: 20px 0;
+  display: table; }
   .more .third {
     width: 30%;
     margin: 0 1.66%; }
@@ -201,6 +213,8 @@ p {
     width: 100%; }
   .more a {
     color: #162214; }
+  .more h5, .more ul li, ul .more li {
+    margin-bottom: 10px; }
 
 .image-pair {
   display: block;
@@ -222,11 +236,18 @@ p {
 
 /*RESUME STYLING */
 .resume {
-  display: block;
+  display: table;
   height: 100%;
   width: 800px;
   margin: 0 auto;
   margin-top: 100px; }
+  .resume p {
+    font-weight: 200;
+    font-size: 16px;
+    display: block;
+    clear: both;
+    margin-top: 5px;
+    line-height: 20px; }
   .resume h4 {
     color: #162214; }
 
@@ -240,6 +261,26 @@ p {
     font-weight: 300; }
     .resume-list li:first-child {
       margin-top: 0; }
+
+.resume-links {
+  width: 50%;
+  float: left;
+  text-align: center;
+  margin-bottom: 20px; }
+  .resume-links button {
+    padding: 10px 20px;
+    font-weight: 100;
+    font-size: 14px;
+    background: none;
+    border: 1px solid #87cc94;
+    border-radius: 5px;
+    color: #87cc94;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; }
+    .resume-links button:hover, .resume-links button:focus {
+      background: rgba(134, 204, 148, 0.2);
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s; }
 
 .two-thirds {
   width: 60%;
@@ -256,13 +297,9 @@ p {
   margin-right: 0; }
 
 @media (max-width: 800px) {
-  .wrapper {
+  .wrapper,
+  .resume {
     width: 80%; }
-
-  nav {
-    background: #162214; }
-    nav a {
-      color: white; }
 
   .image-pair {
     display: block;
@@ -278,6 +315,12 @@ p {
     float: none;
     text-align: center; } }
 @media (max-width: 400px) {
+  .resume-links {
+    float: none;
+    clear: both;
+    margin: 0 auto;
+    width: 80%; }
+
   .third,
   .two-thirds {
     float: none;
