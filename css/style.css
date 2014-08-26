@@ -269,8 +269,9 @@ p {
   margin-bottom: 20px; }
 
 button {
-  padding: 10px 20px;
   margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: block;
   font-weight: 100;
   font-size: 14px;
@@ -283,6 +284,8 @@ button {
     background: rgba(134, 204, 148, 0.2);
     -webkit-transition: all 0.3s;
     transition: all 0.3s; }
+  button a {
+    padding: 10px 20px; }
 
 .two-thirds {
   width: 60%;
