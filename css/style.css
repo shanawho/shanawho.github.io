@@ -303,6 +303,10 @@ button {
   .resume {
     width: 80%; }
 
+  #splash {
+    width: 90%;
+    margin: 0 auto; }
+
   .image-pair {
     display: block;
     height: 200px;
