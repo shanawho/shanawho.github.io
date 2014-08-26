@@ -334,5 +334,6 @@ button {
     width: 100%;
     margin: 0 auto; }
 
-  .more {
-    height: 500px; } }
+  .more .third {
+    width: 100%;
+    margin: 0; } }
