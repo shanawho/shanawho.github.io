@@ -267,20 +267,22 @@ p {
   float: left;
   text-align: center;
   margin-bottom: 20px; }
-  .resume-links button {
-    padding: 10px 20px;
-    font-weight: 100;
-    font-size: 14px;
-    background: none;
-    border: 1px solid #87cc94;
-    border-radius: 5px;
-    color: #87cc94;
+
+button {
+  padding: 10px 20px;
+  margin: 0 auto;
+  display: block;
+  font-weight: 100;
+  font-size: 14px;
+  background: none;
+  border: 1px solid #87cc94;
+  color: #87cc94;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  button:hover, button:focus {
+    background: rgba(134, 204, 148, 0.2);
     -webkit-transition: all 0.3s;
     transition: all 0.3s; }
-    .resume-links button:hover, .resume-links button:focus {
-      background: rgba(134, 204, 148, 0.2);
-      -webkit-transition: all 0.3s;
-      transition: all 0.3s; }
 
 .two-thirds {
   width: 60%;

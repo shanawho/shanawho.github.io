@@ -317,22 +317,23 @@ p
   text-align: center
   margin-bottom: $margin
 
-  button
-    padding: 10px $margin
-    font-weight: 100
-    font-size: 14px
-    background: none
-    border: 1px solid $mint
-    border-radius: 5px
-    color: $mint
+button
+  padding: 10px $margin
+  margin: 0 auto
+  display: block
+  font-weight: 100
+  font-size: 14px
+  background: none
+  border: 1px solid $mint
+  color: $mint
+  -webkit-transition: all .3s
+  transition: all .3s
+
+  &:hover,
+  &:focus
+    background: $transp-mint
     -webkit-transition: all .3s
     transition: all .3s
-
-    &:hover,
-    &:focus
-      background: $transp-mint
-      -webkit-transition: all .3s
-      transition: all .3s
 
 
 
