@@ -56,6 +56,14 @@
       });
   }]);
 
+  app.controller("navController", function($scope, $location) {
+    console.log("butts");
+    
+    $scope.isActive = function(viewLocation) {
+      console.log($location.path());
+      return viewLocation === $location.path();
+    };
+  });
 
   app.controller("mainController", function($scope) {
 
@@ -66,7 +74,8 @@
       {title: "32pt", path: "32pt", tagline: "A custom design editor for letterpressed business cards"},
       {title: "Lettering", path: "lettering", tagline: "Illustrative typography"},
       {title: "Artwork", path: "art", tagline: "Portraiture & paintings"}
-    ]
+    ];
+
 
   });
 

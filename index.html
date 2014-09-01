@@ -32,9 +32,9 @@
 <body>
   <nav id="nav-bar" data-scroll-index="0">
 
-    <div class="nav-right">
-      <a href="#/main#work" id="work-link"><h2>work</h2></a>
-      <a href="#/about" id="about-link"><h2>about</h2></a>
+    <div class="nav-right" ng-controller="navController">
+      <a href="#/" id="work-link" ng-class="{ active : isActive('/')}"><h2>work</h2></a>
+      <a href="#/about" id="about-link" ng-class="{ active : isActive('/about')}"><h2>about</h2></a>
     </div>
   </nav>
 
