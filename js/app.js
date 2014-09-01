@@ -6,7 +6,7 @@
     return $routeProvider.when("/", {
       templateUrl: "pages/main.html",
       controller: "mainController",
-      title: "Product Design & Frontend Development"
+      title: "UI/UX Design & Frontend Development"
     }).when("/main", {
       templateUrl: "pages/main.html",
       controller: "mainController",
@@ -58,7 +58,7 @@
 
   app.controller("navController", function($scope, $location) {
     console.log("butts");
-    
+
     $scope.isActive = function(viewLocation) {
       console.log($location.path());
       return viewLocation === $location.path();

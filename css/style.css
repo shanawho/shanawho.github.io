@@ -123,8 +123,7 @@ nav {
 
 /*MAIN PAGE STYLING */
 #splash {
-  width: 150%;
-  margin-left: -25%; }
+  margin-bottom: 100px; }
   #splash h1 {
     color: #87cc94; }
   #splash h2 {
