@@ -1,29 +1,23 @@
-<div class="wrapper">
-  <div class="main">
     <div id="splash">
       <h1>Shana Hu</h1>
-      <h2>designer &amp; developer</h2>
-
+      <h2>design &amp; development</h2>
     </div>
 
-    <div id="work" data-scroll-index="1">
-      <span ng-repeat="project in projects" ng-show="project.path != params">
+    <div class="main">
 
-        <div class="title" id="{{project.path}}">
-          <script>
-          console.log({{project.path}});
-          </script>
-          <a href="#/{{project.path}}">
-            <img src="../images/{{project.path}}/{{project.path}}.png" />
-            <div class="banner-text">
-              <h1>{{project.title}}</h1>
-              <h2>{{project.tagline}}</h2>
-            </div>
-          </a>
+      <div id="work" data-scroll-index="1">
+        <span ng-repeat="project in projects" ng-show="project.path != params">
 
-        </div>
-      </span>
+          <div class="title" id="{{project.path}}">
+            <a href="#/{{project.path}}">
+              <img src="../images/{{project.path}}/{{project.path}}.png" />
+              <div class="banner-text">
+                <h1>{{project.title}}</h1>
+                <h2>{{project.tagline}}</h2>
+              </div>
+            </a>
+
+          </div>
+        </span>
+      </div>
     </div>
-
-  </div>
-</div>

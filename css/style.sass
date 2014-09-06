@@ -1,3 +1,5 @@
+@import "./bourbon/bourbon"
+
 $margin: 20px
 $main-font: Ek Mukta, sans-serif
 $black: #162214
@@ -14,7 +16,7 @@ body, html
   font-family: $main-font
   width: 100%
   color: $black
-  // background: rgba(192, 224, 182, 0.1)
+
 h1
   font-weight: 700
   font-size: 40px
@@ -47,18 +49,15 @@ ul li
 a
   text-decoration: none
   color: $mint
-  -webkit-transition: all .3s
-  transition: all .3s
+  @include transition(all .3s)
 
   &:hover
     color: $green
-    -webkit-transition: all .3s
-    transition: all .3s
+    @include transition(all .3s)
 
 .active
   color: $mint
-  -webkit-transition: all .3s
-  transition: all .3s
+  @include transition(all .3s)
 
 
 figure img
@@ -126,12 +125,21 @@ nav
 
   a
     margin-left: $margin * 2
+    @include animation(fadein 2s)
+    @include animation-delay(1s)
+
 
     &:first-child
       margin-left: 0
 
   h2
     display: inline-block
+
+@include keyframes(fadein)
+  from
+    opacity: 0
+  to
+    opacity: 1
 
 .side
   background-color: rgba(0, 0, 0, 0.3)
@@ -142,15 +150,19 @@ nav
 
 #splash
   padding-top: 20%
-  height: 70%
+  height: 85%
+  margin: 0 auto
+  text-align: center
 
   h1
     color: $mint
+    @include animation(fadein 2s)
+
 
   h2
     margin-bottom: 30px
-
-
+    @include animation(fadein 2s)
+    @include animation-delay(.5s)
 
 .title
   position: relative
@@ -161,7 +173,6 @@ nav
     margin-left: -15%
 
     &:hover
-
 
   h1
     font-size: 2em
@@ -180,9 +191,17 @@ nav
   width: 600px
   margin: 0 auto
   margin-top: 100px
+  @include animation(fadein 1s)
 
-.main
+#work
+  width: 600px
+  margin: 0 auto
   text-align: center
+
+  img
+    @include animation(fadein 2s)
+    @include animation-delay(2s)
+
 
 .footer
   background: $black
@@ -190,6 +209,9 @@ nav
   display: table
   padding: $margin 0
   width: 100%
+
+  @include animation(fadein 2s)
+
 
   a
     color: #fff
@@ -285,6 +307,9 @@ p
   margin: 0 auto
   margin-top: 100px
 
+  @include animation(fadein 2s)
+  
+
   p
     font-weight: 200
     font-size: 16px
@@ -325,14 +350,12 @@ p
   background: none
   border: 1px solid $mint
   color: $mint
-  -webkit-transition: all .3s
-  transition: all .3s
+  @include transition(all .3s)
 
   &:hover,
   &:focus
     background: $transp-mint
-    -webkit-transition: all .3s
-    transition: all .3s
+    @include transition(all .3s)
 
   a
     padding: 10px $margin
@@ -355,7 +378,7 @@ p
   margin-right: 0
 
 
-@media (max-width: 800px)
+@media (max-width: 920px)
   .wrapper,
   .resume
     width: 80%
@@ -363,7 +386,6 @@ p
   #splash
     width: 90%
     margin: 0 auto
-
 
   .image-pair
     display: block
@@ -379,6 +401,7 @@ p
   .nav-right
     float: none
     text-align: center
+    margin-right: 0
 
 
 @media (max-width: 400px)

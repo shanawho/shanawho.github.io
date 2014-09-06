@@ -40,15 +40,18 @@ a {
   text-decoration: none;
   color: #87cc94;
   -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
   transition: all 0.3s; }
   a:hover {
     color: #218732;
     -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
     transition: all 0.3s; }
 
 .active {
   color: #87cc94;
   -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
   transition: all 0.3s; }
 
 figure img {
@@ -110,12 +113,36 @@ nav {
   float: right;
   margin-right: 5%; }
   .nav-right a {
-    margin-left: 40px; }
+    margin-left: 40px;
+    -webkit-animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    animation: fadein 2s;
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    animation-delay: 1s; }
     .nav-right a:first-child {
       margin-left: 0; }
   .nav-right h2 {
     display: inline-block; }
 
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+@-moz-keyframes fadein {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+@keyframes fadein {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
 .side {
   background-color: rgba(0, 0, 0, 0.3);
   width: 40%;
@@ -124,11 +151,22 @@ nav {
 /*MAIN PAGE STYLING */
 #splash {
   padding-top: 20%;
-  height: 70%; }
+  height: 85%;
+  margin: 0 auto;
+  text-align: center; }
   #splash h1 {
-    color: #87cc94; }
+    color: #87cc94;
+    -webkit-animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    animation: fadein 2s; }
   #splash h2 {
-    margin-bottom: 30px; }
+    margin-bottom: 30px;
+    -webkit-animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    animation: fadein 2s;
+    -webkit-animation-delay: 0.5s;
+    -moz-animation-delay: 0.5s;
+    animation-delay: 0.5s; }
 
 .title {
   position: relative;
@@ -151,17 +189,32 @@ nav {
 .wrapper {
   width: 600px;
   margin: 0 auto;
-  margin-top: 100px; }
+  margin-top: 100px;
+  -webkit-animation: fadein 1s;
+  -moz-animation: fadein 1s;
+  animation: fadein 1s; }
 
-.main {
+#work {
+  width: 600px;
+  margin: 0 auto;
   text-align: center; }
+  #work img {
+    -webkit-animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    animation: fadein 2s;
+    -webkit-animation-delay: 2s;
+    -moz-animation-delay: 2s;
+    animation-delay: 2s; }
 
 .footer {
   background: #162214;
   color: white;
   display: table;
   padding: 20px 0;
-  width: 100%; }
+  width: 100%;
+  -webkit-animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  animation: fadein 2s; }
   .footer a {
     color: white; }
     .footer a:hover {
@@ -237,7 +290,10 @@ p {
   height: 100%;
   width: 800px;
   margin: 0 auto;
-  margin-top: 100px; }
+  margin-top: 100px;
+  -webkit-animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  animation: fadein 2s; }
   .resume p {
     font-weight: 200;
     font-size: 16px;
@@ -276,10 +332,12 @@ p {
   border: 1px solid #87cc94;
   color: #87cc94;
   -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
   transition: all 0.3s; }
   .button:hover, .button:focus {
     background: rgba(134, 204, 148, 0.2);
     -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
     transition: all 0.3s; }
   .button a {
     padding: 10px 20px; }
@@ -298,7 +356,7 @@ p {
 .last {
   margin-right: 0; }
 
-@media (max-width: 800px) {
+@media (max-width: 920px) {
   .wrapper,
   .resume {
     width: 80%; }
@@ -319,7 +377,8 @@ p {
   .nav-left,
   .nav-right {
     float: none;
-    text-align: center; } }
+    text-align: center;
+    margin-right: 0; } }
 @media (max-width: 400px) {
   .resume-links {
     float: none;
