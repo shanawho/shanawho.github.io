@@ -212,12 +212,9 @@ nav {
   display: table;
   padding: 20px 0;
   width: 100%;
-  -webkit-animation: fadein 2s;
-  -moz-animation: fadein 2s;
-  animation: fadein 2s;
-  -webkit-animation-delay: 4s;
-  -moz-animation-delay: 4s;
-  animation-delay: 4s; }
+  -webkit-animation: fadein 10s;
+  -moz-animation: fadein 10s;
+  animation: fadein 10s; }
   .footer a {
     color: white; }
     .footer a:hover {
