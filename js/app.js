@@ -57,10 +57,7 @@
   }]);
 
   app.controller("navController", function($scope, $location) {
-    console.log("butts");
-
     $scope.isActive = function(viewLocation) {
-      console.log($location.path());
       return viewLocation === $location.path();
     };
   });
