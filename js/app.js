@@ -6,7 +6,7 @@
     return $routeProvider.when("/", {
       templateUrl: "pages/main.html",
       controller: "mainController",
-      title: "UI/UX Design & Frontend Development"
+      title: "Designer & Developer"
     }).when("/main", {
       templateUrl: "pages/main.html",
       controller: "mainController",
