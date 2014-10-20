@@ -43,13 +43,6 @@
       templateUrl: "pages/lettering.html",
       controller: "mainController",
       title: "Lettering"
-    }).when("/53", {
-      templateUrl: "pages/53.html",
-      controller: "53Controller",
-      title: "Dear 53"
-    }).otherwise({
-      redirectTo: "/",
-      title: "Design & Development"
     });
 
   });
