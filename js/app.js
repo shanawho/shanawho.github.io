@@ -43,9 +43,13 @@
       templateUrl: "pages/lettering.html",
       controller: "mainController",
       title: "Lettering"
+    }).when("/53", {
+      templateUrl: "pages/53.html",
+      controller: "53Controller",
+      title: "Dear 53"
     }).otherwise({
       redirectTo: "/",
-      title: "Product Design & Frontend Development"
+      title: "Design & Development"
     });
 
   });
@@ -113,6 +117,12 @@
   app.controller("letteringController", function($scope, $routeParams) {
     $scope.params = "lettering";
   });
+
+
+  app.controller("53Controller", function($scope, $routeParams) {
+    $scope.params = "53";
+  });
+
 
 
 
