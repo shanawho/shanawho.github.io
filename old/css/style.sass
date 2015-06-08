@@ -1,0 +1,429 @@
+@import "./bourbon/bourbon"
+
+$margin: 20px
+$main-font: Ek Mukta, sans-serif
+$black: #162214
+$green: #218732
+$mint: #87cc94
+$transp-mint: rgba(134, 204, 148, 0.2)
+
+*
+  box-sizing: border-box
+
+body, html
+  padding: 0
+  margin: 0
+  font-family: $main-font
+  width: 100%
+  color: $black
+
+h1
+  font-weight: 700
+  font-size: 40px
+  line-height: 40px
+  margin-bottom: 0
+
+h2
+  font-weight: 200
+  margin: 0
+  clear: both
+  line-height: 30px
+
+h4
+  margin: 0
+  float: left
+  clear: both
+  color: #909390
+
+h5
+  clear: both
+  font-weight: 200
+  font-size: 16px
+  margin: 0
+  line-height: 20px
+
+ul li
+  @extend h5
+  margin-top: 10px
+
+a
+  text-decoration: none
+  color: $mint
+  @include transition(all .3s)
+
+  &:hover
+    color: $green
+    @include transition(all .3s)
+
+.active
+  color: $mint
+  @include transition(all .3s)
+
+
+figure img
+  width: 150%
+  margin-left: -25%
+  
+figcaption
+  font-size: 1em
+  font-weight: 200
+  margin-bottom: 20px
+  display: block
+  width: 150%
+  margin-left: -25%
+
+.resume-title
+  float: left
+.resume-name
+  font-weight: 700
+  font-size: 36px
+  margin-bottom: 0
+  line-height: 36px
+  display: block
+
+.resume-tag
+  display: block
+  margin-bottom: $margin
+
+.resume-contact
+  float: right
+.date
+  font-weight: 200
+  font-size: 16px
+  margin-top: 0
+  display: block
+  float: right
+
+nav
+  top: 0
+  color: #fff
+  padding: $margin 0
+  width: 100%
+  z-index: 100
+
+  h2
+    display: inline-block
+
+  a
+    line-height: 20px
+    font-size: 16px
+    color: $black
+    
+
+
+.nav-left
+  float: left
+  margin-left: 5%
+
+  a
+    margin-right: $margin * 2
+
+
+.nav-right
+  float: right
+  margin-right: 5%
+
+  a
+    margin-left: $margin * 2
+    @include animation(fadein 2s)
+    @include animation-delay(1s)
+
+
+    &:first-child
+      margin-left: 0
+
+  h2
+    display: inline-block
+
+@include keyframes(fadein)
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+.side
+  background-color: rgba(0, 0, 0, 0.3)
+  width: 40%
+  height: 100%
+
+/** MAIN PAGE STYLING **/
+
+#splash
+  padding-top: 20%
+  height: 85%
+  margin: 0 auto
+  text-align: center
+
+  h1
+    color: $mint
+    @include animation(fadein 2s)
+
+
+  h2
+    margin-bottom: 30px
+    @include animation(fadein 2s)
+    @include animation-delay(.5s)
+
+.title
+  position: relative
+  margin-bottom: 300px
+
+  img
+    width: 130%
+    margin-left: -15%
+
+    &:hover
+
+  h1
+    font-size: 2em
+
+  a
+    color: $black
+
+#selected
+  margin-top: 35%
+
+.banner-text
+  position: absolute
+  width: 100%
+
+.wrapper
+  width: 600px
+  margin: 0 auto
+  margin-top: 100px
+  @include animation(fadein 1s)
+
+#work
+  width: 600px
+  margin: 0 auto
+  text-align: center
+
+  img, .banner-text
+    @include animation(fadein 2s)
+    @include animation-delay(1.5s)
+
+
+.footer
+  background: $black
+  color: #fff
+  display: table
+  padding: $margin 0
+  width: 100%
+
+  @include animation(fadein 5s)
+
+
+  a
+    color: #fff
+
+    &:hover
+      color: $mint
+
+  .hilight
+    color: #fff
+  
+  h5
+    margin-top: $margin
+
+i
+  font-size: 25px
+  text-align: -10000px
+/** PROJECT PAGE STYLING **/
+
+p
+  font-size: 18px
+  font-weight: 200
+  line-height: 30px
+  clear: both
+
+.text
+  margin: 0 auto
+
+.hilight
+  font-weight: 400
+
+
+.crowd
+  background-img: url('../images/crowd.jpg')
+  height: 50%
+
+.clearfix
+  clear: both
+
+
+.last
+  margin-right: 0
+
+.more
+  height: 80px
+  border-top: 1px solid $transp-mint
+  padding: $margin 0
+  display: table
+
+  .third
+    width: 30%
+    margin: 0 1.66%
+
+  img
+    width: 100%
+
+  a
+    color: $black
+
+  h5
+    margin-bottom: 10px
+
+.image-pair
+  display: block
+  width: 130%
+  margin-left: -15%
+
+  figure
+    width: 49%
+    margin-left: 0
+    margin-right: 2%
+    float: left
+
+    &:last-child
+      margin-right: 0
+
+    img
+      width: 100%
+      margin: 0
+
+  figcaption
+    margin: 0
+    width: 100%
+
+
+
+
+/** RESUME STYLING **/
+
+.resume
+  display: table
+  height: 100%
+  width: 800px
+  margin: 0 auto
+  margin-top: 100px
+
+  @include animation(fadein 2s)
+
+
+  p
+    font-weight: 200
+    font-size: 16px
+    display: block
+    clear: both
+    margin-top: 5px
+    line-height: 20px
+
+  h4
+    color: $black
+
+.resume-section
+  margin-left: 5%
+
+.resume-list
+  list-style-type: none
+  margin-top: 0
+
+  li
+    &:first-child
+      margin-top: 0
+
+.resume-links
+  width: 50%
+  float: left
+  text-align: center
+  margin-bottom: $margin
+
+.button
+  margin: 0 auto
+  padding-top: 10px
+  width: 50%
+  text-align: center
+  padding-bottom: 10px
+  display: block
+  font-weight: 100
+  font-size: 14px
+  background: none
+  border: 1px solid $mint
+  color: $mint
+  @include transition(all .3s)
+
+  &:hover,
+  &:focus
+    background: $transp-mint
+    @include transition(all .3s)
+
+  a
+    padding: 10px $margin
+
+
+
+.two-thirds
+  width: 60%
+  float: left
+  clear: both
+  margin-right: 5%
+
+
+.third
+  width: 30%
+  float: left
+  margin-right: 3%
+
+.last
+  margin-right: 0
+
+
+@media (max-width: 920px)
+  .wrapper,
+  .resume
+    width: 80%
+
+  #splash
+    width: 90%
+    margin: 0 auto
+
+  .image-pair
+    display: block
+    height: 200px
+    width: 120%
+    margin-left: -10%
+
+  figure img
+    margin-top: 0
+
+
+  .nav-left, 
+  .nav-right
+    float: none
+    text-align: center
+    margin-right: 0
+
+
+@media (max-width: 400px)
+
+  .resume-links
+    float: none
+    clear: both
+    margin: 0 auto
+    width: 80%
+
+  .third,
+  .two-thirds
+    float: none
+    clear: both
+    width: 100%
+    margin: 0 auto
+
+  .more
+    .third
+      width: 100%
+      margin: 0
+
+  .button
+    margin-bottom: 20px
+    width: 100%

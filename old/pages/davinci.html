@@ -1,0 +1,59 @@
+<div class="wrapper">
+
+    <figure>
+      <img src="../images/davinci/davinci.png" />
+
+    </figure>
+    <h1>DaVinci Mobile</h1>
+
+    <div class="text">
+
+    <p>DaVinci Mobile is LinkedIn's pattern library for designers and developers.</p>
+
+    <p>Davinci Mobile originally was a linked PDF. Although the PDF allowed designers to access the information they needed, the setup didn’t scale well and provided limited resources for developers. The solution was to create an online pattern library which fit in with its preexisting sister branches, but also established its own style. Mobile DaVinci is fully-responsive so designers can see components in context on a mobile device.</p>
+
+    <p>Although I was originally slated to solely work on design, I volunteered to expedite the project by developing the hub page. Throughout the project I worked closely with designers, web developers, and a fellow intern who implemented my component page designs.</p>
+
+    <figure>
+      <img src="../images/davinci/mobile-wires.png" />
+      <figcaption>Mobile hub wires </figcaption>
+    </figure>
+
+    <p>We explored version 1, but after conducting some user testing, we realized version 2 was easier to parse and navigate on a mobile device. This design decision also made for a cleaner development practice: no need for different image assets for mobile!</p>
+
+    <figure>
+      <img src="../images/davinci/mobile-hub.png" />
+      <figcaption>The fully developed mobile hub, using a pre-existing mobile web drawer component to offer a list view option.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="../images/davinci/hub.png" />
+      <figcaption>Desktop hub</figcaption>
+    </figure>
+
+    <figure>
+      <img src="../images/davinci/mobile-component.png" />
+      <figcaption>Mobile component pages, designed to showcase device-specific differences between mobile web, iOS, and Android</figcaption>
+    </figure>
+
+    <figure>
+      <img src="../images/davinci/component.png" />
+      <figcaption>Desktop lower component page</figcaption>
+    </figure>
+
+  </div>
+
+
+
+
+  <div class="more">
+    <span ng-repeat="project in projects">
+      <a href="#/{{project.path}}">
+        <div class="third">
+          <img src="../images/{{project.path}}/{{project.path}}.png" />
+          <h5>{{project.title}}</h5>
+        </div>
+      </a>
+    </span>
+  </div>
+</div>
