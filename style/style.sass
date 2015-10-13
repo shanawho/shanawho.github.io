@@ -1,0 +1,246 @@
+$serif: 'Alegreya', serif
+$depot: 'Depot New Web', sans-serif
+$sc: 'Alegreya SC', serif
+$sans: Helvetica Neue, Helvetica sans-serif
+$georgia: Georgia, serif
+
+$green: #339966
+$black: #262926
+$grey: #6A6F6C
+$mint: #F3F9F6
+$white: #fff
+
+body,
+html
+  padding: 0
+  margin: 0
+  height: 0
+  font-family: $depot
+
+*
+  box-sizing: border-box
+  color: $black
+
+nav
+  margin-bottom: 20px
+  display: block
+  min-height: 50px
+  a
+    font-family: $georgia
+    display: inline-block
+    margin: 0
+
+.name
+  float: left
+.about
+  float: right
+  margin-right: 3%
+  font-size: 1em
+  font-family: $depot
+h1
+  font-weight: 500
+  margin-bottom: 0
+  font-size: 1.5em
+  font-family: $georgia
+
+.sub
+  margin-top: 0
+
+h2
+  font-family: $georgia
+  font-size: 1.25em
+  font-weight: 400
+  margin-bottom: 0
+
+h3
+  font-family: Helvetica
+  letter-spacing: 1px
+  font-weight: normal
+  font-size: .8em
+  text-transform: uppercase
+  margin-top: 5px
+
+h4
+  margin-bottom: 0
+
+ul
+  padding-left: 20px
+h5,
+ul li
+  clear: both
+  font-weight: 200
+  font-size: .9em
+  margin: 0
+  padding: 0
+  line-height: 20px
+
+.third
+  width: 30%
+  margin-right: 2%
+  display: inline-block
+  vertical-align: top
+
+p
+  font-family: $depot
+  font-weight: 100
+  font-size: 1em
+  line-height: 1.7em
+
+a
+  font-family: $depot
+  color: $green
+  text-decoration: none
+  cursor: pointer
+
+  &:hover
+    h2:hover
+      text-decoration: none
+
+.about
+  display: inline-block
+
+
+figure
+  width: 120%
+  margin-left: -10%
+
+  img
+    width: 100%
+
+  &.half
+    margin-right: 0
+    width: 58%
+
+    &.second
+      float: right
+      margin-right: -10%
+
+figcaption
+  font-family: $depot
+  font-size: .8em
+  font-weight: 200
+  margin-top: 10px
+  margin-bottom: 20px
+  display: block
+
+.clearfix
+  clear: both
+
+.video-wrap
+  height: auto
+  margin-left: -10%
+
+  &.half
+    margin-right: 0
+    width: 58%
+
+  &.second
+    float: right
+    margin-right: -10%
+.content
+  width: 80%
+  max-width: 1000px
+  margin: 50px auto 0 auto
+
+.wrapper
+  width: 40%
+  min-width: 550px
+  margin: 50px auto 0 auto
+
+.blurb
+  float: right
+
+.half
+  float: left
+  width: 50%
+
+.project
+  display: inline-block
+  width: 30%
+  margin: 20px auto
+  margin-right: 3%
+  vertical-align: top
+
+  img
+    width: 100%
+    height: auto
+
+  &:hover img
+    opacity: 1
+
+.button
+  padding: 20px
+  border: 1px solid $green
+  color: $green
+  margin: 0 auto
+  display: block
+  max-width: 50%
+  font-size: 1.25em
+  font-family: $georgia
+  text-align: center
+
+  &:hover,
+  &:focus
+    background: $green
+    color: $white
+
+video
+  width: 100%
+.video-wrap
+  position: relative
+
+.play-btn
+  font-size: 2em
+  color: $grey
+  position: absolute
+  top: 50%
+  left: 40%
+  z-index: 100000000
+
+
+  &:hover
+    color: $green
+
+.prev-proj
+  position: fixed
+  bottom: 5%
+  left: 5%
+  font-size: 1.2em
+
+.next-proj
+  position: fixed
+  bottom: 5%
+  right: 5%
+  font-size: 1.2em
+
+.fa-long-arrow-left:hover,
+.fa-long-arrow-right:hover
+  color: $green
+
+footer
+  margin-top: 40px
+  border-top: 1px solid $grey
+  min-height: 100px
+  margin-right: 3%
+
+.nav-left
+  float: left
+.nav-right
+  float: right
+
+  h2
+    display: inline-block
+
+@media (max-width: 800px)
+  .project
+    width: 47%
+
+  .wrapper
+    min-width: 90%
+
+  .button
+    min-width: 80%
+
+@media (max-width: 550px)
+  .project
+    width: 97%
