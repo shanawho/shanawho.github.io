@@ -10,6 +10,7 @@ $grey: #6A6F6C
 $mint: #F3F9F6
 $white: #fff
 
+
 body,
 html
   padding: 0
@@ -27,16 +28,24 @@ nav
   min-height: 50px
   a
     font-family: $georgia
-    display: inline-block
+    color: $black
     margin: 0
 
+    &:hover
+      color: $green
+
+  h2
+    margin-top: 5px
+
 .name
-  float: left
-.about
+  margin-top: 0
+.work
   float: right
-  margin-right: 3%
+  margin-right: 2%
   font-size: 1em
   font-family: $depot
+  margin-top: 8px
+
 h1
   font-weight: 500
   margin-bottom: 0
@@ -51,6 +60,7 @@ h2
   font-size: 1.25em
   font-weight: 400
   margin-bottom: 0
+  margin-top: 10px
 
 h3
   font-family: Helvetica
@@ -75,8 +85,8 @@ ul li
   line-height: 20px
 
 .third
-  width: 30%
-  margin-right: 2%
+  width: 33%
+  margin-right: 0.33%
   display: inline-block
   vertical-align: top
 
@@ -87,7 +97,6 @@ p
   line-height: 1.7em
 
 a
-  font-family: $depot
   color: $green
   text-decoration: none
   cursor: pointer
@@ -96,9 +105,9 @@ a
     h2:hover
       text-decoration: none
 
-.about
-  display: inline-block
 
+img
+  background-color: $green
 
 figure
   width: 120%
@@ -156,17 +165,18 @@ figcaption
 
 .project
   display: inline-block
-  width: 30%
+  width: 33.33%
   margin: 20px auto
-  margin-right: 3%
+  padding-right: 2%
   vertical-align: top
 
   img
     width: 100%
     height: auto
 
-  &:hover img
-    opacity: 1
+  &:hover
+    h2,h3
+      color: $green
 
 .button
   padding: 20px
@@ -221,12 +231,27 @@ footer
   margin-top: 40px
   border-top: 1px solid $grey
   min-height: 100px
-  margin-right: 3%
+  margin-right: 2%
+  font-family: $georgia
+
+  i
+    margin-left: 5px
+
+    &:hover
+      color: $green
 
 .nav-left
   float: left
+  margin-top: 10px
+  font-weight: 100
+
+  a
+    color: $black
+    &:hover
+      color: $green
 .nav-right
   float: right
+  margin-top: 10px
 
   h2
     display: inline-block

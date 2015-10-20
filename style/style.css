@@ -15,17 +15,22 @@ nav {
   min-height: 50px; }
   nav a {
     font-family: Georgia, serif;
-    display: inline-block;
+    color: #262926;
     margin: 0; }
+    nav a:hover {
+      color: #339966; }
+  nav h2 {
+    margin-top: 5px; }
 
 .name {
-  float: left; }
+  margin-top: 0; }
 
-.about {
+.work {
   float: right;
-  margin-right: 3%;
+  margin-right: 2%;
   font-size: 1em;
-  font-family: "Depot New Web", sans-serif; }
+  font-family: "Depot New Web", sans-serif;
+  margin-top: 8px; }
 
 h1 {
   font-weight: 500;
@@ -40,7 +45,8 @@ h2 {
   font-family: Georgia, serif;
   font-size: 1.25em;
   font-weight: 400;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  margin-top: 10px; }
 
 h3 {
   font-family: Helvetica;
@@ -66,8 +72,8 @@ ul li {
   line-height: 20px; }
 
 .third {
-  width: 30%;
-  margin-right: 2%;
+  width: 33%;
+  margin-right: 0.33%;
   display: inline-block;
   vertical-align: top; }
 
@@ -78,15 +84,14 @@ p {
   line-height: 1.7em; }
 
 a {
-  font-family: "Depot New Web", sans-serif;
   color: #339966;
   text-decoration: none;
   cursor: pointer; }
   a:hover h2:hover {
     text-decoration: none; }
 
-.about {
-  display: inline-block; }
+img {
+  background-color: #339966; }
 
 figure {
   width: 120%;
@@ -140,15 +145,15 @@ figcaption {
 
 .project {
   display: inline-block;
-  width: 30%;
+  width: 33.33%;
   margin: 20px auto;
-  margin-right: 3%;
+  padding-right: 2%;
   vertical-align: top; }
   .project img {
     width: 100%;
     height: auto; }
-  .project:hover img {
-    opacity: 1; }
+  .project:hover h2, .project:hover h3 {
+    color: #339966; }
 
 .button {
   padding: 20px;
@@ -200,13 +205,25 @@ footer {
   margin-top: 40px;
   border-top: 1px solid #6A6F6C;
   min-height: 100px;
-  margin-right: 3%; }
+  margin-right: 2%;
+  font-family: Georgia, serif; }
+  footer i {
+    margin-left: 5px; }
+    footer i:hover {
+      color: #339966; }
 
 .nav-left {
-  float: left; }
+  float: left;
+  margin-top: 10px;
+  font-weight: 100; }
+  .nav-left a {
+    color: #262926; }
+    .nav-left a:hover {
+      color: #339966; }
 
 .nav-right {
-  float: right; }
+  float: right;
+  margin-top: 10px; }
   .nav-right h2 {
     display: inline-block; }
 
