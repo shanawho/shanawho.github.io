@@ -55,9 +55,16 @@
 
   });
 
+
   app.run(['$location', '$rootScope', function($location, $rootScope) {
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
           $rootScope.title = current.$$route.title;
+
+          $('body').css('opacity', 0);
+
+          $('body').animate({
+            opacity: 1
+          }, 1000);
       });
   }]);
 

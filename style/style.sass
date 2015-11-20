@@ -10,6 +10,31 @@ $grey: #6A6F6C
 $mint: #F3F9F6
 $white: #fff
 
+@mixin keyframes($name)
+  @-webkit-keyframes $name
+    @content
+  @-moz-keyframes $name
+    @content
+  @keyframes $name
+    @content
+
+@include keyframes(fadeIn)
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@mixin animation($anim)
+  -webkit-animation: $anim
+  -moz-animation: $anim
+  -o-animation: $anim
+  animation: $anim
+  animation-fill-mode: forwards
+
+
+.fadeIn
+  @include animation(fadeIn ease-in 1)
+
 
 body,
 html
@@ -17,6 +42,9 @@ html
   margin: 0
   height: 0
   font-family: $depot
+
+body
+  opacity: 0
 
 *
   box-sizing: border-box
@@ -36,6 +64,7 @@ nav
 
   h2
     margin-top: 5px
+
 
 .name
   margin-top: 0
@@ -169,6 +198,7 @@ figcaption
   img
     width: 100%
     height: auto
+    background-color: $black
 
   &:hover
     h2,h3
