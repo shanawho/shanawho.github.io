@@ -1,6 +1,3 @@
-
-
-
 $(window).load(function() {
 	
 	$('body').animate({
