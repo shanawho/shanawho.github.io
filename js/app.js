@@ -139,7 +139,7 @@
 
   app.controller("letteringController", function($scope, $routeParams) {
 
-    $scope.prevProj = "type"
+    $scope.prevProj = "intro"
     $scope.nextProj = "paper"
   });
 
