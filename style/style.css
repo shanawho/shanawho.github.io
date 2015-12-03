@@ -172,8 +172,7 @@ figcaption {
   vertical-align: top; }
   .project img {
     width: 100%;
-    height: auto;
-    background-color: #262926; }
+    height: auto; }
   .project:hover h2, .project:hover h3 {
     color: #339966; }
 
