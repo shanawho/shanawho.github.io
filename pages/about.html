@@ -1,23 +1,93 @@
+<div class="wrapper resume">
+
+    <section>
 
 
-    <div class="wrapper">
+    
+        <div class="about most">
 
-	    <figure>
-	      <img src="../images/shana.JPG" />
-	    </figure>
-    	<p>
-    		I have always wanted to learn everything I could, whether it be art, science, or something in between.
-    	</p>
+            <h1>
+                Hello, my&nbsp;name&nbsp;is&nbsp;<a id="name">Shana</a>. 
+            </h1>
 
-    	<p>
-    		I work at the intersection of design and engineering. I'm currently a product design intern at <a href="http://facebook.com" target="_blank">Facebook</a>. Recently, I was a design intern at <a href="http://fiftythree.com" target="_blank">FiftyThree</a> on the Prototyping Team. And last summer, I was a web development and design intern at <a href="http://linkedin.com" target="_blank">LinkedIn</a>.
-    	</p>
-
-    	<p>
-    		I'm also a senior at UC Berkeley, where I've channeled my love of learning into teaching. I was an undergraduate student instructor for <a href="http://pact.eecs.berkeley.edu/cs160/" target="_blank">CS 160/260A: User Interface Design &amp; Development</a>. I also started the class I always wish I had, Working with Typography, and taught Photoshop and Illustrator.
-    	</p>
-
-    	<p>Resume available upon request.</p>
+            <figure class="me">
+              <img src="../images/shana-film.jpg" />
+              <figcaption>Film photo thanks to Danielle Song.</figcaption>
+            </figure>
 
 
-	</div>
+            <p>
+                I design and code digital products, and I love teaching friends and students how to do the same. I believe amazing ideas come to life when different disciplines are brought together. 
+            </p>
+
+            <p>
+                I recently took some time off school to embark on a 6 month deep dive into prototyping and product design.
+            </p>
+
+            <p>
+            </p>
+        </div>
+    </section>
+
+
+    <section>
+        <h4 class="small-half">Experience</h4>
+
+        <div class="most">
+            <h2><span class="title">Product Design Intern</span> at <a class="company" href="https://www.facebook.com/design/" target="_blank">Facebook</a></h2>
+            <h3>Nearby Friends, Realtime Location • Fall 2015</h3>
+
+            <h2>Design Intern at <a class="company" href="https://www.fiftythree.com" target="_blank">FiftyThree</a></h2>
+            <h3>Product &amp; web prototyping, Visual brand • Summer 2015</h3>
+  
+            <h2>Web Dev &amp; Design Intern at <a class="company" href="https://www.linkedin.com/" target="_blank">LinkedIn</a></h2>
+            <h3>Mobile patterns, Accessibility • Summer 2014</h3>
+        </div>
+    </section>
+
+    <section>
+
+
+        <h4 class="small-half">Education</h4>
+
+        <div class="most">
+            <h2>Bachelor of Arts, Computer Science at <a href="http://www.berkeley.edu/" target="_blank">UC Berkeley</a></h2>
+            <h3>Graduating May 2016 • Member of <a href="http://upe.berkeley.edu/" target="_blank">Upsilon Pi Epsilon</a></h3>
+        </div>
+    </section>
+
+    <section>
+
+        <h4 class="small-half">Teaching</h4>
+
+        <div class="most">
+            <h2><a href="http://pact.eecs.berkeley.edu/cs160/" target="_blank">CS 160</a> Undergraduate Student Instructor</h2>
+            <h3>UI Design &amp; Development: instruction, grading, admin • Spring 2015</h3>
+    
+            <h2><a href="http://shanahu.com/type-decal/#/">Working with Typography</a> DeCal Instructor</h2>
+            <h3>Curriculum creation, instruction • Spring 2014</h3>
+        
+            <h2><a href="http://teaching.paulos.net/cs160_FL2014/" target="_blank">CS 160</a> Reader</h2>
+            <h3>UI Design &amp; Development: grading • Fall 2014</h3>
+        
+            <h2><a href="http://decal.innovativedesign.club/#/" target="_blank">Intro to Photoshop &amp; Illustrator</a> DeCal Instructor</h2>
+            <h3>Education Team lead, instruction, admin • Fall 2012, Spring 2013</h3>
+        </div>
+    </section>
+
+    <script>
+    $(window).load(function() {
+
+    var hoverOn = function() {
+        $('#name').css('font-style', 'italic')
+        $('#name').html('Shay•na')
+    }
+
+    var hoverOff = function() {
+        $('#name').css('font-style', 'normal')
+        $('#name').html('Shana')
+    }
+    
+    $('#name').hover(hoverOn, hoverOff);
+})</script>
+</div>

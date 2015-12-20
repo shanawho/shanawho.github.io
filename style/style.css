@@ -114,10 +114,10 @@ a {
   a:hover h2:hover {
     text-decoration: none; }
 
-iframe {
-  width: 120%;
-  margin-left: -10%;
-  height: 455px; }
+.wrapper {
+  width: 40%;
+  min-width: 550px;
+  margin: 50px auto 0 auto; }
 
 figure {
   width: 120%;
@@ -130,6 +130,38 @@ figure {
     figure.half.second {
       float: right;
       margin-right: -10%; }
+
+.resume {
+  width: 100%; }
+  .resume .about {
+    margin-bottom: 40px; }
+  .resume .me {
+    width: 65%;
+    min-width: 400px;
+    margin-left: 0; }
+  .resume p {
+    max-width: 500px; }
+  .resume .small-half {
+    width: 20%;
+    float: left;
+    margin-left: 0; }
+  .resume .most {
+    width: 80%;
+    float: right; }
+  .resume h2, .resume h4 {
+    margin-top: 0; }
+  .resume h2 {
+    font-size: 1em; }
+  .resume h3 {
+    margin-bottom: 40px; }
+
+section {
+  clear: both; }
+
+iframe {
+  width: 120%;
+  margin-left: -10%;
+  height: 455px; }
 
 figcaption {
   font-family: "Depot New Web", sans-serif;
@@ -155,11 +187,6 @@ figcaption {
 .content {
   width: 80%;
   max-width: 1000px;
-  margin: 50px auto 0 auto; }
-
-.wrapper {
-  width: 40%;
-  min-width: 550px;
   margin: 50px auto 0 auto; }
 
 .blurb {
@@ -228,6 +255,7 @@ video {
   color: #339966; }
 
 footer {
+  clear: both;
   margin-top: 40px;
   border-top: 1px solid #6A6F6C;
   min-height: 100px;
