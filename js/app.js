@@ -9,6 +9,10 @@
       templateUrl: "pages/main.html",
       controller: "mainController",
       title: "Designer & Developer"
+    }).when("/fb", {
+      templateUrl: "pages/fb.html",
+      controller: "fbController",
+      title: "Paper for iPhone: Onboarding"
     }).when("/paper", {
       templateUrl: "pages/paper.html",
       controller: "paperController",
@@ -96,7 +100,12 @@
     $scope.work = false;
   });
 
+  app.controller("fbController", function($scope) {
+    $scope.nextProj = "paper"
+  });
+
   app.controller("paperController", function($scope) {
+    $scope.prevProj = "fb"
     $scope.nextProj = "davinci"
   });
 
