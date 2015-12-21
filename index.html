@@ -4,9 +4,7 @@
    <meta charset="UTF-8">
    <meta name="description" content="Shana Hu is a designer and developer based in Berkeley, CA.">
   <title>Shana Hu</title>
-  <script src="https://use.typekit.net/nfa6gmy.js"></script>
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
-
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300italic,300,700|Merriweather+Sans:300,400' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="style/style.css" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
@@ -72,7 +70,9 @@
 
 
         </a>
-        <h2 class="name" ng-show="work"><a id="name" href="#/about">About</a></h2>
+        <h2 class="about" ng-controller="navController">
+          <a href="#/about" ng-class="{ active : isActive('/about')}">about</a>
+        </h2>
 
       </nav>
 
