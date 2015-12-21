@@ -6,7 +6,6 @@
   <title>Shana Hu</title>
   <script src="https://use.typekit.net/nfa6gmy.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
-  <link href="http://fonts.googleapis.com/css?family=Ek+Mukta:200,400,700" rel="stylesheet" type="text/css">
 
   <link rel="stylesheet" type="text/css" href="style/style.css" />
 
@@ -17,7 +16,6 @@
 
   <script src="js/jquery-2.1.4.js" type="text/javascript"></script>
   <script src="js/app.js"></script>
-
   <script src="js/script.js"></script>
 
   <script>
@@ -38,9 +36,44 @@
     <div  class="content" ng-controller="mainController">
 
       <nav>
-        <h1 class="name"><a id="name" href="#/about">Shana Hu</a></h1>
+        <a href="#" class="logo">
+          <svg width="50" height="51" version="2.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+          <title>S</title>
+          <desc>Created using Figma (9000)</desc>
+          <g id="Canvas" transform="translate(606 637)" figma:type="canvas">
+          <g id="S" style="mix-blend-mode:normal;" figma:type="group">
+          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
+          <use xlink:href="#path0_fill" transform="matrix(1 0 0 1 -590.938 -637)" fill="#333333" style="mix-blend-mode:normal;"/>
+          </g>
+          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
+          <use xlink:href="#path0_fill" transform="matrix(-1 0 -0 -1 -571.062 -586.858)" fill="#333333" style="mix-blend-mode:normal;"/>
+          </g>
+          </g>
+          </g>
+          <defs>
+          <path id="path0_fill" d="
+          M 10.0629 0
+          C 15.5389 2.03835e-15 20.7577 4.27015 25.6204 4.28803
+          C 31.4814 4.30957 33.0544 0.538697 34.5134 0.538697
+          C 34.6872 0.538697 34.7943 0.594624 34.8575 0.668284
+          C 34.9676 0.796607 34.9443 0.978746 34.9075 1.01275
+          C 34.3257 1.55145 27.6774 11.0723 20.3196 10.8601
+          C 13.9306 10.6759 10.975 6.73055 5.96876 6.83067
+          C 6.67317 16.567 29.3815 19.5572 28.5078 32.0632
+          C 28.3411 34.4495 27.4339 36.6902 26.3583 38.5302
+          C 24.702 41.3636 22.6463 43.2466 22.2805 43.2466
+          C 21.9944 43.2466 21.8064 43.133 21.8064 42.8587
+          C 21.8064 42.2884 22.8931 41.5738 22.8838 38.4414
+          C 22.8407 23.8535 -3.74983e-15 23.6183 0 11.248
+          C 1.43687e-15 6.50788 5.02235 -1.87622e-15 10.0629 0
+          Z"/>
+          </defs>
+          </svg>
 
-        <h2><a href="#">Design &amp; Development</a></h2>
+
+        </a>
+        <h2 class="name" ng-show="work"><a id="name" href="#/about">About</a></h2>
+
       </nav>
 
       <div ng-view autoscroll="true"></div>

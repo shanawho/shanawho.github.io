@@ -76,6 +76,8 @@
 
   app.controller("mainController", function($scope) {
 
+    $scope.work = true;
+    $scope.main = true;
     $scope.projects = [
       {title: "Confluence", path: "confluence", tagline: "Crowdsourced Q&A for foreign language learners"},
       {title: "DaVinci Mobile", path: "davinci", tagline: "LinkedIn's mobile pattern library for designers & developers"},
@@ -91,14 +93,8 @@
 
   app.controller("aboutController", function($scope) {
     $scope.params = "about";
-
+    $scope.work = false;
   });
-
-
-  app.controller("resumeController", function($scope) {
-    $scope.params = "resume";
-  });
-
 
   app.controller("paperController", function($scope) {
     $scope.nextProj = "davinci"
