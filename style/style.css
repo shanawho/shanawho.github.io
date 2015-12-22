@@ -182,15 +182,12 @@ figcaption {
 .clearfix {
   clear: both; }
 
-.video-wrap {
-  height: auto;
-  margin-left: -10%; }
-  .video-wrap.half {
-    margin-right: 0;
-    width: 58%; }
-  .video-wrap.second {
-    float: right;
-    margin-right: -10%; }
+video.mobile-proto {
+  float: left;
+  width: 48%;
+  margin-right: 2%; }
+  video.mobile-proto.second {
+    margin-right: 0; }
 
 .content {
   width: 80%;
