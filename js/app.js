@@ -70,6 +70,19 @@
             opacity: 1
           }, 1000);
       });
+
+      $rootScope.$on('$viewContentLoaded', function(event, viewConfig) {
+        console.log('view content loaded');
+        var hoverOn = function() {
+            $('#name').html('Shay•na')
+        }
+
+        var hoverOff = function() {
+            $('#name').html('Shana')
+        }
+        
+        $('#name').hover(hoverOn, hoverOff);
+      })
   }]);
 
   app.controller("navController", function($scope, $location) {

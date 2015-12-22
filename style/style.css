@@ -63,9 +63,6 @@ nav {
 .active {
   border-bottom: 1px solid #333333; }
 
-.name {
-  margin-top: 0; }
-
 .work {
   float: right;
   margin-right: 2%;
@@ -149,6 +146,10 @@ figure {
     figure.half.second {
       float: right;
       margin-right: -10%; }
+
+a#name:hover {
+  font-style: italic;
+  border-bottom: 0px; }
 
 .resume .blurb {
   margin-bottom: 40px; }
