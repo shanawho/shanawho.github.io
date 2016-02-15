@@ -21,6 +21,10 @@
       templateUrl: "pages/about.html",
       controller: "aboutController",
       title: "About"
+    }).when("/writing", {
+      templateUrl: "pages/writing.html",
+      controller: "writingController",
+      title: "Writing"
     }).when("/resume", {
       templateUrl: "pages/resume.html",
       controller: "resumeController",
@@ -110,6 +114,12 @@
 
   app.controller("aboutController", function($scope) {
     $scope.params = "about";
+    $scope.work = false;
+  });
+
+
+  app.controller("writingController", function($scope) {
+    $scope.params = "writing";
     $scope.work = false;
   });
 
