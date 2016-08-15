@@ -46,8 +46,7 @@ nav {
   position: relative; }
   nav a {
     color: #333333;
-    margin: 0;
-    margin-left: 20px; }
+    margin: 0; }
     nav a:hover {
       color: #339966; }
   nav .about {
