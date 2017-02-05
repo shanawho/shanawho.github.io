@@ -25,6 +25,10 @@
       templateUrl: "pages/writing.html",
       controller: "writingController",
       title: "Writing"
+    }).when("/library", {
+      templateUrl: "pages/library.html",
+      controller: "libraryController",
+      title: "Library"
     }).when("/resume", {
       templateUrl: "pages/resume.html",
       controller: "resumeController",
@@ -172,6 +176,9 @@
   });
 
 
+  app.controller("libraryController", function($scope, $routeParams) {
+
+  });
 
 
 
