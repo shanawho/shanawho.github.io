@@ -1,4 +1,0 @@
-AuthType Basic  
-AuthName "restricted area"  
-AuthUserFile /google/.htpasswd  
-require valid-user

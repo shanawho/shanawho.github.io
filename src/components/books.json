@@ -1,0 +1,98 @@
+{"data": 
+	[
+		
+		
+		{
+			"title": "Invisible Cities",
+			"author": "Italo Calvino",
+			"link": "https://en.wikipedia.org/wiki/Invisible_Cities",
+			"image": "invisible"
+		},
+		{
+			"title": "Interaction of Color",
+			"author": "Josef Albers",
+			"link": "https://yalebooks.yale.edu/book/9780300179354/interaction-color",
+			"image": "color"
+		},
+		{
+			"title": "Pale Fire",
+			"author": "Vladimir Nabokov",
+			"link": "https://en.wikipedia.org/wiki/Pale_Fire",
+			"image": "palefire"
+		},
+		{
+			"title": "Autumn",
+			"author": "Ali Smith",
+			"link": "https://en.wikipedia.org/wiki/Autumn_(Smith_novel)",
+			"image": "autumn"
+		},
+		{
+			"title": "The Paper Menagerie",
+			"author": "Ken Liu",
+			"link": "https://io9.gizmodo.com/5958919/read-ken-lius-amazing-story-that-swept-the-hugo-nebula-and-world-fantasy-awards",
+			"image": "menagerie"
+		},
+		{
+			"title": "The Things We Don't Do",
+			"author": "Andrés Neuman",
+			"link": "https://www.goodreads.com/book/show/24796169-the-things-we-don-t-do",
+			"image": "things"
+		},
+		{
+			"title": "The Namesake",
+			"author": "Jhumpa Lahiri",
+			"link": "https://en.wikipedia.org/wiki/The_Namesake",
+			"image": "namesake"
+		},
+		{
+			"title": "All My Puny Sorrows",
+			"author": "Miriam Toews",
+			"link": "https://www.nytimes.com/2014/11/23/books/review/all-my-puny-sorrows-by-miriam-toews.html?_r=0",
+			"image": "puny"
+		},
+		{
+			"title": "Moonwalking with Einstein",
+			"author": "Joshua Foer",
+			"link": "https://en.wikipedia.org/wiki/Moonwalking_with_Einstein",
+			"image": "moonwalking"
+		},
+		{
+			"title": "Ex Libris: Confessions of a Common Reader",
+			"author": "Anne Fadiman",
+			"link": "https://www.goodreads.com/book/show/46890.Ex_Libris",
+			"image": "exlibris"
+		},
+		{
+			"title": "Can't and Won't: Stories",
+			"author": "Lydia Davis",
+			"link": "https://www.nytimes.com/2014/04/06/books/review/cant-and-wont-by-lydia-davis.html",
+			"image": "cant"
+		},
+		{
+			"title": "Stories of Your Life and Others",
+			"author": "Ted Chiang",
+			"link": "https://en.wikipedia.org/wiki/Stories_of_Your_Life_and_Others",
+			"image": "stories"
+		},
+		{
+			"title": "Artful",
+			"author": "Ali Smith",
+			"link": "http://www.nytimes.com/2013/02/03/books/review/artful-by-ali-smith.html",
+			"image": "artful"
+		},
+		{
+			"title": "Slaughterhouse Five",
+			"author": "Kurt Vonnegut",
+			"link": "https://en.wikipedia.org/wiki/Slaughterhouse-Five",
+			"image": "slaughterhouse"
+		},
+		{
+			"title": "Americanah",
+			"author": "Chimamanda Ngozi Adichie",
+			"link": "https://en.wikipedia.org/wiki/Americanah",
+			"image": "americanah"
+		}
+
+		
+	]
+}
