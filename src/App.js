@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import P5Wrapper from 'react-p5-wrapper';
 import './App.css';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import json from './components/books.json'
@@ -63,58 +64,98 @@ function TextLink(props) {
 }
 
 
-class Canvas extends Component {
+// P5 INTEGRATION
+function sketch(p) {
+  var r = (window.innerHeight-180)/2;
+  var startX = window.innerWidth/2
+  var startY = window.innerHeight/2
+  var dotSize = 10
 
-  constructor(props) {
-    super(props);
-    this.ctx = null;
-    this.state = {
-      lastPoint: Array(2).fill(null)
-    }
-  }
+  var num = 60
+  var angle = 360/num
 
-  componentDidMount() {
-    var canvas = this.refs.canvas;
-    this.ctx = this.refs.canvas.getContext("2d");
-    this.draw({clientX: window.innerWidth*.4, clientY: window.innerHeight*.4}, 150)
-    this.draw({clientX: window.innerWidth*.6, clientY: window.innerHeight*.5}, 50)
-    this.draw({clientX: window.innerWidth*.5, clientY: window.innerHeight*.7},80)
+  var points = [];
+  var randomTargets = [];
+  var fromInCircle = true;
     
+  var targetX,
+    targetY;
+
+  function getRandomColor() {
+    var colors = [
+      ['07','C8','A0'], 
+      ['22','B3','FB'], 
+      ['FF','C3','DC'], 
+      ['FF','62','72'], 
+      ['FF','D7','69'], 
+      ['FF','99','6E']
+    ];
+    return p.unhex(colors[(Math.floor(Math.random()*colors.length))]);
   }
+  p.setup = function() {
+    var canvas = p.createCanvas(window.innerWidth, window.innerHeight);
 
-  getRandomColor() {
-    var colors = ["#07C8A0", "#22B3FB", "#FFC3DC", "#FF6272", "#FFD769", "#FF996E"];
-    return colors[(Math.floor(Math.random()*colors.length))];
-  }
-
-  getRandomWidth(min) {
-    var min = min || 10;
-    return (Math.floor(Math.random()*120+min));
-  }
-
-  dist(currPoint, lastPoint) {
-    return Math.sqrt(Math.pow(currPoint[0]-lastPoint[0],2) + Math.pow(currPoint[1]-lastPoint[1],2))
-  }
-
-
-  draw(event, width) {
-    console.log("mousemove");
-    var currPoint = [event.clientX, event.clientY];
-    if (this.state.lastPoint[0] == null || this.dist(currPoint,this.state.lastPoint) > 120) {
-      this.ctx.globalCompositeOperation = 'multiply';
-      var width = this.getRandomWidth(width)
-      this.ctx.beginPath();
-      this.ctx.arc(currPoint[0],currPoint[1],width,0,2*Math.PI);
-      this.ctx.fillStyle = this.getRandomColor();
-      this.ctx.fill();
-
-      this.setState({lastPoint:currPoint});
+    for (var i=0; i<num; i++) {
+      var rgb = getRandomColor()
+      var randomX = p.random(0, p.width)
+      var randomY = p.random(0, p.height)
+      points.push({x:randomX, y:randomY})
+      p.fill(rgb[0],rgb[1],rgb[2])
+      p.noStroke()
+      p.ellipse(randomX,randomY,dotSize,dotSize)
     }
+    // window.onresize = function() {
+    //   p.canvas.size(window.innerWidth, window.innerHeight)
+    // }
   }
-  render() {
-    return(
-      <canvas ref="canvas" width={window.innerWidth} height={window.innerHeight} onMouseMove={(event) => this.draw(event)} />
-    )
+
+  function mouseInCircle(mouseX,mouseY) {
+    return ((mouseX < window.innerWidth/2+r && mouseX > window.innerWidth/2-r) && 
+      (mouseY < window.innerHeight/2+r && mouseY > window.innerHeight/2-r))
+  }
+
+
+
+  p.draw = function() {
+    p.background(255)
+    if (mouseInCircle(p.mouseX,p.mouseY)) {
+      for (var i=0; i < points.length; i++) {
+        var a = i*angle
+        targetX = startX+r*p.cos(p.radians(a))
+        targetY = startY+r*p.sin(p.radians(a))
+
+        var dx = targetX - points[i].x
+        points[i].x += dx * 0.1
+
+        var dy = targetY - points[i].y
+        points[i].y += dy * 0.1
+
+        p.ellipse(points[i].x,points[i].y,dotSize,dotSize)
+      }
+      fromInCircle = true;
+    } else {
+      if(fromInCircle) {
+        randomTargets = []
+        for (var i=0; i < points.length; i++) {
+          targetX = p.random(0, p.width)
+          targetY = p.random(0, p.height)
+          randomTargets.push({x:targetX, y:targetY})
+          // console.log(i)
+        }
+        fromInCircle = false;
+      };
+      for (var j=0; j<randomTargets.length;j++) {
+        var target = randomTargets[j]
+        // console.log(j)
+        var dx = target.x - points[j].x
+        points[j].x += dx * 0.05
+
+        var dy = target.y - points[j].y
+        points[j].y += dy * 0.05
+
+        p.ellipse(points[j].x,points[j].y,dotSize,dotSize)
+      }
+    }
   }
 }
 
@@ -163,7 +204,6 @@ class Home extends Component {
     return ( 
       <div>
         <div className="about">
-          <div className="smallcaps">LIVING AT THE INTERSECTION</div>
           I design, code, letter, and teach. I always loved both art and science but only realized I didn’t have to choose between the two when I discovered digital product design.
           <br /><br />
           I’m at my best when making things or learning something new.
@@ -177,12 +217,15 @@ class Home extends Component {
     )
   }
 
+  
+
 
   render() {
     return (
       <div className="home-wrap">
 
-        <Canvas />
+        <P5Wrapper sketch={sketch} />
+
 
         <div className="home">
           <h1>Shana {this.state.name}</h1>

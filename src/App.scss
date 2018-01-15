@@ -14,7 +14,7 @@ $white: #FFFFFF;
 $black: #1E1E1E;
 
 $font-stack: 'Khula', 'Tahoma', sans-serif;
-$font-size-xl: 4em;
+$font-size-xl: 2.5em;
 $font-size-large: 32px;
 $font-size-med: 21px;
 $font-size-small: 16px;
@@ -217,7 +217,7 @@ h1 {
   font-size: $font-size-xl;
   line-height: $title-lh;
   font-weight: 700;
-  margin-bottom: $margin-quarter;
+  margin-bottom: $margin-half;
   display: inline-block;
 }
 
