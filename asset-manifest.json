@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9a5697bb.chunk.css",
+    "main.js": "/static/js/main.0167d06b.chunk.js",
+    "main.js.map": "/static/js/main.0167d06b.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.3310f33a.chunk.js": "/static/js/2.3310f33a.chunk.js",
+    "static/js/2.3310f33a.chunk.js.map": "/static/js/2.3310f33a.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.6000fc720da0f899b9f20e36d279f909.js": "/precache-manifest.6000fc720da0f899b9f20e36d279f909.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.9a5697bb.chunk.css.map": "/static/css/main.9a5697bb.chunk.css.map",
+    "static/media/index.css": "/static/media/Lark-Light_web.94d1dbab.woff"
+  }
+}
