@@ -25,7 +25,7 @@ function App() {
       </svg>
       <div className="info">
         <h1>
-          <TextLink text="Shana Hu" link="mailto:hello@shanahu.com" /> is a creative&nbsp;technologist <br />who <TextLink text="designs and codes" link="https:www.linkedin.com/in/shanahu" /> at&nbsp;<TextLink text="Pinterest" link="http://pinterest.com/shanahu" />.
+          <TextLink text="Shana Hu" link="mailto:hello@shanahu.com" /> is a product&nbsp;designer at <TextLink text="Figma" link="http://figma.com/" />.
         </h1>
 
         <h2>
