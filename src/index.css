@@ -16,7 +16,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #00AC81;
   box-sizing: border-box;
   color: #1B1B1B;
 }
@@ -31,26 +30,37 @@ code {
   width: 100%;
 }
 
+
+.header {
+  display: block;
+  height: 100%;
+  /*background-color: #00AC81;*/
+}
+
 .info {
-  max-width: 65%;
+  max-width: 60%;
   width: 60%;
-  position: absolute;
+  /*position: absolute;*/
   right: 0;
   left: 0;
-  top: 32%;
+  /*top: 32%;*/
+  padding: 200px 0;
   margin-left: auto;
   margin-right: auto;
   z-index: 100;
+
 }
 
 a {
   color: black;
   text-decoration: none;
+  border-bottom: 2px solid black;
+  padding-bottom: 2px;
 }
 
 a:hover {
-  border-bottom: 2px solid black;
-  padding-bottom: 4px;
+  color: white;
+  border-color: white;
 }
 
 h1 {
@@ -61,7 +71,7 @@ h1 {
 
 }
 
-h1 a:hover {
+h1 a {
   padding-bottom: 0px;
   border-bottom: 4px solid black;
 }
@@ -72,13 +82,16 @@ h2 {
   font-size: 200%;
   line-height: 1.5;
   margin: 0 auto;
+  margin-bottom: 24px;
 }
 
 svg {
   transform: rotate(-15deg);
-  position: fixed;
+  height: 40%;
+  /*position: fixed;*/
   left: 0;
-  top: -30%;
+  /*top: -30%;*/
+  display: none;
 }
 
 
@@ -88,6 +101,39 @@ path {
   animation: dash 60s linear;
   animation-iteration-count: infinite;
 
+}
+
+
+.images {
+  display: block;
+  width: 85%;
+  margin: 0 auto;
+
+}
+
+ul {
+  display: flex;
+  flex-flow: column wrap;
+  list-style: none;
+  height: 3000px;
+  padding-left: 0;
+}
+
+li {
+  left: 0%;
+  width: 48%;
+  margin: 0 4% 4% 0;
+  flex-grow: 4;
+}
+
+li:nth-child(even) {
+
+  left: 52%;
+  margin-right: 0;
+}
+
+caption {
+  width: 100%;
 }
 
 @keyframes dash {
