@@ -25,14 +25,12 @@ function App() {
       </svg>
       <div className="info">
         <h1>
-          <TextLink text="Shana Hu" link="mailto:hello@shanahu.com" /> is a product&nbsp;designer at <TextLink text="Figma" link="http://figma.com/" />.
+          <TextLink text="Shana Hu" link="mailto:hello@shanahu.com" /> is a product&nbsp;designer and letterer.
         </h1>
 
         <h2>
-          She loves <TextLink text="teaching" link="https://www.framer.com/blog/posts/how-to-teach-framer-at-your-company/" />
-          , <TextLink text="lettering" link="https://www.instagram.com/shanaletters" />
-          , <TextLink text="carving Chinese seals" link="https://www.instagram.com/shanacarves" />,
-          and <TextLink text="designing typefaces" link="http://typecooperwest2018.com/shana" />, like this one.
+          She works on building better tools for people who maintain design&nbsp;systems at <TextLink text="Figma" link="https://www.figma.com" /> during the day, 
+          and spends her spare time making things like clothes, prints, plots, and <TextLink text="this typeface" link="https://www.myfonts.com/fonts/shana-hu/lark/" />.
         </h2>
 
 
