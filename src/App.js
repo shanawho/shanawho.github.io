@@ -43,7 +43,7 @@ function App() {
 
 function TextLink(props) {
   return (
-    <a href={props.link} target="_blank">{props.text}</a>
+    <a href={props.link} target="_blank" rel="noopener noreferrer">{props.text}</a>
   )
 }
 
