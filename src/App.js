@@ -53,14 +53,13 @@ function App() {
 
       <div className="images">
         <ul>
-          <ImageLi imageName="hongbao" title="红包" subtitle="Custom lettering, generative waves, plotted with gold paint"/>
-          <ImageLi imageName="hongbao" />
-          <ImageLi imageName="hongbao" />
-          <ImageLi imageName="hongbao" />
-          <ImageLi imageName="hongbao" />
-          <ImageLi imageName="hongbao" />
-          <ImageLi imageName="hongbao" />
-          <ImageLi imageName="hongbao" />
+          <ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
+          <ImageLi imageName="notes" title="Notes to self"  subtitle="Pen-plotted custom lettering on Post-its" alt="Three post-its that read: 'You'll figure it out', 'What's the worst that could happen?', and 'Make it happen'"/>
+          <ImageLi imageName="25" title="25" subtitle="Lasercut custom lettering" alt="Wood panel with the number 25 lasercut" />
+          <ImageLi imageName="hongbao" title="Red envelopes" subtitle="Pen-plotted custom lettering with generated fills and patterns" alt="A pile of red envelopes decorated with Chinese characters that mean 'Wishing you good fortune' and 'Prosper'" />
+          <ImageLi imageName="holiday" title="Holiday card" subtitle="Pen-plotted custom lettering" alt="A card with illustrative lettering that reads 'Hope you have a cozy and relaxing holiday'" />
+          <ImageLi imageName="birthday" title="Happy birthday" subtitle="Hand-lettered and pulled screen print" alt="Paper card with Chinese characters meaning 'Happy birthday'"/>
+
         </ul>
       </div>
 
@@ -70,12 +69,30 @@ function App() {
 }
 
 function ImageLi(props) {
+return (
+    <li>
+      <img
+        src={process.env.PUBLIC_URL + '/images/'+props.imageName+'.jpg'}
+        alt={props.alt}
+        // transitionTime={0.3}
+        // imageStyles={{overflow: "visible"}}
+      />
+      <h3>{props.title}</h3>
+      <p>{props.subtitle}</p>
+    </li>
+  )
+
+}
+
+function SmoothImageLi(props) {
   return (
     <li>
       <SmoothImage
         src={process.env.PUBLIC_URL + '/images/'+props.imageName+'.jpg'}
-        alt={props.imageName}
+        alt={props.alt}
         transitionTime={0.3}
+        imageStyles={{overflow: "visible"}}
+
         //Other props if you choose to use them
       />
       <p>{props.title}</p>

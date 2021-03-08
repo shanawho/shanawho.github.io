@@ -34,7 +34,7 @@ code {
 .header {
   display: block;
   height: 100%;
-  /*background-color: #00AC81;*/
+  background-color: #00AC81;
 }
 
 .info {
@@ -44,7 +44,7 @@ code {
   right: 0;
   left: 0;
   /*top: 32%;*/
-  padding: 200px 0;
+  padding: 220px 0;
   margin-left: auto;
   margin-right: auto;
   z-index: 100;
@@ -85,6 +85,22 @@ h2 {
   margin-bottom: 24px;
 }
 
+h3 {
+  font-family: "LarkBold";
+  font-size: 1.8em;
+  font-weight: 100;
+  margin-top: 12px;
+  margin-bottom: 0;
+
+
+}
+
+p {
+  font-family: "LarkLight";
+  font-size: 1.5em;
+  margin-top: 0;
+}
+
 svg {
   transform: rotate(-15deg);
   height: 40%;
@@ -116,14 +132,24 @@ ul {
   flex-flow: column wrap;
   list-style: none;
   height: 3000px;
+  margin-top: 200px;
   padding-left: 0;
+
+  
 }
 
 li {
   left: 0%;
   width: 48%;
   margin: 0 4% 4% 0;
-  flex-grow: 4;
+}
+
+li img {
+  width: 100%;
+}
+
+li div {
+  overflow: visible;
 }
 
 li:nth-child(even) {
@@ -174,7 +200,15 @@ caption {
   .info {
     width: 80%;
   }
+
+
+  ul {
+      height: 2300px;
+
+  }
+
 }
+
 
 @media only screen and (max-width: 800px) {
   /* For mobile phones: */
