@@ -224,6 +224,8 @@ caption {
     position: relative;
     bottom: 0;
     margin-top: -20px;
+    max-width: 80%;
+    padding: 100px 0;
   }
 
   h1 {
@@ -231,7 +233,7 @@ caption {
   }
 
   h2 {
-    font-size: 1.6em;
+    font-size: 1.4em;
     line-height: 1.3;
   }
 
@@ -250,6 +252,28 @@ caption {
 
   ul {
     height: 1600px;
-
+    margin-top: 100px;
   }
 }
+
+@media only screen and (max-width: 640px) {
+
+  ul {
+    height: 1400px;
+    margin-top: 100px;
+  }
+}
+
+
+@media only screen and (max-width: 580px) {
+
+  ul {
+    height: auto;
+    margin-top: 100px;
+  }
+
+  li {
+    width: 100%;
+  }
+}
+
