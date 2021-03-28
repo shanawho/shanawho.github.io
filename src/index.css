@@ -38,8 +38,8 @@ code {
 }
 
 .info {
-  max-width: 60%;
-  width: 60%;
+  width: 70%;
+  max-width: 70%;
   /*position: absolute;*/
   right: 0;
   left: 0;
@@ -123,14 +123,16 @@ path {
 .images {
   display: block;
   width: 85%;
+  max-width: 1600px;
   margin: 0 auto;
+
 }
 
 ul {
   display: flex;
   flex-flow: column wrap;
   list-style: none;
-  height: 3000px;
+  height: 3600px;
   margin-top: 200px;
   padding-left: 0;
 
@@ -171,7 +173,9 @@ caption {
   }
 }
 
-@media only screen and (max-width: 1800px) {
+
+
+@media only screen and (max-width: 1650px) {
   svg {
     top: -40%;
   }
@@ -180,9 +184,15 @@ caption {
     width: 100%;
   }
 
+
+  ul {
+      height: 3200px;
+
+  }
+
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1200px) {
   svg {
     top: -10%;
   }
@@ -202,7 +212,7 @@ caption {
 
 
   ul {
-      height: 2300px;
+      height: 2400px;
 
   }
 
@@ -218,15 +228,31 @@ caption {
 
 
 @media only screen and (max-width: 750px) {
-  /* For mobile phones: */
-  .info {
+.info {
     text-align: left;
     position: relative;
     bottom: 0;
     margin-top: -20px;
-    max-width: 80%;
+    max-width: 85%;
     padding: 100px 0;
+    width: 85%;
   }
+  ul {
+    height: auto;
+    margin-top: 100px;
+  }
+
+  li {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+
+
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+ 
 
   h1 {
     font-size: 2em;
@@ -250,30 +276,5 @@ caption {
     top: 10%;
   }
 
-  ul {
-    height: 1600px;
-    margin-top: 100px;
-  }
-}
-
-@media only screen and (max-width: 630px) {
-
-  ul {
-    height: 1400px;
-    margin-top: 100px;
-  }
-}
-
-
-@media only screen and (max-width: 580px) {
-
-  ul {
-    height: auto;
-    margin-top: 100px;
-  }
-
-  li {
-    width: 100%;
-  }
 }
 
