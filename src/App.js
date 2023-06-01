@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import SmoothImage from 'react-smooth-image';
+import imagesLoaded from 'imagesloaded';
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
 
 
+    <div className="wrapper">
     <div className="header">
       <svg version="1.1" id="Layer_1"  x="0px" y="0px"
       	 viewBox="0 0 479 451" enable-background="new 0 0 479 451">
@@ -26,59 +28,56 @@ function App() {
           	c0,33-26.9,59-26.9,83.5c0,12.5,7.4,17,14,17c34,0,73-98,59-98c-15.6,0-31.1,182.5-86.1,182.5c-46,0-43-68,10-68
           	c34,0,60.5,19,86.5,19c25,0,25-23,5-23c-41,0-37.5,107-92,107c-19.5,0-29-10-29-10 M362.6,247c28,0,38-33,24-33
           	C362,214,334,327.5,382,327.5c40,0,58.5-76,24-76c-16.5,0-23,19-23,19"/>
-        </svg>
+      </svg>
 
 
-        <div className="info">
-          <h1>
-            Shana Hu is a product&nbsp;designer and letterer.
-          </h1>
+      <div className="info">
+        <h1>
+          Shana Hu
+        </h1>
 
-          <h2>
-            She works on building better tools for people who maintain design&nbsp;systems at <TextLink text="Figma" link="https://www.figma.com" /> during the day, 
-            and spends her spare time making things like clothes, prints, plots, and <TextLink text="this typeface" link="https://www.myfonts.com/fonts/shana-hu/lark/" />.
-          </h2>
+        <h2>
+          Artist and designer based on San Francisco. 
+        </h2>
 
-          <h2>
-            Shana studied type design at Type@Cooper West and is available for custom lettering commissions. 
-          </h2>
-
-          <h2>
-            Get in touch at <TextLink text="hello@shanahu.com" link="mailto:hello@shanahu.com" />
-          </h2>
-        </div>
       </div>
+    </div>
 
 
 
       <div className="images">
-        <ul>
+        <ul className="masonry">
+          <ImageLi imageName="swimming" suff=".gif" title="" subtitle="" />
+          <ImageLi imageName="palettes" suff=".gif" title="" subtitle="" />
+          <ImageLi imageName="dogdaze" suff=".gif" title="" subtitle="" />
+          <ImageLi imageName="lark" suff=".png" title="" subtitle="" />
           <ImageLi imageName="25" title="25" subtitle="Lasercut custom lettering" alt="Wood panel with the number 25 lasercut" />
           <ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
           <ImageLi imageName="notes" title="Notes to self"  subtitle="Pen-plotted custom lettering on Post-its" alt="Three post-its that read: 'You'll figure it out', 'What's the worst that could happen?', and 'Make it happen'"/>
           <ImageLi imageName="hongbao" title="Red envelopes" subtitle="Pen-plotted custom lettering with generated fills and patterns" alt="A pile of red envelopes decorated with Chinese characters that mean 'Wishing you good fortune' and 'Prosper'" />
           <ImageLi imageName="holiday" title="Holiday card" subtitle="Pen-plotted custom lettering" alt="A card with illustrative lettering that reads 'Hope you have a cozy and relaxing holiday'" />
           <ImageLi imageName="birthday" title="Happy birthday" subtitle="Hand-lettered and pulled screen print" alt="Paper card with Chinese characters meaning 'Happy birthday'"/>
-
         </ul>
       </div>
 
 
+    </div>
     </div>
   );
 }
 
 function ImageLi(props) {
 return (
-    <li>
+    <li className="masonry-brick">
       <img
-        src={process.env.PUBLIC_URL + '/images/'+props.imageName+'.jpg'}
+        src={process.env.PUBLIC_URL + '/images/'+props.imageName+(props.suff ? ''+props.suff : '.jpg')}
         alt={props.alt}
+        className={'masonry-content ' + (props.suff=='.gif' ? 'gif': '')}
         // transitionTime={0.3}
         // imageStyles={{overflow: "visible"}}
       />
-      <h3>{props.title}</h3>
-      <p>{props.subtitle}</p>
+      <h3 class="subtitle">{props.title}</h3>
+      <p class="subtitle">{props.subtitle}</p>
     </li>
   )
 
@@ -106,5 +105,91 @@ function TextLink(props) {
     <a href={props.link} target="_blank" rel="noopener noreferrer">{props.text}</a>
   )
 }
+
+function Calculate() {
+    /**
+   * Set appropriate spanning to any masonry item
+   *
+   * Get different properties we already set for the masonry, calculate 
+   * height or spanning for any cell of the masonry grid based on its 
+   * content-wrapper's height, the (row) gap of the grid, and the size 
+   * of the implicit row tracks.
+   *
+   * @param item Object A brick/tile/cell inside the masonry
+   */
+  function resizeMasonryItem(item){
+    /* Get the grid object, its row-gap, and the size of its implicit rows */
+    var grid = document.getElementsByClassName('masonry')[0],
+        rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
+        rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+
+    /*
+    * Spanning for any brick = S
+    * Grid's row-gap = G
+    * Size of grid's implicitly create row-track = R
+    * Height of item content = H
+    * Net height of the item = H1 = H + G
+    * Net height of the implicit row-track = T = G + R
+    * S = H1 / T
+    */
+
+    console.log(item.querySelector('.masonry-content').getBoundingClientRect())
+    var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+
+    /* Set the spanning as calculated above (S) */
+    item.style.gridRowEnd = 'span '+rowSpan;
+  }
+
+    /**
+   * Apply spanning to all the masonry items
+   *
+   * Loop through all the items and apply the spanning to them using 
+   * `resizeMasonryItem()` function.
+   *
+   * @uses resizeMasonryItem
+   */
+  function resizeAllMasonryItems(){
+    // Get all item class objects in one list
+    var allItems = document.getElementsByClassName('masonry-brick');
+
+    /*
+    * Loop through the above list and execute the spanning function to
+    * each list-item (i.e. each masonry item)
+    */
+    for(var i=0;i<allItems.length;i++){
+      resizeMasonryItem(allItems[i]);
+    }
+  }
+
+  /**
+   * Resize the items when all the images inside the masonry grid 
+   * finish loading. This will ensure that all the content inside our
+   * masonry items is visible.
+   *
+   * @uses ImagesLoaded
+   * @uses resizeMasonryItem
+   */
+  function waitForImages() {
+    var allItems = document.getElementsByClassName('masonry-brick');
+    for(var i=0;i<allItems.length;i++){
+      imagesLoaded( allItems[i], function(instance) {
+        var item = instance.elements[0];
+        resizeMasonryItem(item);
+      } );
+    }
+  }
+
+  /* Resize all the grid items on the load and resize events */
+  var masonryEvents = ['load', 'resize'];
+  masonryEvents.forEach( function(event) {
+    window.addEventListener(event, resizeAllMasonryItems);
+  } );
+
+  /* Do a resize once more when all the images finish loading */
+  waitForImages();
+
+}
+
+Calculate();
 
 export default App;
