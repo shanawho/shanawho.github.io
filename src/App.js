@@ -4,6 +4,7 @@ import SmoothImage from 'react-smooth-image';
 import imagesLoaded from 'imagesloaded';
 
 
+
 function App() {
   return (
     <div className="App">
@@ -47,15 +48,16 @@ function App() {
 
       <div className="images">
         <ul className="masonry">
-          <ImageLi imageName="swimming" suff=".gif" title="" subtitle="" />
-          <ImageLi imageName="palettes" suff=".gif" title="" subtitle="" />
-          <ImageLi imageName="dogdaze" suff=".gif" title="" subtitle="" />
+          <ImageLi imageName="rabbitenvelope" title="" subtitle="" />
+          <ImageLi imageName="swimming" suff=".png" title="" subtitle="" gif="true" />
+          <ImageLi imageName="palettes" suff=".png" title="" subtitle="" gif="true" />
           <ImageLi imageName="lark" suff=".png" title="" subtitle="" />
           <ImageLi imageName="25" title="25" subtitle="Lasercut custom lettering" alt="Wood panel with the number 25 lasercut" />
-          <ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
+          <ImageLi imageName="dogdaze" suff=".png" title="" subtitle="" gif="true" /><ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
           <ImageLi imageName="notes" title="Notes to self"  subtitle="Pen-plotted custom lettering on Post-its" alt="Three post-its that read: 'You'll figure it out', 'What's the worst that could happen?', and 'Make it happen'"/>
           <ImageLi imageName="hongbao" title="Red envelopes" subtitle="Pen-plotted custom lettering with generated fills and patterns" alt="A pile of red envelopes decorated with Chinese characters that mean 'Wishing you good fortune' and 'Prosper'" />
           <ImageLi imageName="holiday" title="Holiday card" subtitle="Pen-plotted custom lettering" alt="A card with illustrative lettering that reads 'Hope you have a cozy and relaxing holiday'" />
+          <ImageLi imageName="tigerenvelope" title="" subtitle="" />
           <ImageLi imageName="birthday" title="Happy birthday" subtitle="Hand-lettered and pulled screen print" alt="Paper card with Chinese characters meaning 'Happy birthday'"/>
         </ul>
       </div>
@@ -70,9 +72,9 @@ function ImageLi(props) {
 return (
     <li className="masonry-brick">
       <img
-        src={process.env.PUBLIC_URL + '/images/'+props.imageName+(props.suff ? ''+props.suff : '.jpg')}
+        src={'./images/'+props.imageName+(props.suff ? ''+props.suff : '.jpg')}
         alt={props.alt}
-        className={'masonry-content ' + (props.suff=='.gif' ? 'gif': '')}
+        className={'masonry-content ' + (props.gif ? props.imageName: '')}
         // transitionTime={0.3}
         // imageStyles={{overflow: "visible"}}
       />
@@ -87,7 +89,7 @@ function SmoothImageLi(props) {
   return (
     <li>
       <SmoothImage
-        src={process.env.PUBLIC_URL + '/images/'+props.imageName+'.jpg'}
+        src={'./images/'+props.imageName+'.jpg'}
         alt={props.alt}
         transitionTime={0.3}
         imageStyles={{overflow: "visible"}}

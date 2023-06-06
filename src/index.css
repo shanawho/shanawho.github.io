@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: "LarkBold";
     src: url("./fonts/Lark-Bold_web.woff");
@@ -150,6 +151,20 @@ ul.masonry {
   grid-auto-rows: 0;
 }
 
+.dogdaze:hover {
+  /* content:url('./images/dogdaze.gif'); */
+}
+/* 
+.swimming:hover {
+  content:url('./images/swimming.gif');
+} */
+
+/* 
+.palettes:hover {
+  content:url('./images/palettes.gif');
+} */
+
+
 /* ul {
   display: flex;
   flex-flow: column wrap;
@@ -193,8 +208,6 @@ caption {
     stroke-dashoffset:-1000;
   }
 }
-
-
 
 @media only screen and (max-width: 1650px) {
   /* svg {
