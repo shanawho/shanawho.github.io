@@ -69,7 +69,7 @@ h1 {
   font-family: "LarkBold";
   font-weight: 100;
   font-size: 2.4em; 
-  margin-bottom: 24px;
+  margin-bottom: 0;
   color: #00AC81;
 
 }
@@ -198,6 +198,15 @@ li:nth-child(even) {
 caption {
   width: 100%;
 }
+
+/* CSS */
+.image-placeholder {
+  /* Set a default size or aspect ratio for the placeholder */
+  width: 300px; /* Adjust to your desired default width */
+  height: 200px; /* Adjust to your desired default height */
+  background-color: #f1f1f1; /* Placeholder background color */
+}
+
 
 @keyframes dash {
   50% {

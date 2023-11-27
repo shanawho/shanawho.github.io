@@ -38,7 +38,7 @@ function App() {
         </h1>
 
         <h2>
-          Artist and designer based on San Francisco. 
+          Artist and designer based in San Francisco
         </h2>
 
       </div>
@@ -53,7 +53,8 @@ function App() {
           <ImageLi imageName="palettes" suff=".png" title="" subtitle="" gif="true" />
           <ImageLi imageName="lark" suff=".png" title="" subtitle="" />
           <ImageLi imageName="25" title="25" subtitle="Lasercut custom lettering" alt="Wood panel with the number 25 lasercut" />
-          <ImageLi imageName="dogdaze" suff=".png" title="" subtitle="" gif="true" /><ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
+          <ImageLi imageName="dogdaze" suff=".png" title="" subtitle="" gif="true" />
+          <ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
           <ImageLi imageName="notes" title="Notes to self"  subtitle="Pen-plotted custom lettering on Post-its" alt="Three post-its that read: 'You'll figure it out', 'What's the worst that could happen?', and 'Make it happen'"/>
           <ImageLi imageName="hongbao" title="Red envelopes" subtitle="Pen-plotted custom lettering with generated fills and patterns" alt="A pile of red envelopes decorated with Chinese characters that mean 'Wishing you good fortune' and 'Prosper'" />
           <ImageLi imageName="holiday" title="Holiday card" subtitle="Pen-plotted custom lettering" alt="A card with illustrative lettering that reads 'Hope you have a cozy and relaxing holiday'" />
@@ -72,9 +73,11 @@ function ImageLi(props) {
 return (
     <li className="masonry-brick">
       <img
-        src={'./images/'+props.imageName+(props.suff ? ''+props.suff : '.jpg')}
+        src="./images/small-transparent.png"
+        data-src={'./images/'+props.imageName+(props.suff ? ''+props.suff : '.jpg')}
         alt={props.alt}
         className={'masonry-content ' + (props.gif ? props.imageName: '')}
+        loading="lazy"
         // transitionTime={0.3}
         // imageStyles={{overflow: "visible"}}
       />
@@ -108,8 +111,106 @@ function TextLink(props) {
   )
 }
 
-function Calculate() {
-    /**
+
+// function Calculate() {
+//     /**
+//    * Set appropriate spanning to any masonry item
+//    *
+//    * Get different properties we already set for the masonry, calculate 
+//    * height or spanning for any cell of the masonry grid based on its 
+//    * content-wrapper's height, the (row) gap of the grid, and the size 
+//    * of the implicit row tracks.
+//    *
+//    * @param item Object A brick/tile/cell inside the masonry
+//    */
+//   function resizeMasonryItem(item){
+//     /* Get the grid object, its row-gap, and the size of its implicit rows */
+//     var grid = document.getElementsByClassName('masonry')[0],
+//         rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
+//         rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+
+//     /*
+//     * Spanning for any brick = S
+//     * Grid's row-gap = G
+//     * Size of grid's implicitly create row-track = R
+//     * Height of item content = H
+//     * Net height of the item = H1 = H + G
+//     * Net height of the implicit row-track = T = G + R
+//     * S = H1 / T
+//     */
+
+//     // console.log(item.querySelector('.masonry-content').getBoundingClientRect())
+//     var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+
+//     /* Set the spanning as calculated above (S) */
+//     item.style.gridRowEnd = 'span '+rowSpan;
+//   }
+
+//     /**
+//    * Apply spanning to all the masonry items
+//    *
+//    * Loop through all the items and apply the spanning to them using 
+//    * `resizeMasonryItem()` function.
+//    *
+//    * @uses resizeMasonryItem
+//    */
+//   function resizeAllMasonryItems(){
+//     // Get all item class objects in one list
+//     var allItems = document.getElementsByClassName('masonry-brick');
+
+//     /*
+//     * Loop through the above list and execute the spanning function to
+//     * each list-item (i.e. each masonry item)
+//     */
+//     for(var i=0;i<allItems.length;i++){
+//       resizeMasonryItem(allItems[i]);
+//     }
+//   }
+
+//   /**
+//    * Resize the items when all the images inside the masonry grid 
+//    * finish loading. This will ensure that all the content inside our
+//    * masonry items is visible.
+//    *
+//    * @uses ImagesLoaded
+//    * @uses resizeMasonryItem
+//    */
+//   function waitForImages() {
+//     var allItems = document.querySelectorAll('.masonry-brick');
+//     for(var i=0;i<allItems.length;i++){
+//       imagesLoaded( allItems[i], function(instance) {
+//         var item = instance.elements[0];
+//         resizeMasonryItem(item);
+//       } );
+//     }
+//   }
+
+//   /* Resize all the grid items on the load and resize events */
+//   var masonryEvents = ['load', 'resize'];
+//   masonryEvents.forEach( function(event) {
+//     window.addEventListener(event, resizeAllMasonryItems);
+//   } );
+
+//   /* Do a resize once more when all the images finish loading */
+//   waitForImages();
+
+// }
+//Calculate();
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const masonryItems = document.querySelectorAll('.masonry-brick img');
+
+  function loadImage(img) {
+    img.setAttribute('src', img.getAttribute('data-src'));
+    img.onload = function() {
+        // Once the image is loaded, adjust layout if needed
+        adjustMasonryLayout();
+    };
+  }
+
+   /**
    * Set appropriate spanning to any masonry item
    *
    * Get different properties we already set for the masonry, calculate 
@@ -119,7 +220,7 @@ function Calculate() {
    *
    * @param item Object A brick/tile/cell inside the masonry
    */
-  function resizeMasonryItem(item){
+   function resizeMasonryItem(item){
     /* Get the grid object, its row-gap, and the size of its implicit rows */
     var grid = document.getElementsByClassName('masonry')[0],
         rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
@@ -135,7 +236,7 @@ function Calculate() {
     * S = H1 / T
     */
 
-    console.log(item.querySelector('.masonry-content').getBoundingClientRect())
+    // console.log(item.querySelector('.masonry-content').getBoundingClientRect())
     var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
 
     /* Set the spanning as calculated above (S) */
@@ -163,35 +264,20 @@ function Calculate() {
     }
   }
 
-  /**
-   * Resize the items when all the images inside the masonry grid 
-   * finish loading. This will ensure that all the content inside our
-   * masonry items is visible.
-   *
-   * @uses ImagesLoaded
-   * @uses resizeMasonryItem
-   */
-  function waitForImages() {
-    var allItems = document.getElementsByClassName('masonry-brick');
-    for(var i=0;i<allItems.length;i++){
-      imagesLoaded( allItems[i], function(instance) {
-        var item = instance.elements[0];
-        resizeMasonryItem(item);
-      } );
-    }
+  function adjustMasonryLayout() {
+    // Code to adjust the masonry layout goes here
+    // This could involve using a library or custom JavaScript logic
+    // to arrange the grid based on the loaded image sizes
+    resizeAllMasonryItems();
   }
 
-  /* Resize all the grid items on the load and resize events */
-  var masonryEvents = ['load', 'resize'];
-  masonryEvents.forEach( function(event) {
-    window.addEventListener(event, resizeAllMasonryItems);
-  } );
 
-  /* Do a resize once more when all the images finish loading */
-  waitForImages();
+  // Load images when the DOM content is loaded
+  masonryItems.forEach(function(img) {
+    loadImage(img);
+  });
 
-}
+});
 
-Calculate();
 
 export default App;
