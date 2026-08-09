@@ -1,283 +1,267 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
-import SmoothImage from 'react-smooth-image';
-import imagesLoaded from 'imagesloaded';
-
-
+import { portfolioItems, portfolioItemsByTag, tagLabels, tags } from './portfolioItems';
 
 function App() {
+  const [activeTab, setActiveTab] = useState(tags[0]);
+  const [activeProjectId, setActiveProjectId] = useState(null);
+  const [isHeaderCompact, setIsHeaderCompact] = useState(false);
+
+  const activeProject = portfolioItems.find((item) => item.id === activeProjectId);
+  const shouldShowInfo = activeTab === 'info';
+
+  const visibleItems = useMemo(() => {
+    if (shouldShowInfo) {
+      return [];
+    }
+
+    return portfolioItemsByTag[activeTab] || [];
+  }, [activeTab, shouldShowInfo]);
+
+  function selectTag(tag) {
+    setActiveTab(tag);
+  }
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsHeaderCompact(window.scrollY > 0);
+    }
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="App">
-
-
-    <div className="wrapper">
-    <div className="header">
-      <svg version="1.1" id="Layer_1"  x="0px" y="0px"
-      	 viewBox="0 0 479 451" enable-background="new 0 0 479 451">
-         <path fill="none" stroke="#FFFFFF" stroke-miterlimit="10" d="M295,123.5c22,0,44.6-61.5,32.6-61.5c-16,0-56.1,111-30,111c17.9,0,30.9-37.5,30.9-37.5 M331,126.5
-          	c14,0,53.6-64.5,33.6-64.5c-16,0-71,135-15,135c37.9,0,57.9-73,22-73c-9.1,0-16,9-16,9 M260,207.5c4,0,7,3,7,9c0,20-19,39-19,56
-          	c0,6,4,8.5,8.6,8.5c16,0,35.9-45.5,35.9-45.5 M325.5,214.5c0,0-20,66.5-36.9,66.5c-19.1,0,8-45,8-65 M308.5,195.5
-          	c0,0,0,21.5,34,21.5c12,0-21.9,64-3.9,64c9,0,23.9-33.5,23.9-33.5 M232.6,224c0,0,2.4-10-7-10c-18.6,0-49.1,69-21,69
-          	c23.4,0,53.4-66.5,40.4-66.5c-12,0-8.5,117-60.5,117c-36,0-54.5-25-85.5-25c-50,0-50,77,2,77c45,0,68-96,51-96c-15,0-42,95.5-6,95.5
-          	c23,0,35.5-47.5,35.5-47.5 M195,300.5c0,0-37,85-8,85c12,0,19-16,19-16 M383,297.5c0.4,0.4-43,103,6,103c36,0,56.5-67,23-67
-          	c-12.5,0-20,13-20,13 M238.5,329.5c0,0-8.5,16-8.5,31s7.5,25.5,20.6,25.5c21.6,0,39.2-36,39.2-62.9c0-16.6-11.3-29.6-27.8-29.6
-          	c-29.5,0-31.5,46,10.5,46c29,0,37-18.5,42.1-18.5c11.9,0-16.6,39.5-16.6,56.5c0,5,4,8.5,8.6,8.5c16,0,35.9-48.5,35.9-48.5
-          	 M345.6,321c0,4.3-1.1,9.9-2.8,16c-5.9,21.6-17.8,49-3.8,49c13,0,31.5-49.5,31.5-49.5 M180.5,126.5c0,0-10.5,11-10.5,30
-          	c0,7.9,5,16.5,13.6,16.5c26,0,40.8-66,13.4-66c-18.5,0-21.5,30,4.6,30c20,0,30.4-28.5,36.4-28.5c11.6,0-16,41-16,56
-          	c0,6,3.9,8.5,8.6,8.5c16,0,36.9-49.5,36.9-49.5 M270.6,108c0,20-27,65-11,65c12,0,33.9-44.5,33.9-44.5 M130,225.5c0,0,8.5,4,27.5,4
-          	c12,0,18-4,21-4c12,0-31,56-9.5,56c10,0,26.5-27,26.5-27 M77.5,117.5c-48,0-43-81.1,15-81.1c21,0,36,14.1,36,32.1
-          	c0,33-26.9,59-26.9,83.5c0,12.5,7.4,17,14,17c34,0,73-98,59-98c-15.6,0-31.1,182.5-86.1,182.5c-46,0-43-68,10-68
-          	c34,0,60.5,19,86.5,19c25,0,25-23,5-23c-41,0-37.5,107-92,107c-19.5,0-29-10-29-10 M362.6,247c28,0,38-33,24-33
-          	C362,214,334,327.5,382,327.5c40,0,58.5-76,24-76c-16.5,0-23,19-23,19"/>
-      </svg>
-
-
-      <div className="info">
-        <h1>
+    <div className="site-shell">
+      <header className={`site-header ${isHeaderCompact ? 'is-compact' : ''}`}>
+        <button
+          className="site-title"
+          type="button"
+          onClick={() => setActiveTab(tags[0])}
+        >
           Shana Hu
-        </h1>
+        </button>
 
-        <h2>
-          Artist and designer based in San Francisco
-        </h2>
+        <nav className="site-nav" aria-label="Portfolio sections">
+          {tags.map((tag) => (
+            <button
+              key={tag}
+              className={`nav-tab ${activeTab === tag ? 'is-active' : ''}`}
+              type="button"
+              aria-current={activeTab === tag ? 'page' : undefined}
+              onClick={() => selectTag(tag)}
+            >
+              {tagLabels[tag]}
+            </button>
+          ))}
+          <button
+            className={`nav-tab info-tab ${shouldShowInfo ? 'is-active' : ''}`}
+            type="button"
+            aria-current={shouldShowInfo ? 'page' : undefined}
+            onClick={() => setActiveTab('info')}
+          >
+            Info
+          </button>
+        </nav>
+      </header>
 
-      </div>
-    </div>
+      <main>
+        {shouldShowInfo ? (
+          <InfoPage />
+        ) : (
+          <Gallery
+            items={visibleItems}
+            onOpenProject={setActiveProjectId}
+          />
+        )}
+      </main>
 
-
-
-      <div className="images">
-        <ul className="masonry">
-          <ImageLi imageName="rabbitenvelope" title="" subtitle="" />
-          <ImageLi imageName="swimming" suff=".png" title="" subtitle="" gif="true" />
-          <ImageLi imageName="palettes" suff=".png" title="" subtitle="" gif="true" />
-          <ImageLi imageName="lark" suff=".png" title="" subtitle="" />
-          <ImageLi imageName="25" title="25" subtitle="Lasercut custom lettering" alt="Wood panel with the number 25 lasercut" />
-          <ImageLi imageName="dogdaze" suff=".png" title="" subtitle="" gif="true" />
-          <ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
-          <ImageLi imageName="notes" title="Notes to self"  subtitle="Pen-plotted custom lettering on Post-its" alt="Three post-its that read: 'You'll figure it out', 'What's the worst that could happen?', and 'Make it happen'"/>
-          <ImageLi imageName="hongbao" title="Red envelopes" subtitle="Pen-plotted custom lettering with generated fills and patterns" alt="A pile of red envelopes decorated with Chinese characters that mean 'Wishing you good fortune' and 'Prosper'" />
-          <ImageLi imageName="holiday" title="Holiday card" subtitle="Pen-plotted custom lettering" alt="A card with illustrative lettering that reads 'Hope you have a cozy and relaxing holiday'" />
-          <ImageLi imageName="tigerenvelope" title="" subtitle="" />
-          <ImageLi imageName="birthday" title="Happy birthday" subtitle="Hand-lettered and pulled screen print" alt="Paper card with Chinese characters meaning 'Happy birthday'"/>
-        </ul>
-      </div>
-
-
-    </div>
+      {activeProject ? (
+        <ProjectViewer
+          project={activeProject}
+          onClose={() => setActiveProjectId(null)}
+        />
+      ) : null}
     </div>
   );
 }
 
-function ImageLi(props) {
-return (
-    <li className="masonry-brick">
-      <img
-        src="./images/small-transparent.png"
-        data-src={'./images/'+props.imageName+(props.suff ? ''+props.suff : '.jpg')}
-        alt={props.alt}
-        className={'masonry-content ' + (props.gif ? props.imageName: '')}
-        loading="lazy"
-        // transitionTime={0.3}
-        // imageStyles={{overflow: "visible"}}
-      />
-      <h3 class="subtitle">{props.title}</h3>
-      <p class="subtitle">{props.subtitle}</p>
-    </li>
-  )
-
-}
-
-function SmoothImageLi(props) {
-  return (
-    <li>
-      <SmoothImage
-        src={'./images/'+props.imageName+'.jpg'}
-        alt={props.alt}
-        transitionTime={0.3}
-        imageStyles={{overflow: "visible"}}
-
-        //Other props if you choose to use them
-      />
-      <p>{props.title}</p>
-      <p>{props.subtitle}</p>
-    </li>
-  )
-}
-
-function TextLink(props) {
-  return (
-    <a href={props.link} target="_blank" rel="noopener noreferrer">{props.text}</a>
-  )
-}
-
-
-// function Calculate() {
-//     /**
-//    * Set appropriate spanning to any masonry item
-//    *
-//    * Get different properties we already set for the masonry, calculate 
-//    * height or spanning for any cell of the masonry grid based on its 
-//    * content-wrapper's height, the (row) gap of the grid, and the size 
-//    * of the implicit row tracks.
-//    *
-//    * @param item Object A brick/tile/cell inside the masonry
-//    */
-//   function resizeMasonryItem(item){
-//     /* Get the grid object, its row-gap, and the size of its implicit rows */
-//     var grid = document.getElementsByClassName('masonry')[0],
-//         rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
-//         rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-
-//     /*
-//     * Spanning for any brick = S
-//     * Grid's row-gap = G
-//     * Size of grid's implicitly create row-track = R
-//     * Height of item content = H
-//     * Net height of the item = H1 = H + G
-//     * Net height of the implicit row-track = T = G + R
-//     * S = H1 / T
-//     */
-
-//     // console.log(item.querySelector('.masonry-content').getBoundingClientRect())
-//     var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
-
-//     /* Set the spanning as calculated above (S) */
-//     item.style.gridRowEnd = 'span '+rowSpan;
-//   }
-
-//     /**
-//    * Apply spanning to all the masonry items
-//    *
-//    * Loop through all the items and apply the spanning to them using 
-//    * `resizeMasonryItem()` function.
-//    *
-//    * @uses resizeMasonryItem
-//    */
-//   function resizeAllMasonryItems(){
-//     // Get all item class objects in one list
-//     var allItems = document.getElementsByClassName('masonry-brick');
-
-//     /*
-//     * Loop through the above list and execute the spanning function to
-//     * each list-item (i.e. each masonry item)
-//     */
-//     for(var i=0;i<allItems.length;i++){
-//       resizeMasonryItem(allItems[i]);
-//     }
-//   }
-
-//   /**
-//    * Resize the items when all the images inside the masonry grid 
-//    * finish loading. This will ensure that all the content inside our
-//    * masonry items is visible.
-//    *
-//    * @uses ImagesLoaded
-//    * @uses resizeMasonryItem
-//    */
-//   function waitForImages() {
-//     var allItems = document.querySelectorAll('.masonry-brick');
-//     for(var i=0;i<allItems.length;i++){
-//       imagesLoaded( allItems[i], function(instance) {
-//         var item = instance.elements[0];
-//         resizeMasonryItem(item);
-//       } );
-//     }
-//   }
-
-//   /* Resize all the grid items on the load and resize events */
-//   var masonryEvents = ['load', 'resize'];
-//   masonryEvents.forEach( function(event) {
-//     window.addEventListener(event, resizeAllMasonryItems);
-//   } );
-
-//   /* Do a resize once more when all the images finish loading */
-//   waitForImages();
-
-// }
-//Calculate();
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const masonryItems = document.querySelectorAll('.masonry-brick img');
-
-  function loadImage(img) {
-    img.setAttribute('src', img.getAttribute('data-src'));
-    img.onload = function() {
-        // Once the image is loaded, adjust layout if needed
-        adjustMasonryLayout();
-    };
+function Gallery({ items, onOpenProject }) {
+  if (items.length === 0) {
+    return (
+      <section className="empty-state" aria-live="polite">
+        <p>No work in this section yet.</p>
+      </section>
+    );
   }
 
-   /**
-   * Set appropriate spanning to any masonry item
-   *
-   * Get different properties we already set for the masonry, calculate 
-   * height or spanning for any cell of the masonry grid based on its 
-   * content-wrapper's height, the (row) gap of the grid, and the size 
-   * of the implicit row tracks.
-   *
-   * @param item Object A brick/tile/cell inside the masonry
-   */
-   function resizeMasonryItem(item){
-    /* Get the grid object, its row-gap, and the size of its implicit rows */
-    var grid = document.getElementsByClassName('masonry')[0],
-        rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
-        rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+  return (
+    <section className="gallery" aria-label="Selected work">
+      {items.map((item, index) => (
+        <GalleryItem
+          key={item.id}
+          item={item}
+          isPriority={index < 4}
+          onOpen={() => onOpenProject(item.id)}
+        />
+      ))}
+    </section>
+  );
+}
 
-    /*
-    * Spanning for any brick = S
-    * Grid's row-gap = G
-    * Size of grid's implicitly create row-track = R
-    * Height of item content = H
-    * Net height of the item = H1 = H + G
-    * Net height of the implicit row-track = T = G + R
-    * S = H1 / T
-    */
+function GalleryItem({ item, isPriority, onOpen }) {
+  return (
+    <article className="gallery-item">
+      <button
+        className="gallery-button"
+        type="button"
+        onClick={onOpen}
+        aria-label={`Open ${item.title}`}
+      >
+        <img
+          src={item.cover.src}
+          alt={item.cover.alt}
+          width={item.cover.width}
+          height={item.cover.height}
+          loading={isPriority ? 'eager' : 'lazy'}
+          decoding="async"
+          sizes="(max-width: 720px) 92vw, (max-width: 1180px) 44vw, 30vw"
+        />
+        <span className="gallery-caption">
+          <span>{item.title}</span>
+          <span>{item.tags.map((tag) => tagLabels[tag]).join(', ')}</span>
+        </span>
+      </button>
+    </article>
+  );
+}
 
-    // console.log(item.querySelector('.masonry-content').getBoundingClientRect())
-    var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+function ProjectViewer({ project, onClose }) {
+  const [imageIndex, setImageIndex] = useState(0);
+  const images = project.images.length > 0 ? project.images : [project.cover];
+  const activeImage = images[imageIndex];
+  const hasMultipleImages = images.length > 1;
 
-    /* Set the spanning as calculated above (S) */
-    item.style.gridRowEnd = 'span '+rowSpan;
+  function showPrevious() {
+    setImageIndex((currentIndex) =>
+      currentIndex === 0 ? images.length - 1 : currentIndex - 1
+    );
   }
 
-    /**
-   * Apply spanning to all the masonry items
-   *
-   * Loop through all the items and apply the spanning to them using 
-   * `resizeMasonryItem()` function.
-   *
-   * @uses resizeMasonryItem
-   */
-  function resizeAllMasonryItems(){
-    // Get all item class objects in one list
-    var allItems = document.getElementsByClassName('masonry-brick');
+  function showNext() {
+    setImageIndex((currentIndex) =>
+      currentIndex === images.length - 1 ? 0 : currentIndex + 1
+    );
+  }
 
-    /*
-    * Loop through the above list and execute the spanning function to
-    * each list-item (i.e. each masonry item)
-    */
-    for(var i=0;i<allItems.length;i++){
-      resizeMasonryItem(allItems[i]);
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+
+      if (!hasMultipleImages) {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        showPrevious();
+      }
+
+      if (event.key === 'ArrowRight') {
+        showNext();
+      }
     }
-  }
 
-  function adjustMasonryLayout() {
-    // Code to adjust the masonry layout goes here
-    // This could involve using a library or custom JavaScript logic
-    // to arrange the grid based on the loaded image sizes
-    resizeAllMasonryItems();
-  }
-
-
-  // Load images when the DOM content is loaded
-  masonryItems.forEach(function(img) {
-    loadImage(img);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   });
 
-});
+  return (
+    <section className="project-viewer" role="dialog" aria-modal="true" aria-label={project.title}>
+      <div className="viewer-topbar">
+        <div>
+          <h2>{project.title}</h2>
+          <p>{project.summary}</p>
+        </div>
+        <button className="close-button" type="button" onClick={onClose} aria-label="Close project">
+          Close
+        </button>
+      </div>
 
+      <div className="viewer-stage">
+        {hasMultipleImages ? (
+          <button
+            className="viewer-hit-area viewer-hit-area-previous"
+            type="button"
+            onClick={showPrevious}
+            aria-label="Previous image"
+          />
+        ) : null}
+
+        <img
+          src={activeImage.src}
+          alt={activeImage.alt}
+          width={activeImage.width}
+          height={activeImage.height}
+          decoding="async"
+        />
+
+        {hasMultipleImages ? (
+          <button
+            className="viewer-hit-area viewer-hit-area-next"
+            type="button"
+            onClick={showNext}
+            aria-label="Next image"
+          />
+        ) : null}
+      </div>
+
+      <footer className="viewer-footer">
+        <p>{project.tags.map((tag) => tagLabels[tag]).join(', ')}</p>
+        {hasMultipleImages ? (
+          <p>
+            {imageIndex + 1} / {images.length}
+          </p>
+        ) : null}
+      </footer>
+    </section>
+  );
+}
+
+function InfoPage() {
+  return (
+    <section className="info-page">
+      <div className="info-photo">
+        <img
+          src={`${process.env.PUBLIC_URL}/images/optimized/info-portrait.jpg`}
+          alt="Shana Hu seated beside a textile piece."
+          width="1066"
+          height="1600"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <div className="info-copy">
+        <div className="info-intro">
+          <p>
+            Shana Hu is an artist and designer based in San Francisco, working across
+            textiles, type, printed matter, red envelopes, and small editions.
+          </p>
+        </div>
+
+        <div className="info-details">
+          <p>
+            This page is scaffolded for a longer bio, selected clients, exhibitions,
+            stockists, press, and contact links.
+          </p>
+          <a href="mailto:hello@shanahu.com">hello@shanahu.com</a>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default App;
