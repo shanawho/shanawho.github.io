@@ -2,24 +2,99 @@ import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import { portfolioItems, portfolioItemsByTag, tagLabels, tags } from './portfolioItems';
 
+const infoTab = 'info';
+const routeTabs = [...tags, infoTab];
+const routeAliases = {
+  print: 'play',
+  prints: 'play',
+  type: 'play',
+  zines: 'play',
+};
+
+function projectHref(project) {
+  return `#/project/${project.id}`;
+}
+
+function tabHref(tab) {
+  return `#/${tab}`;
+}
+
+function getProjectGroup(project) {
+  const projectTag = project.tags[0];
+  return portfolioItemsByTag[projectTag] || portfolioItems;
+}
+
+function getRouteFromUrl() {
+  const hashRoute = window.location.hash.replace(/^#\/?/, '');
+  const [routeType, routeValue] = hashRoute.split('/');
+
+  if (routeType === 'project') {
+    const project = portfolioItems.find((item) => item.id === routeValue);
+
+    if (project) {
+      return {
+        activeTab: project.tags[0] || tags[0],
+        projectId: project.id,
+        view: 'project',
+      };
+    }
+  }
+
+  const aliasedRoute = routeAliases[hashRoute] || hashRoute;
+
+  if (aliasedRoute === infoTab) {
+    return {
+      activeTab: infoTab,
+      projectId: null,
+      view: 'info',
+    };
+  }
+
+  return {
+    activeTab: routeTabs.includes(aliasedRoute) ? aliasedRoute : tags[0],
+    projectId: null,
+    view: 'gallery',
+  };
+}
+
 function App() {
-  const [activeTab, setActiveTab] = useState(tags[0]);
-  const [activeProjectId, setActiveProjectId] = useState(null);
+  const [route, setRoute] = useState(getRouteFromUrl);
   const [isHeaderCompact, setIsHeaderCompact] = useState(false);
 
-  const activeProject = portfolioItems.find((item) => item.id === activeProjectId);
-  const shouldShowInfo = activeTab === 'info';
+  const activeProject = portfolioItems.find((item) => item.id === route.projectId);
+  const activeProjectGroup = activeProject ? getProjectGroup(activeProject) : [];
+  const activeProjectIndex = activeProjectGroup.findIndex((item) => item.id === route.projectId);
+  const previousProject = activeProjectIndex >= 0
+    ? activeProjectGroup[(activeProjectIndex - 1 + activeProjectGroup.length) % activeProjectGroup.length]
+    : null;
+  const nextProject = activeProjectIndex >= 0
+    ? activeProjectGroup[(activeProjectIndex + 1) % activeProjectGroup.length]
+    : null;
+  const activeTab = activeProject ? activeProject.tags[0] : route.activeTab;
+  const shouldShowInfo = route.view === 'info';
 
   const visibleItems = useMemo(() => {
-    if (shouldShowInfo) {
+    if (shouldShowInfo || activeProject) {
       return [];
     }
 
     return portfolioItemsByTag[activeTab] || [];
-  }, [activeTab, shouldShowInfo]);
+  }, [activeProject, activeTab, shouldShowInfo]);
 
-  function selectTag(tag) {
-    setActiveTab(tag);
+  function selectTab(tab) {
+    setRoute({
+      activeTab: tab,
+      projectId: null,
+      view: tab === infoTab ? 'info' : 'gallery',
+    });
+  }
+
+  function selectProject(project) {
+    setRoute({
+      activeTab: project.tags[0] || tags[0],
+      projectId: project.id,
+      view: 'project',
+    });
   }
 
   useEffect(() => {
@@ -32,57 +107,70 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    function syncTabToUrl() {
+      setRoute(getRouteFromUrl());
+    }
+
+    syncTabToUrl();
+    window.addEventListener('hashchange', syncTabToUrl);
+    return () => window.removeEventListener('hashchange', syncTabToUrl);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [route.projectId, route.view]);
+
   return (
-    <div className="site-shell">
+    <div className={`site-shell ${shouldShowInfo ? 'is-info-view' : ''}`}>
       <header className={`site-header ${isHeaderCompact ? 'is-compact' : ''}`}>
-        <button
+        <a
           className="site-title"
-          type="button"
-          onClick={() => setActiveTab(tags[0])}
+          href={tabHref(tags[0])}
+          onClick={() => selectTab(tags[0])}
         >
           Shana Hu
-        </button>
+        </a>
 
         <nav className="site-nav" aria-label="Portfolio sections">
           {tags.map((tag) => (
-            <button
+            <a
               key={tag}
               className={`nav-tab ${activeTab === tag ? 'is-active' : ''}`}
-              type="button"
+              href={tabHref(tag)}
               aria-current={activeTab === tag ? 'page' : undefined}
-              onClick={() => selectTag(tag)}
+              onClick={() => selectTab(tag)}
             >
               {tagLabels[tag]}
-            </button>
+            </a>
           ))}
-          <button
+          <a
             className={`nav-tab info-tab ${shouldShowInfo ? 'is-active' : ''}`}
-            type="button"
+            href={tabHref(infoTab)}
             aria-current={shouldShowInfo ? 'page' : undefined}
-            onClick={() => setActiveTab('info')}
+            onClick={() => selectTab(infoTab)}
           >
             Info
-          </button>
+          </a>
         </nav>
       </header>
 
       <main>
-        {shouldShowInfo ? (
+        {activeProject ? (
+          <ProjectPage
+            project={activeProject}
+            previousProject={previousProject}
+            nextProject={nextProject}
+          />
+        ) : shouldShowInfo ? (
           <InfoPage />
         ) : (
           <Gallery
             items={visibleItems}
-            onOpenProject={setActiveProjectId}
+            onOpenProject={selectProject}
           />
         )}
       </main>
-
-      {activeProject ? (
-        <ProjectViewer
-          project={activeProject}
-          onClose={() => setActiveProjectId(null)}
-        />
-      ) : null}
     </div>
   );
 }
@@ -103,7 +191,7 @@ function Gallery({ items, onOpenProject }) {
           key={item.id}
           item={item}
           isPriority={index < 4}
-          onOpen={() => onOpenProject(item.id)}
+          onOpen={() => onOpenProject(item)}
         />
       ))}
     </section>
@@ -113,9 +201,9 @@ function Gallery({ items, onOpenProject }) {
 function GalleryItem({ item, isPriority, onOpen }) {
   return (
     <article className="gallery-item">
-      <button
+      <a
         className="gallery-button"
-        type="button"
+        href={projectHref(item)}
         onClick={onOpen}
         aria-label={`Open ${item.title}`}
       >
@@ -130,102 +218,58 @@ function GalleryItem({ item, isPriority, onOpen }) {
         />
         <span className="gallery-caption">
           <span>{item.title}</span>
-          <span>{item.tags.map((tag) => tagLabels[tag]).join(', ')}</span>
+          {item.year ? <span>{item.year}</span> : null}
         </span>
-      </button>
+      </a>
     </article>
   );
 }
 
-function ProjectViewer({ project, onClose }) {
-  const [imageIndex, setImageIndex] = useState(0);
+function ProjectPage({ project, previousProject, nextProject }) {
   const images = project.images.length > 0 ? project.images : [project.cover];
-  const activeImage = images[imageIndex];
-  const hasMultipleImages = images.length > 1;
-
-  function showPrevious() {
-    setImageIndex((currentIndex) =>
-      currentIndex === 0 ? images.length - 1 : currentIndex - 1
-    );
-  }
-
-  function showNext() {
-    setImageIndex((currentIndex) =>
-      currentIndex === images.length - 1 ? 0 : currentIndex + 1
-    );
-  }
-
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-
-      if (!hasMultipleImages) {
-        return;
-      }
-
-      if (event.key === 'ArrowLeft') {
-        showPrevious();
-      }
-
-      if (event.key === 'ArrowRight') {
-        showNext();
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  });
+  const projectDimensions = project.dimensions || project.cover.dimensions;
+  const projectMaterials = project.materials || project.cover.materials;
 
   return (
-    <section className="project-viewer" role="dialog" aria-modal="true" aria-label={project.title}>
-      <div className="viewer-topbar">
-        <div>
+    <section className="project-page" aria-label={project.title}>
+      <div className="viewer-layout">
+        <div className="viewer-images" aria-label={`${project.title} images`}>
+          {images.map((image, index) => (
+            <figure className="viewer-image" key={`${image.src}-${index}`}>
+              <img
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
+
+        <aside className="viewer-info">
           <h2>{project.title}</h2>
           <p>{project.summary}</p>
-        </div>
-        <button className="close-button" type="button" onClick={onClose} aria-label="Close project">
-          Close
-        </button>
+          {projectMaterials ? <p className="project-materials">{projectMaterials}</p> : null}
+          {projectDimensions ? <p className="project-dimensions">{projectDimensions}</p> : null}
+          {project.year ? <p className="project-year">{project.year}</p> : null}
+          <nav className="project-navigation" aria-label="Project navigation">
+            <a
+              href={projectHref(previousProject)}
+              aria-label={`Previous project: ${previousProject.title}`}
+            >
+              􀄪
+            </a>
+            <a
+              href={projectHref(nextProject)}
+              aria-label={`Next project: ${nextProject.title}`}
+            >
+              􀄫
+            </a>
+          </nav>
+        </aside>
       </div>
-
-      <div className="viewer-stage">
-        {hasMultipleImages ? (
-          <button
-            className="viewer-hit-area viewer-hit-area-previous"
-            type="button"
-            onClick={showPrevious}
-            aria-label="Previous image"
-          />
-        ) : null}
-
-        <img
-          src={activeImage.src}
-          alt={activeImage.alt}
-          width={activeImage.width}
-          height={activeImage.height}
-          decoding="async"
-        />
-
-        {hasMultipleImages ? (
-          <button
-            className="viewer-hit-area viewer-hit-area-next"
-            type="button"
-            onClick={showNext}
-            aria-label="Next image"
-          />
-        ) : null}
-      </div>
-
-      <footer className="viewer-footer">
-        <p>{project.tags.map((tag) => tagLabels[tag]).join(', ')}</p>
-        {hasMultipleImages ? (
-          <p>
-            {imageIndex + 1} / {images.length}
-          </p>
-        ) : null}
-      </footer>
     </section>
   );
 }
@@ -233,6 +277,25 @@ function ProjectViewer({ project, onClose }) {
 function InfoPage() {
   return (
     <section className="info-page">
+      <div className="info-copy">
+        <div className="info-intro">
+          <p>
+            is a textile and lettering artist based in San Francisco.
+          </p>
+        </div>
+
+        <div className="info-details">
+          <p>
+            Shana also is passionate about building creative tooling at{' '}
+            <a href="https://openstudio.ing">OpenStudio</a>,{' '}
+            <a href="https://www.figma.com">Figma</a>,{' '}
+            <a href="https://www.pinterest.com">Pinterest</a>, and{' '}
+            <a href="https://www.fiftythree.com">FiftyThree</a>.
+          </p>
+          <a href="mailto:hello@shanahu.com">hello@shanahu.com</a>
+        </div>
+      </div>
+
       <div className="info-photo">
         <img
           src={`${process.env.PUBLIC_URL}/images/optimized/info-portrait.jpg`}
@@ -242,23 +305,6 @@ function InfoPage() {
           loading="eager"
           decoding="async"
         />
-      </div>
-
-      <div className="info-copy">
-        <div className="info-intro">
-          <p>
-            Shana Hu is an artist and designer based in San Francisco, working across
-            textiles, type, printed matter, red envelopes, and small editions.
-          </p>
-        </div>
-
-        <div className="info-details">
-          <p>
-            This page is scaffolded for a longer bio, selected clients, exhibitions,
-            stockists, press, and contact links.
-          </p>
-          <a href="mailto:hello@shanahu.com">hello@shanahu.com</a>
-        </div>
       </div>
     </section>
   );
