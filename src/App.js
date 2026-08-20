@@ -280,17 +280,17 @@ function InfoPage() {
       <div className="info-copy">
         <div className="info-intro">
           <p>
-            is a textile and lettering artist based in San Francisco.
+            is a textile and lettering artist based in San Francisco, exploring the relationship between pixel precision and analog craft.
           </p>
-        </div>
-
-        <div className="info-details">
           <p>
-            Shana also is passionate about building creative tooling at{' '}
-            <a href="https://openstudio.ing">OpenStudio</a>,{' '}
-            <a href="https://www.figma.com">Figma</a>,{' '}
-            <a href="https://www.pinterest.com">Pinterest</a>, and{' '}
-            <a href="https://www.fiftythree.com">FiftyThree</a>.
+            She studied typeface design at Type@Cooper West and received her B.A. in computer science from UC Berkeley. Her work is influenced by her Chinese-American heritage and the pictorial beauty of hanzi letterforms.
+          </p>
+          <p>
+            Her professional product design work focuses on creative tooling. You may have encountered her work while using {' '}
+            <a href="https://openstudio.ing" target="_blank" rel="noopener noreferrer">OpenStudio</a>,{' '}
+            <a href="https://www.figma.com" target="_blank" rel="noopener noreferrer">Figma</a>,{' '}
+            <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest</a>, and{' '}
+            <a href="https://www.fiftythree.com" target="_blank" rel="noopener noreferrer">FiftyThree</a>.
           </p>
           <a href="mailto:hello@shanahu.com">hello@shanahu.com</a>
         </div>

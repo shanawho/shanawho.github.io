@@ -20,7 +20,7 @@ const textileItems = [
       alt: 'A quilted textile hanging with the word forever repeated in blue block lettering.',
       width: 1477,
       height: 1600,
-      dimensions: '60x64 in',
+      dimensions: '60"x64"',
       materials: 'Cotton fabric and batting'
     },
     images: [],
@@ -36,7 +36,7 @@ const textileItems = [
       alt: 'A green and yellow textile wall hanging with french seamed fabric Chinese lettering.',
       width: 1194,
       height: 1600,
-      dimensions: 'X"xX"',
+      dimensions: '10.5"x16"',
       materials: 'Salvaged fabric scraps and wooden dowel'
     },
     images: [],
@@ -108,7 +108,7 @@ const textileItems = [
   {
     id: 'j-and-a',
     title: 'J & A',
-    summary: 'NYC subway mosaic inspired lettering',
+    summary: 'A little gift for friends, and my first typographic textile. The lettering is inspired by NYC subway mosaics, which I always love admiring when I visit',
     year: '2023',
     tags: ['textiles'],
     cover: {
@@ -165,34 +165,16 @@ const playItems = [
     },
     images: [
       {
-        src: imagePath('swimming.png'),
-        alt: 'Lettering artwork spelling swimming in a vertical composition.',
-        width: 682,
-        height: 1024,
-      },
-      {
         src: originalPath('swimming.gif'),
         alt: 'Animated lettering artwork spelling swimming.',
         width: 682,
         height: 1024,
       },
       {
-        src: imagePath('palettes.png'),
-        alt: 'Lettering artwork with the word palettes repeated in color.',
-        width: 1024,
-        height: 682,
-      },
-      {
         src: originalPath('palettes.gif'),
         alt: 'Animated color palette lettering artwork.',
         width: 1024,
         height: 682,
-      },
-      {
-        src: imagePath('dogdaze.png'),
-        alt: 'Illustrated lettering artwork for Dog Daze.',
-        width: 1024,
-        height: 678,
       },
       {
         src: originalPath('dogdaze.gif'),

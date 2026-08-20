@@ -3,6 +3,11 @@
   padding: 28px clamp(18px, 4vw, 56px) 56px;
 }
 
+.site-shell.is-info-view {
+  background: #c5d4da;
+  color: #518396;
+}
+
 .site-header {
   align-items: center;
   display: flex;
@@ -39,6 +44,10 @@
   margin-bottom: 12px;
 }
 
+.site-shell.is-info-view .site-header::before {
+  background: rgba(197, 212, 218, 0.88);
+}
+
 .site-title,
 .nav-tab,
 .empty-state button {
@@ -65,6 +74,13 @@
 .site-header.is-compact .site-title {
   font-size: 32px;
   line-height: 1;
+}
+
+.site-shell.is-info-view .site-title,
+.site-shell.is-info-view .nav-tab,
+.site-shell.is-info-view .nav-tab.is-active,
+.site-shell.is-info-view .info-tab.is-active {
+  color: #518396;
 }
 
 .site-nav {
@@ -219,11 +235,35 @@
 }
 
 .info-intro p {
-  color: #008f72;
+  color: #518396;
   font-family: "LarkBold", Georgia, serif;
   font-size: clamp(28px, 3.4vw, 52px);
   line-height: 1.08;
   margin: 0;
+}
+
+.info-intro p + p {
+  margin-top: clamp(18px, 2.4vw, 32px);
+}
+
+.info-page a {
+  color: #518396;
+  text-decoration: none;
+}
+
+.info-page a:hover,
+.info-page a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.info-intro > a {
+  display: inline-block;
+  font-family: "LarkBold", Georgia, serif;
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1.08;
+  margin-top: clamp(18px, 2.4vw, 32px);
 }
 
 .info-details {
