@@ -1,283 +1,601 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
-import SmoothImage from 'react-smooth-image';
-import imagesLoaded from 'imagesloaded';
+import { portfolioItems, portfolioItemsByTag, tagLabels, tags } from './portfolioItems';
 
+const infoTab = 'info';
+const routeTabs = [...tags, infoTab];
+const routeAliases = {
+  print: 'play',
+  prints: 'play',
+  type: 'typeface',
+  zines: 'play',
+};
 
+const larkTesterRows = [
+  { label: 'Roman Bold', className: 'is-bold', text: 'In a sentimental mood' },
+  { label: 'Roman Medium', className: 'is-medium', text: 'Take the A train' },
+  { label: 'Roman Regular', className: 'is-regular', text: 'All the things you are' },
+  { label: 'Roman Light', className: 'is-light', text: "Straight no chaser" },
+  { label: 'Italic Bold', className: 'is-bold is-italic', text: 'Round Midnight' },
+  { label: 'Italic Medium', className: 'is-medium is-italic', text: 'Autumn in New York' },
+  { label: 'Italic Regular', className: 'is-regular is-italic', text: 'I fall in love too easily' },
+  { label: 'Italic Light', className: 'is-light is-italic', text: 'Night in Tunisia' },
+];
+
+function projectHref(project) {
+  return `#/project/${project.id}`;
+}
+
+function tabHref(tab) {
+  return `#/${tab}`;
+}
+
+function isTextEntryTarget(element) {
+  if (!element) {
+    return false;
+  }
+
+  const tagName = element.tagName;
+  return element.isContentEditable || tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT';
+}
+
+function getProjectGroup(project) {
+  const projectTag = project.tags[0];
+  return portfolioItemsByTag[projectTag] || portfolioItems;
+}
+
+function getRouteFromUrl() {
+  const hashRoute = window.location.hash.replace(/^#\/?/, '');
+  const [routeType, routeValue] = hashRoute.split('/');
+
+  if (routeType === 'project') {
+    const project = portfolioItems.find((item) => item.id === routeValue);
+
+    if (project) {
+      return {
+        activeTab: project.tags[0] || tags[0],
+        projectId: project.id,
+        view: 'project',
+      };
+    }
+  }
+
+  const aliasedRoute = routeAliases[hashRoute] || hashRoute;
+
+  if (aliasedRoute === infoTab) {
+    return {
+      activeTab: infoTab,
+      projectId: null,
+      view: 'info',
+    };
+  }
+
+  if (aliasedRoute === 'typeface') {
+    return {
+      activeTab: 'typeface',
+      projectId: 'lark',
+      view: 'project',
+    };
+  }
+
+  return {
+    activeTab: routeTabs.includes(aliasedRoute) ? aliasedRoute : tags[0],
+    projectId: null,
+    view: 'gallery',
+  };
+}
 
 function App() {
+  const [route, setRoute] = useState(getRouteFromUrl);
+  const [isHeaderCompact, setIsHeaderCompact] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const activeProject = portfolioItems.find((item) => item.id === route.projectId);
+  const activeProjectGroup = activeProject ? getProjectGroup(activeProject) : [];
+  const activeProjectIndex = activeProjectGroup.findIndex((item) => item.id === route.projectId);
+  const previousProject = activeProjectIndex >= 0
+    ? activeProjectGroup[(activeProjectIndex - 1 + activeProjectGroup.length) % activeProjectGroup.length]
+    : null;
+  const nextProject = activeProjectIndex >= 0
+    ? activeProjectGroup[(activeProjectIndex + 1) % activeProjectGroup.length]
+    : null;
+  const activeTab = activeProject ? activeProject.tags[0] : route.activeTab;
+  const shouldShowInfo = route.view === 'info';
+
+  const visibleItems = useMemo(() => {
+    if (shouldShowInfo || activeProject) {
+      return [];
+    }
+
+    return portfolioItemsByTag[activeTab] || [];
+  }, [activeProject, activeTab, shouldShowInfo]);
+
+  function selectTab(tab) {
+    setIsMenuOpen(false);
+
+    if (tab === 'typeface') {
+      setRoute({
+        activeTab: 'typeface',
+        projectId: 'lark',
+        view: 'project',
+      });
+      return;
+    }
+
+    setRoute({
+      activeTab: tab,
+      projectId: null,
+      view: tab === infoTab ? 'info' : 'gallery',
+    });
+  }
+
+  function selectProject(project) {
+    setRoute({
+      activeTab: project.tags[0] || tags[0],
+      projectId: project.id,
+      view: 'project',
+    });
+  }
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsHeaderCompact(window.scrollY > 0);
+    }
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    function syncTabToUrl() {
+      setRoute(getRouteFromUrl());
+    }
+
+    syncTabToUrl();
+    window.addEventListener('hashchange', syncTabToUrl);
+    return () => window.removeEventListener('hashchange', syncTabToUrl);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [route.projectId, route.view]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('is-info-background', shouldShowInfo);
+    document.body.classList.toggle('is-info-background', shouldShowInfo);
+
+    return () => {
+      document.documentElement.classList.remove('is-info-background');
+      document.body.classList.remove('is-info-background');
+    };
+  }, [shouldShowInfo]);
+
+  useEffect(() => {
+    document.body.classList.toggle('is-menu-open', isMenuOpen);
+
+    function handleMenuKeydown(event) {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    }
+
+    window.addEventListener('keydown', handleMenuKeydown);
+
+    return () => {
+      document.body.classList.remove('is-menu-open');
+      window.removeEventListener('keydown', handleMenuKeydown);
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    function handleProjectKeydown(event) {
+      if (!activeProject || isTextEntryTarget(event.target) || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft' && previousProject) {
+        event.preventDefault();
+        window.location.hash = projectHref(previousProject);
+      }
+
+      if (event.key === 'ArrowRight' && nextProject) {
+        event.preventDefault();
+        window.location.hash = projectHref(nextProject);
+      }
+    }
+
+    window.addEventListener('keydown', handleProjectKeydown);
+    return () => window.removeEventListener('keydown', handleProjectKeydown);
+  }, [activeProject, previousProject, nextProject]);
+
   return (
-    <div className="App">
-
-
-    <div className="wrapper">
-    <div className="header">
-      <svg version="1.1" id="Layer_1"  x="0px" y="0px"
-      	 viewBox="0 0 479 451" enable-background="new 0 0 479 451">
-         <path fill="none" stroke="#FFFFFF" stroke-miterlimit="10" d="M295,123.5c22,0,44.6-61.5,32.6-61.5c-16,0-56.1,111-30,111c17.9,0,30.9-37.5,30.9-37.5 M331,126.5
-          	c14,0,53.6-64.5,33.6-64.5c-16,0-71,135-15,135c37.9,0,57.9-73,22-73c-9.1,0-16,9-16,9 M260,207.5c4,0,7,3,7,9c0,20-19,39-19,56
-          	c0,6,4,8.5,8.6,8.5c16,0,35.9-45.5,35.9-45.5 M325.5,214.5c0,0-20,66.5-36.9,66.5c-19.1,0,8-45,8-65 M308.5,195.5
-          	c0,0,0,21.5,34,21.5c12,0-21.9,64-3.9,64c9,0,23.9-33.5,23.9-33.5 M232.6,224c0,0,2.4-10-7-10c-18.6,0-49.1,69-21,69
-          	c23.4,0,53.4-66.5,40.4-66.5c-12,0-8.5,117-60.5,117c-36,0-54.5-25-85.5-25c-50,0-50,77,2,77c45,0,68-96,51-96c-15,0-42,95.5-6,95.5
-          	c23,0,35.5-47.5,35.5-47.5 M195,300.5c0,0-37,85-8,85c12,0,19-16,19-16 M383,297.5c0.4,0.4-43,103,6,103c36,0,56.5-67,23-67
-          	c-12.5,0-20,13-20,13 M238.5,329.5c0,0-8.5,16-8.5,31s7.5,25.5,20.6,25.5c21.6,0,39.2-36,39.2-62.9c0-16.6-11.3-29.6-27.8-29.6
-          	c-29.5,0-31.5,46,10.5,46c29,0,37-18.5,42.1-18.5c11.9,0-16.6,39.5-16.6,56.5c0,5,4,8.5,8.6,8.5c16,0,35.9-48.5,35.9-48.5
-          	 M345.6,321c0,4.3-1.1,9.9-2.8,16c-5.9,21.6-17.8,49-3.8,49c13,0,31.5-49.5,31.5-49.5 M180.5,126.5c0,0-10.5,11-10.5,30
-          	c0,7.9,5,16.5,13.6,16.5c26,0,40.8-66,13.4-66c-18.5,0-21.5,30,4.6,30c20,0,30.4-28.5,36.4-28.5c11.6,0-16,41-16,56
-          	c0,6,3.9,8.5,8.6,8.5c16,0,36.9-49.5,36.9-49.5 M270.6,108c0,20-27,65-11,65c12,0,33.9-44.5,33.9-44.5 M130,225.5c0,0,8.5,4,27.5,4
-          	c12,0,18-4,21-4c12,0-31,56-9.5,56c10,0,26.5-27,26.5-27 M77.5,117.5c-48,0-43-81.1,15-81.1c21,0,36,14.1,36,32.1
-          	c0,33-26.9,59-26.9,83.5c0,12.5,7.4,17,14,17c34,0,73-98,59-98c-15.6,0-31.1,182.5-86.1,182.5c-46,0-43-68,10-68
-          	c34,0,60.5,19,86.5,19c25,0,25-23,5-23c-41,0-37.5,107-92,107c-19.5,0-29-10-29-10 M362.6,247c28,0,38-33,24-33
-          	C362,214,334,327.5,382,327.5c40,0,58.5-76,24-76c-16.5,0-23,19-23,19"/>
-      </svg>
-
-
-      <div className="info">
-        <h1>
+    <div
+      className={`site-shell ${shouldShowInfo ? 'is-info-view' : ''} ${activeProject ? 'is-project-view' : ''}`}
+    >
+      <header className={`site-header ${isHeaderCompact ? 'is-compact' : ''}`}>
+        <a
+          className="site-title"
+          href={tabHref(tags[0])}
+          onClick={() => selectTab(tags[0])}
+        >
           Shana Hu
-        </h1>
+        </a>
 
-        <h2>
-          Artist and designer based in San Francisco
-        </h2>
+        <nav className="site-nav" aria-label="Portfolio sections">
+          {tags.map((tag) => (
+            <a
+              key={tag}
+              className={`nav-tab ${activeTab === tag ? 'is-active' : ''}`}
+              href={tabHref(tag)}
+              aria-current={activeTab === tag ? 'page' : undefined}
+              onClick={() => selectTab(tag)}
+            >
+              {tagLabels[tag]}
+            </a>
+          ))}
+          <a
+            className={`nav-tab info-tab ${shouldShowInfo ? 'is-active' : ''}`}
+            href={tabHref(infoTab)}
+            aria-current={shouldShowInfo ? 'page' : undefined}
+            onClick={() => selectTab(infoTab)}
+          >
+            Info
+          </a>
+        </nav>
 
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen(true)}
+        >
+          􀌇
+        </button>
+      </header>
+
+      <div className={`mobile-menu-overlay ${isMenuOpen ? 'is-open' : ''}`} aria-hidden={!isMenuOpen}>
+        <button
+          className="menu-close"
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          􀆄
+        </button>
+        <nav className="mobile-menu-nav" aria-label="Portfolio sections">
+          {tags.map((tag) => (
+            <a
+              key={tag}
+              className={`mobile-menu-link ${activeTab === tag ? 'is-active' : ''}`}
+              href={tabHref(tag)}
+              aria-current={activeTab === tag ? 'page' : undefined}
+              onClick={() => selectTab(tag)}
+            >
+              {tagLabels[tag]}
+            </a>
+          ))}
+          <a
+            className={`mobile-menu-link ${shouldShowInfo ? 'is-active' : ''}`}
+            href={tabHref(infoTab)}
+            aria-current={shouldShowInfo ? 'page' : undefined}
+            onClick={() => selectTab(infoTab)}
+          >
+            Info
+          </a>
+        </nav>
       </div>
-    </div>
 
-
-
-      <div className="images">
-        <ul className="masonry">
-          <ImageLi imageName="rabbitenvelope" title="" subtitle="" />
-          <ImageLi imageName="swimming" suff=".png" title="" subtitle="" gif="true" />
-          <ImageLi imageName="palettes" suff=".png" title="" subtitle="" gif="true" />
-          <ImageLi imageName="lark" suff=".png" title="" subtitle="" />
-          <ImageLi imageName="25" title="25" subtitle="Lasercut custom lettering" alt="Wood panel with the number 25 lasercut" />
-          <ImageLi imageName="dogdaze" suff=".png" title="" subtitle="" gif="true" />
-          <ImageLi imageName="numbergestures" title="Chinese Number Gestures" subtitle='Risograph prints, 11x17' />
-          <ImageLi imageName="notes" title="Notes to self"  subtitle="Pen-plotted custom lettering on Post-its" alt="Three post-its that read: 'You'll figure it out', 'What's the worst that could happen?', and 'Make it happen'"/>
-          <ImageLi imageName="hongbao" title="Red envelopes" subtitle="Pen-plotted custom lettering with generated fills and patterns" alt="A pile of red envelopes decorated with Chinese characters that mean 'Wishing you good fortune' and 'Prosper'" />
-          <ImageLi imageName="holiday" title="Holiday card" subtitle="Pen-plotted custom lettering" alt="A card with illustrative lettering that reads 'Hope you have a cozy and relaxing holiday'" />
-          <ImageLi imageName="tigerenvelope" title="" subtitle="" />
-          <ImageLi imageName="birthday" title="Happy birthday" subtitle="Hand-lettered and pulled screen print" alt="Paper card with Chinese characters meaning 'Happy birthday'"/>
-        </ul>
-      </div>
-
-
-    </div>
+      <main>
+        {activeProject ? (
+          <ProjectPage
+            project={activeProject}
+            previousProject={previousProject}
+            nextProject={nextProject}
+          />
+        ) : shouldShowInfo ? (
+          <InfoPage />
+        ) : (
+          <Gallery
+            items={visibleItems}
+            onOpenProject={selectProject}
+          />
+        )}
+      </main>
     </div>
   );
 }
 
-function ImageLi(props) {
-return (
-    <li className="masonry-brick">
-      <img
-        src="./images/small-transparent.png"
-        data-src={'./images/'+props.imageName+(props.suff ? ''+props.suff : '.jpg')}
-        alt={props.alt}
-        className={'masonry-content ' + (props.gif ? props.imageName: '')}
-        loading="lazy"
-        // transitionTime={0.3}
-        // imageStyles={{overflow: "visible"}}
-      />
-      <h3 class="subtitle">{props.title}</h3>
-      <p class="subtitle">{props.subtitle}</p>
-    </li>
-  )
-
-}
-
-function SmoothImageLi(props) {
-  return (
-    <li>
-      <SmoothImage
-        src={'./images/'+props.imageName+'.jpg'}
-        alt={props.alt}
-        transitionTime={0.3}
-        imageStyles={{overflow: "visible"}}
-
-        //Other props if you choose to use them
-      />
-      <p>{props.title}</p>
-      <p>{props.subtitle}</p>
-    </li>
-  )
-}
-
-function TextLink(props) {
-  return (
-    <a href={props.link} target="_blank" rel="noopener noreferrer">{props.text}</a>
-  )
-}
-
-
-// function Calculate() {
-//     /**
-//    * Set appropriate spanning to any masonry item
-//    *
-//    * Get different properties we already set for the masonry, calculate 
-//    * height or spanning for any cell of the masonry grid based on its 
-//    * content-wrapper's height, the (row) gap of the grid, and the size 
-//    * of the implicit row tracks.
-//    *
-//    * @param item Object A brick/tile/cell inside the masonry
-//    */
-//   function resizeMasonryItem(item){
-//     /* Get the grid object, its row-gap, and the size of its implicit rows */
-//     var grid = document.getElementsByClassName('masonry')[0],
-//         rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
-//         rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-
-//     /*
-//     * Spanning for any brick = S
-//     * Grid's row-gap = G
-//     * Size of grid's implicitly create row-track = R
-//     * Height of item content = H
-//     * Net height of the item = H1 = H + G
-//     * Net height of the implicit row-track = T = G + R
-//     * S = H1 / T
-//     */
-
-//     // console.log(item.querySelector('.masonry-content').getBoundingClientRect())
-//     var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
-
-//     /* Set the spanning as calculated above (S) */
-//     item.style.gridRowEnd = 'span '+rowSpan;
-//   }
-
-//     /**
-//    * Apply spanning to all the masonry items
-//    *
-//    * Loop through all the items and apply the spanning to them using 
-//    * `resizeMasonryItem()` function.
-//    *
-//    * @uses resizeMasonryItem
-//    */
-//   function resizeAllMasonryItems(){
-//     // Get all item class objects in one list
-//     var allItems = document.getElementsByClassName('masonry-brick');
-
-//     /*
-//     * Loop through the above list and execute the spanning function to
-//     * each list-item (i.e. each masonry item)
-//     */
-//     for(var i=0;i<allItems.length;i++){
-//       resizeMasonryItem(allItems[i]);
-//     }
-//   }
-
-//   /**
-//    * Resize the items when all the images inside the masonry grid 
-//    * finish loading. This will ensure that all the content inside our
-//    * masonry items is visible.
-//    *
-//    * @uses ImagesLoaded
-//    * @uses resizeMasonryItem
-//    */
-//   function waitForImages() {
-//     var allItems = document.querySelectorAll('.masonry-brick');
-//     for(var i=0;i<allItems.length;i++){
-//       imagesLoaded( allItems[i], function(instance) {
-//         var item = instance.elements[0];
-//         resizeMasonryItem(item);
-//       } );
-//     }
-//   }
-
-//   /* Resize all the grid items on the load and resize events */
-//   var masonryEvents = ['load', 'resize'];
-//   masonryEvents.forEach( function(event) {
-//     window.addEventListener(event, resizeAllMasonryItems);
-//   } );
-
-//   /* Do a resize once more when all the images finish loading */
-//   waitForImages();
-
-// }
-//Calculate();
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const masonryItems = document.querySelectorAll('.masonry-brick img');
-
-  function loadImage(img) {
-    img.setAttribute('src', img.getAttribute('data-src'));
-    img.onload = function() {
-        // Once the image is loaded, adjust layout if needed
-        adjustMasonryLayout();
-    };
+function Gallery({ items, onOpenProject }) {
+  if (items.length === 0) {
+    return (
+      <section className="empty-state" aria-live="polite">
+        <p>No work in this section yet.</p>
+      </section>
+    );
   }
 
-   /**
-   * Set appropriate spanning to any masonry item
-   *
-   * Get different properties we already set for the masonry, calculate 
-   * height or spanning for any cell of the masonry grid based on its 
-   * content-wrapper's height, the (row) gap of the grid, and the size 
-   * of the implicit row tracks.
-   *
-   * @param item Object A brick/tile/cell inside the masonry
-   */
-   function resizeMasonryItem(item){
-    /* Get the grid object, its row-gap, and the size of its implicit rows */
-    var grid = document.getElementsByClassName('masonry')[0],
-        rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
-        rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+  return (
+    <section className="gallery" aria-label="Selected work">
+      {items.map((item, index) => (
+        <GalleryItem
+          key={item.id}
+          item={item}
+          isPriority={index < 4}
+          onOpen={() => onOpenProject(item)}
+        />
+      ))}
+    </section>
+  );
+}
 
-    /*
-    * Spanning for any brick = S
-    * Grid's row-gap = G
-    * Size of grid's implicitly create row-track = R
-    * Height of item content = H
-    * Net height of the item = H1 = H + G
-    * Net height of the implicit row-track = T = G + R
-    * S = H1 / T
-    */
+function GalleryItem({ item, isPriority, onOpen }) {
+  return (
+    <article className="gallery-item">
+      <a
+        className="gallery-button"
+        href={projectHref(item)}
+        onClick={onOpen}
+        aria-label={`Open ${item.title}`}
+      >
+        <ProjectImage
+          image={item.cover}
+          isPriority={isPriority}
+          sizes="(max-width: 720px) 92vw, (max-width: 1180px) 44vw, 30vw"
+        />
+        <span className="gallery-caption">
+          <span>{item.title}</span>
+        </span>
+      </a>
+    </article>
+  );
+}
 
-    // console.log(item.querySelector('.masonry-content').getBoundingClientRect())
-    var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+function ProjectImage({ image, isPriority = false, sizes }) {
+  const [isAnimating, setIsAnimating] = useState(false);
+  const hasAnimation = Boolean(image.animatedSrc);
+  const shouldAnimate = image.autoPlay || isAnimating;
+  const src = hasAnimation && shouldAnimate ? image.animatedSrc : image.src;
 
-    /* Set the spanning as calculated above (S) */
-    item.style.gridRowEnd = 'span '+rowSpan;
+  return (
+    <img
+      src={src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      loading={isPriority ? 'eager' : 'lazy'}
+      decoding="async"
+      sizes={sizes}
+      onMouseEnter={hasAnimation ? () => setIsAnimating(true) : undefined}
+      onMouseLeave={hasAnimation ? () => setIsAnimating(false) : undefined}
+      onFocus={hasAnimation ? () => setIsAnimating(true) : undefined}
+      onBlur={hasAnimation ? () => setIsAnimating(false) : undefined}
+    />
+  );
+}
+
+function ProjectSummary({ project, boldLead }) {
+  const summaryText = boldLead && project.summary.startsWith(boldLead)
+    ? project.summary.slice(boldLead.length)
+    : project.summary;
+
+  if (!project.summaryLinks || project.summaryLinks.length === 0) {
+    return (
+      <p>
+        {boldLead ? <strong>{boldLead}</strong> : null}
+        {summaryText}
+      </p>
+    );
   }
 
-    /**
-   * Apply spanning to all the masonry items
-   *
-   * Loop through all the items and apply the spanning to them using 
-   * `resizeMasonryItem()` function.
-   *
-   * @uses resizeMasonryItem
-   */
-  function resizeAllMasonryItems(){
-    // Get all item class objects in one list
-    var allItems = document.getElementsByClassName('masonry-brick');
+  const summaryParts = [];
+  let remainingText = summaryText;
 
-    /*
-    * Loop through the above list and execute the spanning function to
-    * each list-item (i.e. each masonry item)
-    */
-    for(var i=0;i<allItems.length;i++){
-      resizeMasonryItem(allItems[i]);
+  project.summaryLinks.forEach((link) => {
+    const linkIndex = remainingText.indexOf(link.text);
+
+    if (linkIndex === -1) {
+      return;
     }
-  }
 
-  function adjustMasonryLayout() {
-    // Code to adjust the masonry layout goes here
-    // This could involve using a library or custom JavaScript logic
-    // to arrange the grid based on the loaded image sizes
-    resizeAllMasonryItems();
-  }
+    if (linkIndex > 0) {
+      summaryParts.push(remainingText.slice(0, linkIndex));
+    }
 
+    summaryParts.push(
+      <a href={link.href} target="_blank" rel="noopener noreferrer" key={`${link.text}-${link.href}`}>
+        {link.text}
+      </a>
+    );
 
-  // Load images when the DOM content is loaded
-  masonryItems.forEach(function(img) {
-    loadImage(img);
+    remainingText = remainingText.slice(linkIndex + link.text.length);
   });
 
-});
+  if (remainingText) {
+    summaryParts.push(remainingText);
+  }
 
+  return (
+    <p>
+      {boldLead ? <strong>{boldLead}</strong> : null}
+      {summaryParts}
+    </p>
+  );
+}
+
+function ProjectPage({ project, previousProject, nextProject }) {
+  const images = project.images.length > 0 ? project.images : [project.cover];
+  const projectDimensions = project.dimensions || project.cover.dimensions;
+  const projectMaterials = project.materials || project.cover.materials;
+
+  if (project.id === 'lark') {
+    return (
+      <LarkProjectPage
+        project={project}
+        previousProject={previousProject}
+        nextProject={nextProject}
+      />
+    );
+  }
+
+  return (
+    <section
+      className={`project-page ${project.id === 'zines' ? 'is-zines-page' : ''}`}
+      aria-label={project.title}
+    >
+      <div className="viewer-layout">
+        <div className="viewer-images" aria-label={`${project.title} images`}>
+          {images.map((image, index) => (
+            <figure className="viewer-image" key={`${image.src}-${index}`}>
+              <ProjectImage image={image} isPriority={index === 0} />
+            </figure>
+          ))}
+        </div>
+
+        <aside className="viewer-info">
+          <h2>{project.title}</h2>
+          <ProjectSummary project={project} />
+          {projectMaterials ? <p className="project-materials">{projectMaterials}</p> : null}
+          {projectDimensions ? <p className="project-dimensions">{projectDimensions}</p> : null}
+          {project.year ? <p className="project-year">{project.year}</p> : null}
+          <nav className="project-navigation" aria-label="Project navigation">
+            <a
+              href={projectHref(previousProject)}
+              aria-label={`Previous project: ${previousProject.title}`}
+            >
+              􀄪
+            </a>
+            <a
+              href={projectHref(nextProject)}
+              aria-label={`Next project: ${nextProject.title}`}
+            >
+              􀄫
+            </a>
+          </nav>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function LarkProjectPage({ project, previousProject, nextProject }) {
+  return (
+    <section
+      className="project-page lark-project-page"
+      aria-label={project.title}
+    >
+      <figure className="lark-hero-image">
+        <img
+          src={project.cover.src}
+          alt={project.cover.alt}
+          width={project.cover.width}
+          height={project.cover.height}
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+
+      <div className="lark-project-intro">
+        <ProjectSummary project={project} boldLead="Lark" />
+      </div>
+
+      <div className="lark-type-testers" aria-label="Lark type testers">
+        {larkTesterRows.map((row) => (
+          <div className="lark-type-tester" key={row.label}>
+            <span>{row.label}</span>
+            <div
+              className={`lark-type-editor ${row.className}`}
+              contentEditable
+              role="textbox"
+              tabIndex="0"
+              aria-label={`${row.label} type tester`}
+              spellCheck="false"
+              suppressContentEditableWarning
+            >
+              {row.text}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <nav className="project-navigation" aria-label="Project navigation">
+        <a
+          href={projectHref(previousProject)}
+          aria-label={`Previous project: ${previousProject.title}`}
+        >
+          􀄪
+        </a>
+        <a
+          href={projectHref(nextProject)}
+          aria-label={`Next project: ${nextProject.title}`}
+        >
+          􀄫
+        </a>
+      </nav>
+    </section>
+  );
+}
+
+function InfoPage() {
+  return (
+    <section className="info-page">
+      <div className="info-copy">
+        <div className="info-intro">
+          <p>
+            (shay-nuh who) is a textile and lettering artist based in San Francisco, exploring the relationship between analog craft and pixel precision.
+          </p>
+          <p>
+           Her work is influenced by her Chinese-American heritage and a love of letterforms. She studied typeface design at Type@Cooper West and received her B.A. in computer science from UC Berkeley.
+          </p>
+          <p>
+            Her professional product design work focuses on building tools for creativity. You may have encountered her work while using {' '}
+            <a href="https://www.figma.com" target="_blank" rel="noopener noreferrer">Figma</a>,{' '}
+            <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest</a>, {' '}
+            <a href="https://apps.apple.com/fi/app/paper-sketch-draw-create/id506003812" target="_blank" rel="noopener noreferrer">FiftyThree</a>, and <a href="https://openstudio.ing" target="_blank" rel="noopener noreferrer">OpenStudio</a>.{' '}
+          </p>
+          <p>
+          For inquiries, contact <a href="mailto:hello@shanahu.com">hello@shanahu.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div className="info-photo">
+        <img
+          src={`${process.env.PUBLIC_URL}/images/optimized/info-portrait.jpg`}
+          alt="Shana Hu seated beside a textile piece."
+          width="1066"
+          height="1600"
+          loading="eager"
+          decoding="async"
+        />
+        <div className="info-social-links" aria-label="Social links">
+          <a
+            href="https://www.instagram.com/shanamade"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" />
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/shanahu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M5.2 8.9h3.1v10H5.2zM6.8 4.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM10.5 8.9h3v1.4c.5-.8 1.6-1.7 3.2-1.7 3.3 0 3.9 2.2 3.9 5v5.3h-3.1v-4.7c0-1.1 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5v4.8h-3.1v-10z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default App;
