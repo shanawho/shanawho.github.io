@@ -354,24 +354,43 @@ function GalleryItem({ item, isPriority, onOpen }) {
 
 function ProjectImage({ image, isPriority = false, sizes }) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [loadedSources, setLoadedSources] = useState(() => new Set());
   const hasAnimation = Boolean(image.animatedSrc);
   const shouldAnimate = image.autoPlay || isAnimating;
   const src = hasAnimation && shouldAnimate ? image.animatedSrc : image.src;
+  const isLoaded = loadedSources.has(src);
+  const imageStyle = image.width && image.height
+    ? { '--image-aspect': `${image.width} / ${image.height}` }
+    : undefined;
+
+  function handleLoad() {
+    setLoadedSources((currentSources) => {
+      const nextSources = new Set(currentSources);
+      nextSources.add(src);
+      return nextSources;
+    });
+  }
 
   return (
-    <img
-      src={src}
-      alt={image.alt}
-      width={image.width}
-      height={image.height}
-      loading={isPriority ? 'eager' : 'lazy'}
-      decoding="async"
-      sizes={sizes}
-      onMouseEnter={hasAnimation ? () => setIsAnimating(true) : undefined}
-      onMouseLeave={hasAnimation ? () => setIsAnimating(false) : undefined}
-      onFocus={hasAnimation ? () => setIsAnimating(true) : undefined}
-      onBlur={hasAnimation ? () => setIsAnimating(false) : undefined}
-    />
+    <span
+      className={`portfolio-image ${isLoaded ? 'is-loaded' : 'is-loading'}`}
+      style={imageStyle}
+    >
+      <img
+        src={src}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        loading={isPriority ? 'eager' : 'lazy'}
+        decoding="async"
+        sizes={sizes}
+        onLoad={handleLoad}
+        onMouseEnter={hasAnimation ? () => setIsAnimating(true) : undefined}
+        onMouseLeave={hasAnimation ? () => setIsAnimating(false) : undefined}
+        onFocus={hasAnimation ? () => setIsAnimating(true) : undefined}
+        onBlur={hasAnimation ? () => setIsAnimating(false) : undefined}
+      />
+    </span>
   );
 }
 
@@ -486,14 +505,7 @@ function LarkProjectPage({ project, previousProject, nextProject }) {
       aria-label={project.title}
     >
       <figure className="lark-hero-image">
-        <img
-          src={project.cover.src}
-          alt={project.cover.alt}
-          width={project.cover.width}
-          height={project.cover.height}
-          loading="eager"
-          decoding="async"
-        />
+        <ProjectImage image={project.cover} isPriority />
       </figure>
 
       <div className="lark-project-intro">
