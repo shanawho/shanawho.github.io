@@ -573,13 +573,14 @@ function InfoPage() {
       </div>
 
       <div className="info-photo">
-        <img
-          src={`${process.env.PUBLIC_URL}/images/optimized/info-portrait.jpg`}
-          alt="Shana Hu seated beside a textile piece."
-          width="1066"
-          height="1600"
-          loading="eager"
-          decoding="async"
+        <ProjectImage
+          image={{
+            src: `${process.env.PUBLIC_URL}/images/optimized/info-portrait.jpg`,
+            alt: 'Shana Hu seated beside a textile piece.',
+            width: 1066,
+            height: 1600,
+          }}
+          isPriority
         />
         <div className="info-social-links" aria-label="Social links">
           <a

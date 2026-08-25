@@ -242,23 +242,6 @@
   width: 100%;
 }
 
-.portfolio-image::before {
-  background: linear-gradient(110deg, #eeebe4 0%, #f7f5ef 45%, #eeebe4 90%);
-  content: "";
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  transform: translateX(-100%);
-  transition: opacity 240ms ease;
-  z-index: 1;
-}
-
-.portfolio-image.is-loading::before {
-  animation: imageLoadSweep 1500ms ease-in-out infinite;
-  opacity: 1;
-}
-
 .portfolio-image img {
   display: block;
   filter: blur(10px);
@@ -273,16 +256,6 @@
   filter: blur(0);
   opacity: 1;
   transform: scale(1);
-}
-
-@keyframes imageLoadSweep {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
 }
 
 .gallery-caption {
