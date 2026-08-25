@@ -47,6 +47,72 @@ const textileItems = [
     ],
   },
   {
+    id: 'double-happiness',
+    title: 'Double Happiness ',
+    accentColor: '#9c262b',
+    summary: '双喜 or 囍 is ubiquitous with marriage in Chinese culture, taking the character for happiness and doubling it to represent good luck. I’ve always loved the symmetric symbolism of it. For this piece I used offcuts from the western ceremony dress and Chinese reception qipao I sewed for my own wedding, and brought them together to create 囍。',
+    year: '2024',
+    tags: ['textiles'],
+    cover: {
+      src: imagePath('shuangxi.jpg'),
+      alt: 'A red floral textile piece forming the Chinese double-happiness character.',
+      width: 1600,
+      height: 1600,
+      dimensions: '15.5"x15.5"',
+      materials: 'Silk organza and jacquard brocade scraps of my wedding dresses'
+    },
+    images: [
+      {
+        src: originalPath('shuangxi.jpg'),
+        alt: 'A red floral textile piece forming the Chinese double-happiness character.',
+        width: 2203,
+        height: 2203,
+      },
+      {
+        src: originalPath('xi3.jpg'),
+        alt: 'The Double Happiness textile photographed on a white background.',
+        width: 2847,
+        height: 2847,
+      },
+      {
+        src: originalPath('xi2.png'),
+        alt: 'The Double Happiness textile framed and lit by sunlight.',
+        width: 3024,
+        height: 4032,
+      },
+    ],
+  },
+  {
+    id: 'never-better',
+    title: 'Never Better',
+    accentColor: '#082a81',
+    summary: 'Textile banner with pieced and appliqued lettering.',
+    year: '2025',
+    tags: ['textiles'],
+    cover: {
+      src: imagePath('better1.jpg'),
+      alt: 'A quilted textile banner with dark blue block lettering and light blue script lettering that reads never better.',
+      width: 2960,
+      height: 1973,
+      dimensions: '44"x18"',
+      materials: 'Cotton fabric'
+    },
+    images: [
+      {
+        src: originalPath('better1.jpg'),
+        alt: 'A quilted textile banner with dark blue block lettering and light blue script lettering that reads never better.',
+        width: 2960,
+        height: 1973,
+      },
+      {
+        src: originalPath('better2.jpg'),
+        alt: 'A second view of the Never Better textile banner.',
+        width: 2650,
+        height: 1767,
+      },
+    ],
+  },
+  {
     id: 'shine',
     title: 'Shine 杲',
     accentColor: '#a58e50',
@@ -85,36 +151,6 @@ const textileItems = [
     ],
   },
   {
-    id: 'never-better',
-    title: 'Never Better',
-    accentColor: '#082a81',
-    summary: 'Textile banner with pieced and appliqued lettering.',
-    year: '2025',
-    tags: ['textiles'],
-    cover: {
-      src: imagePath('better1.jpg'),
-      alt: 'A quilted textile banner with dark blue block lettering and light blue script lettering that reads never better.',
-      width: 2960,
-      height: 1973,
-      dimensions: '44"x18"',
-      materials: 'Cotton fabric'
-    },
-    images: [
-      {
-        src: originalPath('better1.jpg'),
-        alt: 'A quilted textile banner with dark blue block lettering and light blue script lettering that reads never better.',
-        width: 2960,
-        height: 1973,
-      },
-      {
-        src: originalPath('better2.jpg'),
-        alt: 'A second view of the Never Better textile banner.',
-        width: 2650,
-        height: 1767,
-      },
-    ],
-  },
-  {
     id: 'wishes',
     title: 'May all your wishes come true',
     accentColor: '#e5101b',
@@ -130,42 +166,6 @@ const textileItems = [
       materials: 'Cotton fabric'
     },
     images: [],
-  },
-  {
-    id: 'double-happiness',
-    title: 'Double Happiness ',
-    accentColor: '#9c262b',
-    summary: '双喜 or 囍 is ubiquitous with marriage in Chinese culture, taking the character for happiness and doubling it to represent good luck. I’ve always loved the symmetric symbolism of it. For this piece I used offcuts from the western ceremony dress and Chinese reception qipao I sewed for my own wedding, and brought them together to create 囍。',
-    year: '2024',
-    tags: ['textiles'],
-    cover: {
-      src: imagePath('shuangxi.jpg'),
-      alt: 'A red floral textile piece forming the Chinese double-happiness character.',
-      width: 1600,
-      height: 1600,
-      dimensions: '15.5"x15.5"',
-      materials: 'Silk organza and jacquard brocade scraps of my wedding dresses'
-    },
-    images: [
-      {
-        src: originalPath('shuangxi.jpg'),
-        alt: 'A red floral textile piece forming the Chinese double-happiness character.',
-        width: 2203,
-        height: 2203,
-      },
-      {
-        src: originalPath('xi3.jpg'),
-        alt: 'The Double Happiness textile photographed on a white background.',
-        width: 2847,
-        height: 2847,
-      },
-      {
-        src: originalPath('xi2.png'),
-        alt: 'The Double Happiness textile framed and lit by sunlight.',
-        width: 3024,
-        height: 4032,
-      },
-    ],
   },
   {
     id: 'slow-down',
