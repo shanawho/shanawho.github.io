@@ -50,6 +50,8 @@
 
 .site-title,
 .nav-tab,
+.menu-toggle,
+.menu-close,
 .empty-state button {
   appearance: none;
   background: transparent;
@@ -62,22 +64,18 @@
 }
 
 .site-title {
-  color: #008f72;
+  color: #1f1f1f;
   flex: 0 0 auto;
   font-family: "LarkBold", Georgia, serif;
-  font-size: clamp(30px, 5vw, 64px);
-  line-height: 0.95;
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1.08;
   text-decoration: none;
   transition: font-size 180ms ease, line-height 180ms ease;
 }
 
 .site-header.is-compact .site-title {
-  font-size: clamp(30px, 5vw, 64px);
-  line-height: 0.95;
-}
-
-.site-shell.is-project-view .site-title {
-  color: var(--project-accent);
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1.08;
 }
 
 .site-shell.is-info-view .site-title,
@@ -137,6 +135,68 @@
   color: #1f1f1f;
 }
 
+.menu-toggle {
+  display: none;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.mobile-menu-overlay {
+  background: #faf9f6;
+  color: #1f1f1f;
+  left: 0;
+  opacity: 0;
+  padding: 84px 18px 28px;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateY(-100%);
+  transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+  visibility: hidden;
+  z-index: 100;
+}
+
+.mobile-menu-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.site-shell.is-info-view .mobile-menu-overlay {
+  background: #c5d4da;
+}
+
+.menu-close {
+  color: inherit;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: 24px;
+  line-height: 1;
+  position: absolute;
+  right: 18px;
+  top: 18px;
+}
+
+.mobile-menu-nav {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.mobile-menu-link {
+  color: inherit;
+  font-family: "LarkBold", Georgia, serif;
+  font-size: clamp(24px, 7vw, 36px);
+  line-height: 1.08;
+  text-decoration: none;
+}
+
+.mobile-menu-link.is-active {
+  color: #518396;
+}
+
 .gallery {
   column-count: 3;
   column-gap: clamp(18px, 3vw, 48px);
@@ -171,6 +231,7 @@
 }
 
 .gallery-caption {
+  color: #1f1f1f;
   display: flex;
   font-family: "LarkLight", Arial, sans-serif;
   font-size: 15px;
@@ -183,7 +244,7 @@
   transition: opacity 160ms ease, transform 160ms ease;
 }
 
-.gallery-caption span:last-child {
+.gallery-caption-year {
   color: #777066;
   text-align: right;
 }
@@ -331,7 +392,6 @@
 }
 
 .project-page {
-  --project-accent: #008f72;
   color: #1f1f1f;
   margin: 0 auto;
   max-width: 1500px;
@@ -360,6 +420,17 @@
   width: 100%;
 }
 
+.project-page.is-zines-page .viewer-images {
+  column-count: 2;
+  column-gap: clamp(16px, 2.4vw, 32px);
+  display: block;
+}
+
+.project-page.is-zines-page .viewer-image {
+  break-inside: avoid;
+  margin: 0 0 clamp(16px, 2.4vw, 32px);
+}
+
 .viewer-info {
   font-family: "LarkLight", Arial, sans-serif;
   position: sticky;
@@ -367,7 +438,7 @@
 }
 
 .viewer-info h2 {
-  color: var(--project-accent);
+  color: inherit;
   font-family: "LarkBold", Georgia, serif;
   font-size: clamp(28px, 3.2vw, 48px);
   line-height: 1;
@@ -375,7 +446,7 @@
 }
 
 .viewer-info p {
-  font-size: clamp(16px, 1.25vw, 20px);
+  font-size: 21px;
   line-height: 1.35;
   margin: 0;
 }
@@ -386,20 +457,16 @@
 
 .viewer-info p a {
   color: inherit;
-  text-decoration: none;
-}
-
-.viewer-info p a:hover,
-.viewer-info p a:focus-visible {
   text-decoration: underline;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 0.5px;
   text-underline-offset: 4px;
 }
 
 .viewer-info .project-dimensions,
 .viewer-info .project-materials,
 .viewer-info .project-year {
-  font: inherit;
+  font-family: inherit;
+  font-size: 21px;
   line-height: 1.35;
 }
 
@@ -433,7 +500,7 @@
 }
 
 .lark-project-intro h2 {
-  color: var(--project-accent);
+  color: inherit;
   font-family: "LarkBold", Georgia, serif;
   font-size: clamp(34px, 5vw, 72px);
   line-height: 0.96;
@@ -441,9 +508,21 @@
 }
 
 .lark-project-intro p {
-  font-size: clamp(17px, 1.45vw, 24px);
-  line-height: 1.35;
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1.08;
   margin: 0;
+}
+
+.lark-project-intro p a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 4px;
+}
+
+.lark-project-intro strong {
+  font-family: "LarkBold", Georgia, serif;
+  font-weight: 400;
 }
 
 .lark-type-testers {
@@ -530,14 +609,16 @@
 
 .project-navigation a:hover,
 .project-navigation a:focus-visible {
-  color: var(--project-accent);
+  color: #1f1f1f;
 }
 
 @media (max-width: 1100px) {
   .gallery {
     column-count: 2;
   }
+}
 
+@media (max-width: 699px) {
   .info-page {
     grid-template-columns: 1fr;
     margin-top: 48px;
@@ -558,7 +639,8 @@
   }
 
   .site-header {
-    display: block;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
     margin-bottom: 28px;
     min-height: 0;
   }
@@ -573,14 +655,27 @@
 
   .site-title {
     display: block;
-    margin-bottom: 16px;
+    grid-column: 1;
+    justify-self: start;
+    margin-bottom: 0;
+    text-align: left;
   }
 
   .site-nav {
-    justify-content: flex-start;
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    grid-column: 2;
+    justify-self: end;
   }
 
   .gallery {
+    column-count: 1;
+  }
+
+  .project-page.is-zines-page .viewer-images {
     column-count: 1;
   }
 

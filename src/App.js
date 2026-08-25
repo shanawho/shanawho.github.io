@@ -13,13 +13,13 @@ const routeAliases = {
 
 const larkTesterRows = [
   { label: 'Roman Bold', className: 'is-bold', text: 'In a sentimental mood' },
-  { label: 'Roman Medium', className: 'is-medium', text: 'My funny valentine' },
-  { label: 'Roman Regular', className: 'is-regular', text: 'Body and soul' },
-  { label: 'Roman Light', className: 'is-light', text: "You don't know what love is" },
-  { label: 'Italic Bold', className: 'is-bold is-italic', text: 'Someone to watch over me' },
+  { label: 'Roman Medium', className: 'is-medium', text: 'The nearness of you' },
+  { label: 'Roman Regular', className: 'is-regular', text: 'All the things you are' },
+  { label: 'Roman Light', className: 'is-light', text: "The very thought of you" },
+  { label: 'Italic Bold', className: 'is-bold is-italic', text: 'Round midnight' },
   { label: 'Italic Medium', className: 'is-medium is-italic', text: 'Autumn in New York' },
   { label: 'Italic Regular', className: 'is-regular is-italic', text: 'I fall in love too easily' },
-  { label: 'Italic Light', className: 'is-light is-italic', text: 'The nearness of you' },
+  { label: 'Italic Light', className: 'is-light is-italic', text: 'It could happen to you' },
 ];
 
 function projectHref(project) {
@@ -28,6 +28,15 @@ function projectHref(project) {
 
 function tabHref(tab) {
   return `#/${tab}`;
+}
+
+function isTextEntryTarget(element) {
+  if (!element) {
+    return false;
+  }
+
+  const tagName = element.tagName;
+  return element.isContentEditable || tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT';
 }
 
 function getProjectGroup(project) {
@@ -79,6 +88,7 @@ function getRouteFromUrl() {
 function App() {
   const [route, setRoute] = useState(getRouteFromUrl);
   const [isHeaderCompact, setIsHeaderCompact] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const activeProject = portfolioItems.find((item) => item.id === route.projectId);
   const activeProjectGroup = activeProject ? getProjectGroup(activeProject) : [];
@@ -101,6 +111,8 @@ function App() {
   }, [activeProject, activeTab, shouldShowInfo]);
 
   function selectTab(tab) {
+    setIsMenuOpen(false);
+
     if (tab === 'typeface') {
       setRoute({
         activeTab: 'typeface',
@@ -149,10 +161,57 @@ function App() {
     window.scrollTo(0, 0);
   }, [route.projectId, route.view]);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle('is-info-background', shouldShowInfo);
+    document.body.classList.toggle('is-info-background', shouldShowInfo);
+
+    return () => {
+      document.documentElement.classList.remove('is-info-background');
+      document.body.classList.remove('is-info-background');
+    };
+  }, [shouldShowInfo]);
+
+  useEffect(() => {
+    document.body.classList.toggle('is-menu-open', isMenuOpen);
+
+    function handleMenuKeydown(event) {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    }
+
+    window.addEventListener('keydown', handleMenuKeydown);
+
+    return () => {
+      document.body.classList.remove('is-menu-open');
+      window.removeEventListener('keydown', handleMenuKeydown);
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    function handleProjectKeydown(event) {
+      if (!activeProject || isTextEntryTarget(event.target) || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft' && previousProject) {
+        event.preventDefault();
+        window.location.hash = projectHref(previousProject);
+      }
+
+      if (event.key === 'ArrowRight' && nextProject) {
+        event.preventDefault();
+        window.location.hash = projectHref(nextProject);
+      }
+    }
+
+    window.addEventListener('keydown', handleProjectKeydown);
+    return () => window.removeEventListener('keydown', handleProjectKeydown);
+  }, [activeProject, previousProject, nextProject]);
+
   return (
     <div
       className={`site-shell ${shouldShowInfo ? 'is-info-view' : ''} ${activeProject ? 'is-project-view' : ''}`}
-      style={activeProject ? { '--project-accent': activeProject.accentColor || '#008f72' } : undefined}
     >
       <header className={`site-header ${isHeaderCompact ? 'is-compact' : ''}`}>
         <a
@@ -184,7 +243,49 @@ function App() {
             Info
           </a>
         </nav>
+
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen(true)}
+        >
+          􀌇
+        </button>
       </header>
+
+      <div className={`mobile-menu-overlay ${isMenuOpen ? 'is-open' : ''}`} aria-hidden={!isMenuOpen}>
+        <button
+          className="menu-close"
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          􀆄
+        </button>
+        <nav className="mobile-menu-nav" aria-label="Portfolio sections">
+          {tags.map((tag) => (
+            <a
+              key={tag}
+              className={`mobile-menu-link ${activeTab === tag ? 'is-active' : ''}`}
+              href={tabHref(tag)}
+              aria-current={activeTab === tag ? 'page' : undefined}
+              onClick={() => selectTab(tag)}
+            >
+              {tagLabels[tag]}
+            </a>
+          ))}
+          <a
+            className={`mobile-menu-link ${shouldShowInfo ? 'is-active' : ''}`}
+            href={tabHref(infoTab)}
+            aria-current={shouldShowInfo ? 'page' : undefined}
+            onClick={() => selectTab(infoTab)}
+          >
+            Info
+          </a>
+        </nav>
+      </div>
 
       <main>
         {activeProject ? (
@@ -238,21 +339,88 @@ function GalleryItem({ item, isPriority, onOpen }) {
         onClick={onOpen}
         aria-label={`Open ${item.title}`}
       >
-        <img
-          src={item.cover.src}
-          alt={item.cover.alt}
-          width={item.cover.width}
-          height={item.cover.height}
-          loading={isPriority ? 'eager' : 'lazy'}
-          decoding="async"
+        <ProjectImage
+          image={item.cover}
+          isPriority={isPriority}
           sizes="(max-width: 720px) 92vw, (max-width: 1180px) 44vw, 30vw"
         />
         <span className="gallery-caption">
           <span>{item.title}</span>
-          {item.year ? <span>{item.year}</span> : null}
         </span>
       </a>
     </article>
+  );
+}
+
+function ProjectImage({ image, isPriority = false, sizes }) {
+  const [isAnimating, setIsAnimating] = useState(false);
+  const hasAnimation = Boolean(image.animatedSrc);
+  const shouldAnimate = image.autoPlay || isAnimating;
+  const src = hasAnimation && shouldAnimate ? image.animatedSrc : image.src;
+
+  return (
+    <img
+      src={src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      loading={isPriority ? 'eager' : 'lazy'}
+      decoding="async"
+      sizes={sizes}
+      onMouseEnter={hasAnimation ? () => setIsAnimating(true) : undefined}
+      onMouseLeave={hasAnimation ? () => setIsAnimating(false) : undefined}
+      onFocus={hasAnimation ? () => setIsAnimating(true) : undefined}
+      onBlur={hasAnimation ? () => setIsAnimating(false) : undefined}
+    />
+  );
+}
+
+function ProjectSummary({ project, boldLead }) {
+  const summaryText = boldLead && project.summary.startsWith(boldLead)
+    ? project.summary.slice(boldLead.length)
+    : project.summary;
+
+  if (!project.summaryLinks || project.summaryLinks.length === 0) {
+    return (
+      <p>
+        {boldLead ? <strong>{boldLead}</strong> : null}
+        {summaryText}
+      </p>
+    );
+  }
+
+  const summaryParts = [];
+  let remainingText = summaryText;
+
+  project.summaryLinks.forEach((link) => {
+    const linkIndex = remainingText.indexOf(link.text);
+
+    if (linkIndex === -1) {
+      return;
+    }
+
+    if (linkIndex > 0) {
+      summaryParts.push(remainingText.slice(0, linkIndex));
+    }
+
+    summaryParts.push(
+      <a href={link.href} target="_blank" rel="noopener noreferrer" key={`${link.text}-${link.href}`}>
+        {link.text}
+      </a>
+    );
+
+    remainingText = remainingText.slice(linkIndex + link.text.length);
+  });
+
+  if (remainingText) {
+    summaryParts.push(remainingText);
+  }
+
+  return (
+    <p>
+      {boldLead ? <strong>{boldLead}</strong> : null}
+      {summaryParts}
+    </p>
   );
 }
 
@@ -273,29 +441,21 @@ function ProjectPage({ project, previousProject, nextProject }) {
 
   return (
     <section
-      className="project-page"
+      className={`project-page ${project.id === 'zines' ? 'is-zines-page' : ''}`}
       aria-label={project.title}
-      style={{ '--project-accent': project.accentColor || '#008f72' }}
     >
       <div className="viewer-layout">
         <div className="viewer-images" aria-label={`${project.title} images`}>
           {images.map((image, index) => (
             <figure className="viewer-image" key={`${image.src}-${index}`}>
-              <img
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
+              <ProjectImage image={image} isPriority={index === 0} />
             </figure>
           ))}
         </div>
 
         <aside className="viewer-info">
           <h2>{project.title}</h2>
-          <p>{project.summary}</p>
+          <ProjectSummary project={project} />
           {projectMaterials ? <p className="project-materials">{projectMaterials}</p> : null}
           {projectDimensions ? <p className="project-dimensions">{projectDimensions}</p> : null}
           {project.year ? <p className="project-year">{project.year}</p> : null}
@@ -324,7 +484,6 @@ function LarkProjectPage({ project, previousProject, nextProject }) {
     <section
       className="project-page lark-project-page"
       aria-label={project.title}
-      style={{ '--project-accent': project.accentColor || '#008f72' }}
     >
       <figure className="lark-hero-image">
         <img
@@ -338,8 +497,7 @@ function LarkProjectPage({ project, previousProject, nextProject }) {
       </figure>
 
       <div className="lark-project-intro">
-        <h2>{project.title}</h2>
-        <p>{project.summary}</p>
+        <ProjectSummary project={project} boldLead="Lark" />
       </div>
 
       <div className="lark-type-testers" aria-label="Lark type testers">

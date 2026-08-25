@@ -75,7 +75,9 @@ const textileItems = [
         height: 1510,
       },
       {
-        src: originalPath('gou.gif'),
+        src: imagePath('gou-poster.png'),
+        animatedSrc: originalPath('gou.gif'),
+        autoPlay: true,
         alt: 'Animated view of the Shine textile suncatcher moving in the light.',
         width: 1080,
         height: 1920,
@@ -109,12 +111,6 @@ const textileItems = [
         alt: 'A second view of the Never Better textile banner.',
         width: 2650,
         height: 1767,
-      },
-      {
-        src: originalPath('better3.jpg'),
-        alt: 'A close detail of the Never Better textile banner lettering.',
-        width: 3120,
-        height: 2080,
       },
     ],
   },
@@ -179,25 +175,25 @@ const textileItems = [
     year: '2025',
     tags: ['textiles'],
     cover: {
-      src: imagePath('slowdown.jpg'),
-      alt: 'A quilted textile banner hanging on a line with blue lettering that reads slow down and enjoy.',
+      src: imagePath('slow.png'),
+      alt: 'A quilted textile banner on a wood floor with blue lettering that reads slow down and enjoy.',
       width: 1600,
-      height: 883,
+      height: 755,
       dimensions: '47"x19"',
       materials: 'Cotton fabric'
     },
     images: [
       {
-        src: originalPath('slowdown.jpg'),
-        alt: 'A quilted textile banner on a white background with blue lettering that reads slow down and enjoy.',
-        width: 4277,
-        height: 2361,
+        src: originalPath('slow.png'),
+        alt: 'A quilted textile banner on a wood floor with blue lettering that reads slow down and enjoy.',
+        width: 4024,
+        height: 1900,
       },
     ],
   },
   {
     id: 'j-and-a',
-    title: 'J&A',
+    title: 'Subway type',
     accentColor: '#a53623',
     summary: 'A little gift for friends, and my first typographic textile. The lettering is inspired by NYC subway mosaics, which I always love admiring when I visit',
     year: '2023',
@@ -207,7 +203,6 @@ const textileItems = [
       alt: 'A quilted textile piece with large letters J and A separated by an ampersand.',
       width: 1600,
       height: 1168,
-      dimensions: 'X"xX"',
       materials: 'Cotton fabric and batting'
     },
     images: [
@@ -226,7 +221,13 @@ const typefaceItems = [
     id: 'lark',
     title: 'Lark typeface family',
     accentColor: '#0f80c2',
-    summary: 'A modern calligraphic typeface family with 4 weights in roman and italic. Designed as my final project while studying typeface design at Type@Cooper West, run by the Letterform Archive. Available for purchase on MyFonts',
+    summary: 'Lark is a modern calligraphic typeface family with 4 weights in roman and italic. Designed as my final project while studying typeface design at Type@Cooper West run by the Letterform Archive in 2018, Lark is available for purchase on My Fonts.',
+    summaryLinks: [
+      {
+        text: 'My Fonts',
+        href: 'https://www.myfonts.com/collections/lark-font-shana-hu/',
+      },
+    ],
     tags: ['typeface'],
     cover: {
       src: imagePath('lark.png'),
@@ -255,113 +256,6 @@ const playItems = [
     images: [],
   },
   {
-    id: 'azizam-merch',
-    title: 'Azizam merch',
-    accentColor: '#9f4b69',
-    summary: 'Illustrations for custom Baggu and hat for Azizam LA',
-    summaryLinks: [
-      {
-        text: 'Azizam LA',
-        href: 'https://www.azizamla.com/',
-      },
-    ],
-    year: '2025',
-    tags: ['play'],
-    cover: {
-      src: imagePath('azizam-baggu.png'),
-      alt: 'A pink Baggu bag with Azizam LA illustrations hanging outdoors.',
-      width: 1200,
-      height: 1600,
-    },
-    images: [
-      {
-        src: originalPath('azizam-baggu.png'),
-        alt: 'A pink Baggu bag with Azizam LA illustrations hanging outdoors.',
-        width: 3024,
-        height: 4032,
-      },
-      {
-        src: originalPath('azizam-hat.png'),
-        alt: 'A blue Azizam hat with embroidered lettering.',
-        width: 3024,
-        height: 4032,
-      },
-    ],
-  },
-  {
-    id: 'zines',
-    title: 'Zines',
-    accentColor: '#bc8639',
-    summary: 'Small-batch printed and bound zines.',
-    tags: ['play'],
-    cover: {
-      src: imagePath('swimming.png'),
-      alt: 'Risographed zine about what it feels like to go swimming',
-      width: 682,
-      height: 1024,
-      materials: 'Paper. Risograph for some, laserjet for others.'
-    },
-    images: [
-      {
-        src: originalPath('swimming.gif'),
-        alt: 'Animated lettering artwork spelling swimming.',
-        width: 682,
-        height: 1024,
-      },
-      {
-        src: originalPath('palettes.gif'),
-        alt: 'Animated color palette lettering artwork.',
-        width: 1024,
-        height: 682,
-      },
-      {
-        src: originalPath('dogdaze.gif'),
-        alt: 'Animated illustrated lettering artwork for Dog Daze.',
-        width: 1024,
-        height: 678,
-      },
-      {
-        src: originalPath('burnout.png'),
-        alt: 'A spiral-bound zine page that reads B is for Burnout with an illustration of a person at a laptop.',
-        width: 3024,
-        height: 3037,
-      },
-    ],
-  },
-  {
-    id: 'number-gestures',
-    title: 'Chinese Number Gestures',
-    accentColor: '#b93c66',
-    summary: 'Chinese hand gestures for numbers 10 and under',
-    tags: ['play'],
-    dimensions: '11"x17"',
-    materials: 'Risograph on paper',
-    cover: {
-      src: imagePath('numbergestures.jpg'),
-      alt: 'Risograph print showing Chinese number gestures.',
-      width: 1094,
-      height: 1600,
-    },
-    images: [
-      {
-        src: imagePath('numbergestures.jpg'),
-        alt: 'Risograph print showing Chinese number gestures.',
-        width: 1094,
-        height: 1600,
-      },
-      {
-        src: imagePath('gestures2.jpg'),
-        alt: 'Second print showing Chinese number gestures.',
-        width: 1133,
-        height: 1600,
-      },
-      {
-        src: originalPath('numbergestures-zine.jpg'),
-        alt: 'Zine showing Chinese number gestures.',
-      },
-    ],
-  },
-  {
     id: 'notes-to-self',
     title: 'Notes to Self',
     accentColor: '#773f82',
@@ -376,11 +270,65 @@ const playItems = [
     images: [],
   },
   {
+    id: 'zines',
+    title: 'Zines',
+    accentColor: '#bc8639',
+    summary: "Sometimes, I make zines, which are small-batch self-published booklets. They're a fun way to explore a theme in a scrappy way. Many of mine are printed using risography (a kind of digital duplicator) and hand bound. In the past, I've tabled at SF Zine Fest with friends under the banner Hotcake Collective",
+    summaryLinks: [
+      {
+        text: 'Hotcake Collective',
+        href: 'https://www.instagram.com/hotcakecollective/',
+      },
+    ],
+    tags: ['play'],
+    cover: {
+      src: imagePath('swimming.png'),
+      alt: 'Risographed zine about what it feels like to go swimming',
+      width: 682,
+      height: 1024,
+    },
+    images: [
+      {
+        src: imagePath('swimming-poster.png'),
+        animatedSrc: originalPath('swimming.gif'),
+        alt: 'Risographed zine about what it feels like to go swimming',
+        width: 682,
+        height: 1024,
+      },
+      {
+        src: imagePath('palettes-poster.png'),
+        animatedSrc: originalPath('palettes.gif'),
+        alt: 'Animated color palette zine inspired by San Francisco',
+        width: 1024,
+        height: 682,
+      },
+      {
+        src: imagePath('dogdaze-poster.png'),
+        animatedSrc: originalPath('dogdaze.gif'),
+        alt: 'Dog Daze zine',
+        width: 1024,
+        height: 678,
+      },
+      {
+        src: originalPath('rituals.jpg'),
+        alt: 'Illustrated Rituals zine on green checked fabric.',
+        width: 4898,
+        height: 3265,
+      },
+      {
+        src: originalPath('burnout.png'),
+        alt: 'A spiral-bound zine page that reads B is for Burnout with an illustration of a person at a laptop.',
+        width: 3024,
+        height: 3037,
+      },
+    ],
+  },
+  {
     id: 'red-envelope',
     title: 'Red Envelopes',
     accentColor: '#b0454a',
     summary: 'Every year I design a red envelope with the zodiac for the lunar new year as a way of giving holiday cards to friends and family. Each envelope, or hongbao, is pen-plotted with gold paint markers',
-    year: '2023–ongoing',
+    year: '2021–ongoing',
     tags: ['play'],
     cover: {
       src: imagePath('snakeenvelope.jpg'),
@@ -418,6 +366,67 @@ const playItems = [
         alt: 'A pile of red envelopes printed with a chinese lettering on it wishing you good fortune.',
         width: 1600,
         height: 1066,
+      },
+    ],
+  },
+  {
+    id: 'azizam-merch',
+    title: 'Azizam merch',
+    accentColor: '#9f4b69',
+    summary: 'Illustrations for custom Baggu and hat for Azizam LA',
+    summaryLinks: [
+      {
+        text: 'Azizam LA',
+        href: 'https://www.azizamla.com/',
+      },
+    ],
+    year: '2025',
+    tags: ['play'],
+    cover: {
+      src: imagePath('azizam-baggu.png'),
+      alt: 'A pink Baggu bag with Azizam LA illustrations hanging outdoors.',
+      width: 1200,
+      height: 1600,
+    },
+    images: [
+      {
+        src: originalPath('azizam-baggu.png'),
+        alt: 'A pink Baggu bag with Azizam LA illustrations hanging outdoors.',
+        width: 3024,
+        height: 4032,
+      },
+      {
+        src: originalPath('azizam-hat.png'),
+        alt: 'A blue Azizam hat with embroidered lettering.',
+        width: 3024,
+        height: 4032,
+      },
+    ],
+  },
+  {
+    id: 'number-gestures',
+    title: 'Chinese Number Gestures',
+    accentColor: '#b93c66',
+    summary: 'Chinese hand gestures for numbers 10 and under',
+    tags: ['play'],
+    dimensions: '11"x17"',
+    materials: 'Risograph on paper',
+    cover: {
+      src: imagePath('numbergestures.jpg'),
+      alt: 'Risograph print showing Chinese number gestures.',
+      width: 1094,
+      height: 1600,
+    },
+    images: [
+      {
+        src: imagePath('numbergestures.jpg'),
+        alt: 'Risograph print showing Chinese number gestures.',
+        width: 1094,
+        height: 1600,
+      },
+      {
+        src: originalPath('numbergestures-zine.jpg'),
+        alt: 'Zine showing Chinese number gestures.',
       },
     ],
   },
