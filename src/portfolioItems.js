@@ -1,7 +1,7 @@
 const imagePath = (filename) => `${process.env.PUBLIC_URL}/images/optimized/${filename}`;
 const originalPath = (filename) => `${process.env.PUBLIC_URL}/images/${filename}`;
 
-export const tags = ['textiles', 'play', 'typeface'];
+export const tags = ['textiles', 'typeface', 'play'];
 
 export const tagLabels = {
   textiles: 'Textiles',
@@ -373,7 +373,7 @@ const playItems = [
     id: 'azizam-merch',
     title: 'Azizam merch',
     accentColor: '#9f4b69',
-    summary: 'Illustrations for custom Baggu and hat for Azizam LA',
+    summary: 'Illustrations for custom Baggu and hat for Azizam LA showing their logotype in Farsi being piped onto a Napoleon cake.',
     summaryLinks: [
       {
         text: 'Azizam LA',

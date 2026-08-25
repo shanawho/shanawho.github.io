@@ -13,13 +13,13 @@ const routeAliases = {
 
 const larkTesterRows = [
   { label: 'Roman Bold', className: 'is-bold', text: 'In a sentimental mood' },
-  { label: 'Roman Medium', className: 'is-medium', text: 'The nearness of you' },
+  { label: 'Roman Medium', className: 'is-medium', text: 'Take the A train' },
   { label: 'Roman Regular', className: 'is-regular', text: 'All the things you are' },
-  { label: 'Roman Light', className: 'is-light', text: "The very thought of you" },
-  { label: 'Italic Bold', className: 'is-bold is-italic', text: 'Round midnight' },
+  { label: 'Roman Light', className: 'is-light', text: "Straight no chaser" },
+  { label: 'Italic Bold', className: 'is-bold is-italic', text: 'Round Midnight' },
   { label: 'Italic Medium', className: 'is-medium is-italic', text: 'Autumn in New York' },
   { label: 'Italic Regular', className: 'is-regular is-italic', text: 'I fall in love too easily' },
-  { label: 'Italic Light', className: 'is-light is-italic', text: 'It could happen to you' },
+  { label: 'Italic Light', className: 'is-light is-italic', text: 'Night in Tunisia' },
 ];
 
 function projectHref(project) {

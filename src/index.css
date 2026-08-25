@@ -80,6 +80,7 @@
 
 html {
   background: #faf9f6;
+  overflow-x: hidden;
 }
 
 html.is-info-background {
@@ -90,6 +91,7 @@ body {
   background: #faf9f6;
   color: #1f1f1f;
   margin: 0;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

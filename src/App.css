@@ -1,6 +1,8 @@
 .site-shell {
   min-height: 100vh;
-  padding: 28px clamp(18px, 4vw, 56px) 56px;
+  --page-x-padding: clamp(18px, 4vw, 56px);
+  overflow-x: clip;
+  padding: 28px var(--page-x-padding) 56px;
 }
 
 .site-shell.is-info-view {
@@ -26,7 +28,7 @@
   backdrop-filter: blur(18px);
   background: rgba(250, 249, 246, 0.88);
   content: "";
-  inset: -28px -56px -16px;
+  inset: -28px calc(var(--page-x-padding) * -1) -16px;
   position: absolute;
   transition: inset 180ms ease;
   z-index: -1;
@@ -37,7 +39,7 @@
 }
 
 .site-header.is-compact::before {
-  inset: -28px -56px 0;
+  inset: -28px calc(var(--page-x-padding) * -1) 0;
 }
 
 .site-shell.is-info-view .site-header {
@@ -635,7 +637,8 @@
 
 @media (max-width: 720px) {
   .site-shell {
-    padding: 18px 14px 36px;
+    --page-x-padding: 14px;
+    padding: 18px var(--page-x-padding) 36px;
   }
 
   .site-header {
@@ -646,11 +649,11 @@
   }
 
   .site-header::before {
-    inset: -18px -14px -14px;
+    inset: -18px calc(var(--page-x-padding) * -1) -14px;
   }
 
   .site-header.is-compact::before {
-    inset: -18px -14px -14px;
+    inset: -18px calc(var(--page-x-padding) * -1) -14px;
   }
 
   .site-title {
