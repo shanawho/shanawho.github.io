@@ -114,9 +114,9 @@ const textileItems = [
   },
   {
     id: 'shine',
-    title: 'Shine 杲',
+    title: 'Shine',
     accentColor: '#a58e50',
-    summary: 'Textile suncatcher, feature a hanzi character from a friend\'s name, meaning "to shine"',
+    summary: 'Textile suncatcher, feature a hanzi character from a friend\'s name 杲 meaning "to shine"',
     year: '2026',
     tags: ['textiles'],
     cover: {
@@ -203,6 +203,7 @@ const textileItems = [
       alt: 'A quilted textile piece with large letters J and A separated by an ampersand.',
       width: 1600,
       height: 1168,
+      dimensions: '29"x18.75"',
       materials: 'Cotton fabric and batting'
     },
     images: [

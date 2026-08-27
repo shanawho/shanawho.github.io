@@ -80,7 +80,8 @@
 
 html {
   background: #faf9f6;
-  overflow-x: hidden;
+  font-synthesis: none;
+  overflow-x: clip;
 }
 
 html.is-info-background {
@@ -91,7 +92,7 @@ body {
   background: #faf9f6;
   color: #1f1f1f;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

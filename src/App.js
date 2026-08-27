@@ -44,6 +44,38 @@ function getProjectGroup(project) {
   return portfolioItemsByTag[projectTag] || portfolioItems;
 }
 
+function SymbolIcon({ name }) {
+  if (name === 'menu') {
+    return (
+      <svg className="symbol-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    );
+  }
+
+  if (name === 'close') {
+    return (
+      <svg className="symbol-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />
+      </svg>
+    );
+  }
+
+  if (name === 'arrow-left') {
+    return (
+      <svg className="symbol-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M19 12H5M11 6l-6 6 6 6" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg className="symbol-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 function getRouteFromUrl() {
   const hashRoute = window.location.hash.replace(/^#\/?/, '');
   const [routeType, routeValue] = hashRoute.split('/');
@@ -251,7 +283,7 @@ function App() {
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen(true)}
         >
-          􀌇
+          <SymbolIcon name="menu" />
         </button>
       </header>
 
@@ -262,7 +294,7 @@ function App() {
           aria-label="Close menu"
           onClick={() => setIsMenuOpen(false)}
         >
-          􀆄
+          <SymbolIcon name="close" />
         </button>
         <nav className="mobile-menu-nav" aria-label="Portfolio sections">
           {tags.map((tag) => (
@@ -483,13 +515,13 @@ function ProjectPage({ project, previousProject, nextProject }) {
               href={projectHref(previousProject)}
               aria-label={`Previous project: ${previousProject.title}`}
             >
-              􀄪
+              <SymbolIcon name="arrow-left" />
             </a>
             <a
               href={projectHref(nextProject)}
               aria-label={`Next project: ${nextProject.title}`}
             >
-              􀄫
+              <SymbolIcon name="arrow-right" />
             </a>
           </nav>
         </aside>
@@ -536,13 +568,13 @@ function LarkProjectPage({ project, previousProject, nextProject }) {
           href={projectHref(previousProject)}
           aria-label={`Previous project: ${previousProject.title}`}
         >
-          􀄪
+          <SymbolIcon name="arrow-left" />
         </a>
         <a
           href={projectHref(nextProject)}
           aria-label={`Next project: ${nextProject.title}`}
         >
-          􀄫
+          <SymbolIcon name="arrow-right" />
         </a>
       </nav>
     </section>
