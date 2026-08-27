@@ -22,6 +22,19 @@ const larkTesterRows = [
   { label: 'Italic Light', className: 'is-light is-italic', text: 'Night in Tunisia' },
 ];
 
+const galleryColumnLayouts = {
+  textiles: [
+    ['forever', 'double-happiness'],
+    ['never-better', 'shine'],
+    ['wishes', 'slow-down', 'j-and-a'],
+  ],
+  play: [
+    ['twenty-five', 'notes-to-self'],
+    ['zines', 'red-envelope'],
+    ['azizam-merch', 'number-gestures'],
+  ],
+};
+
 function projectHref(project) {
   return `#/project/${project.id}`;
 }
@@ -42,6 +55,77 @@ function isTextEntryTarget(element) {
 function getProjectGroup(project) {
   const projectTag = project.tags[0];
   return portfolioItemsByTag[projectTag] || portfolioItems;
+}
+
+function getGalleryColumnCount() {
+  if (typeof window === 'undefined') {
+    return 3;
+  }
+
+  if (window.matchMedia('(max-width: 720px)').matches) {
+    return 1;
+  }
+
+  if (window.matchMedia('(max-width: 1100px)').matches) {
+    return 2;
+  }
+
+  return 3;
+}
+
+function useGalleryColumnCount() {
+  const [columnCount, setColumnCount] = useState(getGalleryColumnCount);
+
+  useEffect(() => {
+    function syncColumnCount() {
+      setColumnCount(getGalleryColumnCount());
+    }
+
+    syncColumnCount();
+    window.addEventListener('resize', syncColumnCount);
+    return () => window.removeEventListener('resize', syncColumnCount);
+  }, []);
+
+  return columnCount;
+}
+
+function distributeGalleryItems(items, columnCount, activeTab) {
+  const requestedLayout = galleryColumnLayouts[activeTab];
+
+  if (columnCount === 3 && requestedLayout) {
+    const itemEntries = new Map(items.map((item, index) => [item.id, { item, index }]));
+    const usedIds = new Set();
+    const columns = requestedLayout.map((columnIds) => (
+      columnIds.flatMap((itemId) => {
+        const entry = itemEntries.get(itemId);
+
+        if (!entry) {
+          return [];
+        }
+
+        usedIds.add(itemId);
+        return [entry];
+      })
+    ));
+
+    items.forEach((item, index) => {
+      if (usedIds.has(item.id)) {
+        return;
+      }
+
+      columns[index % columnCount].push({ item, index });
+    });
+
+    return columns;
+  }
+
+  const columns = Array.from({ length: columnCount }, () => []);
+
+  items.forEach((item, index) => {
+    columns[index % columnCount].push({ item, index });
+  });
+
+  return columns;
 }
 
 function SymbolIcon({ name }) {
@@ -330,6 +414,7 @@ function App() {
           <InfoPage />
         ) : (
           <Gallery
+            activeTab={activeTab}
             items={visibleItems}
             onOpenProject={selectProject}
           />
@@ -339,7 +424,12 @@ function App() {
   );
 }
 
-function Gallery({ items, onOpenProject }) {
+function Gallery({ activeTab, items, onOpenProject }) {
+  const columnCount = useGalleryColumnCount();
+  const columns = useMemo(() => (
+    distributeGalleryItems(items, columnCount, activeTab)
+  ), [activeTab, columnCount, items]);
+
   if (items.length === 0) {
     return (
       <section className="empty-state" aria-live="polite">
@@ -350,13 +440,17 @@ function Gallery({ items, onOpenProject }) {
 
   return (
     <section className="gallery" aria-label="Selected work">
-      {items.map((item, index) => (
-        <GalleryItem
-          key={item.id}
-          item={item}
-          isPriority={index < 4}
-          onOpen={() => onOpenProject(item)}
-        />
+      {columns.map((columnItems, columnIndex) => (
+        <div className="gallery-column" key={`gallery-column-${columnIndex}`}>
+          {columnItems.map(({ item, index }) => (
+            <GalleryItem
+              key={item.id}
+              item={item}
+              isPriority={index < 4}
+              onOpen={() => onOpenProject(item)}
+            />
+          ))}
+        </div>
       ))}
     </section>
   );

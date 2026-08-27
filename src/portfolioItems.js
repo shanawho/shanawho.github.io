@@ -222,7 +222,7 @@ const typefaceItems = [
     id: 'lark',
     title: 'Lark typeface family',
     accentColor: '#0f80c2',
-    summary: 'Lark is a modern calligraphic typeface family with 4 weights in roman and italic. Designed as my final project while studying typeface design at Type@Cooper West run by the Letterform Archive in 2018, Lark is available for purchase on My Fonts.',
+    summary: 'Lark is a modern calligraphic typeface family with 4 weights in roman and italic. Designed for my final project while studying typeface design at Type@Cooper West in 2018, Lark is available for purchase on My Fonts.',
     summaryLinks: [
       {
         text: 'My Fonts',
